@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+  traefik:
+    image: traefik:v2.0
+    container_name: traefik
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.mytlschallenge.acme.tlschallenge=true"
+      - "--certificatesresolvers.mytlschallenge.acme.email=miles@budden.net"
+      - "--certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt
+    depends_on:
+      - app
+
+  app:
+    build: ./src
+    container_name: app
+    command: gunicorn syncref.wsgi:application --workers 2 --threads 2 --bind 0.0.0.0:8000
+    # entrypoint: /code/dockerfiles-stage/entrypoint.sh
+    volumes:
+      - static_volume:/code/static
+      - ./src/logs/main/:/code/logs/
+    ports:
+      - 8000:8000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.app-http.entrypoints=web"
+      - "traefik.http.routers.app-http.rule=Host(`localhost`)"
+      - "traefik.http.routers.app-http.middlewares=redirect-https@docker"
+      - "traefik.http.routers.app-https.rule=Host(`localhost`)"
+      - "traefik.http.routers.app-https.entrypoints=websecure"
+      - "traefik.http.routers.app-https.tls.certresolver=mytlschallenge"
+
+  nginx:
+    image: nginx:1.15-alpine
+    container_name: nginx
+    restart: always
+    volumes:
+      - ./traefik-files/nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_volume:/static
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.static-http.entrypoints=websecure"
+      - "traefik.http.routers.static-http.rule=Host(`localhost`) && PathPrefix(`/static`)" 
+      - "traefik.http.routers.static-http.tls.certresolver=mytlschallenge"  
+    depends_on:
+      - app
+
+volumes:
+  static_volume:
+  
