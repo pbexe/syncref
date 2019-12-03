@@ -8,5 +8,5 @@ headers = {
     'Accept': "application/x-bibtex"
     }
 
-response = requests.request("GET", url, headers=headers)
+response = requests.get(url, headers=headers)
 print(response.text)

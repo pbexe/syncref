@@ -26,11 +26,11 @@ services:
   app:
     build: ./src
     container_name: app
-    command: gunicorn syncref.wsgi:application --workers 2 --threads 2 --bind 0.0.0.0:8000
-    # entrypoint: /code/dockerfiles-stage/entrypoint.sh
+    command: uvicorn syncref.asgi:application --workers 2 --host 0.0.0.0 --port 8000 --reload
     volumes:
       - static_volume:/code/static
       - ./src/logs/main/:/code/logs/
+      - ./src/:/code/
     ports:
       - 8000:8000
     labels:
