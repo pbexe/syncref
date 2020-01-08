@@ -22,6 +22,10 @@ services:
       - ./letsencrypt:/letsencrypt
     depends_on:
       - app
+    networks:
+      - internal
+      - proxy
+
 
   app:
     build: ./src
@@ -42,6 +46,10 @@ services:
       - "traefik.http.routers.app-https.rule=Host(`localhost`)"
       - "traefik.http.routers.app-https.entrypoints=websecure"
       - "traefik.http.routers.app-https.tls.certresolver=mytlschallenge"
+      - traefik.docker.network=proxy
+    networks:
+      - internal
+      - proxy
 
   nginx:
     image: nginx:1.15-alpine
@@ -54,10 +62,29 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.static-http.entrypoints=websecure"
       - "traefik.http.routers.static-http.rule=Host(`localhost`) && PathPrefix(`/static`)" 
-      - "traefik.http.routers.static-http.tls.certresolver=mytlschallenge"  
+      - "traefik.http.routers.static-http.tls.certresolver=mytlschallenge"
+      - traefik.docker.network=proxy
     depends_on:
       - app
+    networks:
+      - internal
+      - proxy
+  # mysql:
+  #   image: mysql:5.7
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD:
+  #   networks:
+  #     - internal
+  #   labels:
+  #     - traefik.enable=false
+  # Something like this for the DB
 
 volumes:
   static_volume:
-  
+
+
+networks:
+  proxy:
+    external: true
+  internal:
+    external: false
