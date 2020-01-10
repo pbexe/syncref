@@ -49,6 +49,8 @@ services:
     networks:
       - internal
       - proxy
+    environment:
+      NODE_ENV: production
 
   nginx:
     image: nginx:1.15-alpine
