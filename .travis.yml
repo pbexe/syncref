@@ -3,4 +3,6 @@ services:
 
 install:
   - docker network create proxy
+  - docker-compose build
+script:
   - docker-compose up -d --build
