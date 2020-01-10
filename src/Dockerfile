@@ -7,3 +7,4 @@ COPY Pipfile.lock /code/
 RUN pipenv install --system
 COPY . /code/
 RUN python manage.py collectstatic
+# RUN python manage.py migrate
