@@ -6,72 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>{% block title %}Syncref{% endblock %}</title>
     <link rel="stylesheet" href="{% static "references/css/tailwind.css" %}" />
 </head>
-<body class="bg-background h-full">
-	<div class="flex h-screen">
-  		<!-- Container -->
-		  <div class="container m-auto">
-			<div class="flex justify-center px-6 my-12">
-				<!-- Row -->
-                <div class="w-full xl:w-3/4 lg:w-11/12 flex justify-center">
-					<!-- Col -->
-					<div class="w-full p-5 rounded-lg lg:rounded-l-none lg:w-2/3">
-						<h3 class="pt-4 text-2xl px-8 text-headline font-bold">Sign in</h3>
-						<form class="px-8 pt-6 pb-8 mb-4 rounded">
-							<div class="mb-4">
-								<label class="block mb-2 text-sm text-paragraph" for="username">
-									Username
-								</label>
-								<input
-									class="w-full px-3 py-2 text-z bg-background text-paragraph placeholder-paragraph rounded border-stroke border-2"
-									id="username"
-									type="text"
-									placeholder="Username"
-								/>
-							</div>
-							<div class="mb-4">
-								<label class="block mb-2 text-sm text-paragraph" for="password">
-									Password
-								</label>
-								<input
-									class="w-full px-3 py-2 text-z bg-background text-paragraph placeholder-paragraph rounded border-stroke border-2"
-									id="password"
-									type="password"
-									placeholder="••••••••••••••"
-								/>
-							</div>
-							<div class="mb-6 text-center">
-								<button
-									class="w-full px-4 py-2 font-bold text-buttontext bg-button rounded-full hover:bg-paragraph focus:outline-none focus:shadow-outline"
-									type="button"
-								>
-									Sign In
-								</button>
-							</div>
-							<!-- <hr class="mb-10 mt-10 border-t" /> -->
-							<div class="text-center mt-20">
-								<a
-									class="inline-block text-sm text-button align-baseline hover:text-paragraph"
-									href="./register.html"
-								>
-									Create an Account!
-								</a>
-							</div>
-							<div class="text-center">
-								<a
-									class="inline-block text-sm text-button align-baseline hover:text-paragraph"
-									href="./forgot-password.html"
-								>
-									Forgot Password?
-								</a>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-</div>
-	</body>
+{% block body %}
+{% endblock %}
 </html>
