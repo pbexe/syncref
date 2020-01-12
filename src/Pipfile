@@ -8,7 +8,7 @@ verify_ssl = true
 [packages]
 django = "*"
 gunicorn = "*"
-psycopg2 = "*"
+psycopg2-binary = "*"
 uvicorn = "*"
 
 [requires]
