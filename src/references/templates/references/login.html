@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Sign in
+Login
 {% endblock %}
 
 {% block body %}
@@ -15,18 +15,30 @@ Sign in
                 <div class="w-full xl:w-3/4 lg:w-11/12 flex justify-center">
 					<!-- Col -->
 					<div class="w-full sm:p-5 rounded-lg lg:rounded-l-none lg:w-2/3">
-						<h3 class="pt-4 text-2xl px-8 text-headline font-bold">Sign in</h3>
-						<form class="px-8 pt-6 pb-8 mb-4 rounded">
-							<div class="mb-4">
+						<h3 class="pt-4 text-2xl px-8 text-headline font-bold">Login</h3>
+						<form class="px-8 pt-6 pb-8 mb-4 rounded" method="post" action="{% url 'login' %}">
+							{% csrf_token %}
+							{% if form.errors %}
+							<p class="text-paragraph pb-4">Your username and password didn't match. Please try again.</p>
+							{% endif %}
+							{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+                            <div class="mb-4">
 								<label class="block mb-2 text-sm text-paragraph" for="username">
 									Username
 								</label>
 								<input
 									class="w-full px-3 py-2 text-z bg-background text-paragraph placeholder-paragraph rounded border-stroke border-2"
-									id="username"
-									type="text"
+                                    id="username"
+                                    name="username"
+                                    type="text"
 									placeholder="Username"
-								/>
+                                />
 							</div>
 							<div class="mb-4">
 								<label class="block mb-2 text-sm text-paragraph" for="password">
@@ -34,24 +46,25 @@ Sign in
 								</label>
 								<input
 									class="w-full px-3 py-2 text-z bg-background text-paragraph placeholder-paragraph rounded border-stroke border-2"
-									id="password"
-									type="password"
-									placeholder="••••••••••••••"
-								/>
+                                    id="password"
+                                    name="password"
+                                    type="password"
+									placeholder="Password"
+                                />
 							</div>
 							<div class="mb-6 text-center">
 								<button
 									class="w-full px-4 py-2 font-bold text-buttontext bg-button rounded-full hover:bg-paragraph focus:outline-none focus:shadow-outline"
-									type="button"
+                                    type="submit"
 								>
-									Sign In
-								</button>
-							</div>
-							<!-- <hr class="mb-10 mt-10 border-t" /> -->
+									Login
+                            </button>
+                            </div>
+							<hr class="mb-10 mt-10 border-t" />
 							<div class="text-center mt-20">
 								<a
 									class="inline-block text-sm text-button align-baseline hover:text-paragraph"
-									href="./register.html"
+									href="{% url 'signup' %}"
 								>
 									Create an Account!
 								</a>
