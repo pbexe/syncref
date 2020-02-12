@@ -4,6 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import logout
+from .models import GroupMembership, GroupMembership, Reference
+
 
 def index(request):
     if request.user.is_authenticated:
@@ -42,4 +44,13 @@ def login(request):
                 return redirect("home")
         else:
             messages.error(request,"Invalid Credentials")
+    return render(request, "references/login.html")
+
+
+def create_group(request):
+    if request.method == "POST":
+        name = request.POST["name"]
+        description = request.POST["description"]
+        group = Group(name=name, description=description)
+        group.save()
     return render(request, "references/login.html")
