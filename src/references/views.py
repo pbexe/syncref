@@ -4,12 +4,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import logout
-from .models import GroupMembership, GroupMembership, Reference
-
+from .models import GroupMembership, Group, Reference
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 def index(request):
     if request.user.is_authenticated:
-        return render(request, "references/app.html")
+        group_relations = GroupMembership.objects.filter(user=request.user)
+        groups = [i.group for i in group_relations]
+        return render(request, "references/app.html", {"groups": groups})
     else:
         return render(request, "references/index.html")
 
@@ -47,10 +50,14 @@ def login(request):
     return render(request, "references/login.html")
 
 
+@login_required
 def create_group(request):
     if request.method == "POST":
         name = request.POST["name"]
         description = request.POST["description"]
-        group = Group(name=name, description=description)
+        group = Group(name=name, description=description, admin=request.user)
         group.save()
-    return render(request, "references/login.html")
+        membership = GroupMembership(group=group, user=request.user)
+        membership.save()
+        return HttpResponse("OK")
+    return render(request, "references/create_group.html")

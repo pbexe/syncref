@@ -29,7 +29,7 @@ services:
   app:
     build: ./src
     container_name: app
-    command: bash -c "python manage.py makemigrations && python manage.py collectstatic --no-input --clear && python manage.py migrate && uvicorn syncref.asgi:application --workers 2 --host 0.0.0.0 --port 8000 --reload"
+    command: bash -c "python manage.py makemigrations references && python manage.py collectstatic --no-input --clear && python manage.py migrate references && uvicorn syncref.asgi:application --workers 2 --host 0.0.0.0 --port 8000 --reload"
     volumes:
       - static_volume:/code/static
       - ./src/logs/main/:/code/logs/
