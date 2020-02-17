@@ -1,6 +1,6 @@
-from django.db import models
-from django.contrib.postgres.fields import JSONField
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
+from django.db import models
 
 
 class Group(models.Model):
@@ -17,6 +17,9 @@ class GroupMembership(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
+    
+    def __str__():
+        return user.username " is a member of " + group.name
 
 
 class Reference(models.Model):
