@@ -4,9 +4,13 @@ import sys
 from habanero import Crossref, cn
 
 def extract(fp):
-    files = {'input': fp}
-    r = requests.post("http://localhost:8080/api/processHeaderDocument", files=files)
+    files = {"input": fp,
+             "consolidateHeader": "1"}
+    r = requests.post("http://localhost:8080/api/processHeaderDocument", files=files, data={
+        "consolidateHeader": "1"
+    })
     title = ""
+    print(r.text)
     try:
         soup = BeautifulSoup(r.text, "xml")
         print("Title:", soup.find("title").string)
