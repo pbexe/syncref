@@ -1,18 +1,30 @@
+import json
+import re
+
+from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
-from django.contrib import messages
 from django.contrib.auth import logout
-from .models import GroupMembership, Group, Reference
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import PermissionDenied
-import re
-import json
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+
+from .models import Group, GroupMembership, Reference
+
 
 def index(request):
+    """View to handle the root directory of the website. If the user is logged
+    in, then it is the app home page. If the user is not logged in, then a
+    landing page is shown. 
+    
+    Args:
+        request (request): A handle to the request
+    
+    Returns:
+        render: Renders the specified template
+    """
     if request.user.is_authenticated:
         group_relations = GroupMembership.objects.filter(user=request.user)
         groups = [i.group for i in group_relations]
@@ -22,6 +34,15 @@ def index(request):
 
 
 def signup(request):
+    """A view to handle the user registration process
+    
+    Args:
+        request (request): A handle to the request
+    
+    Returns:
+        render: Renders the registration form
+        redirect: Redirects the user to the home page
+    """
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -41,6 +62,15 @@ def signup(request):
 
 
 def login(request):
+    """A view to handle the login process
+    
+    Args:
+        request (request): A handle to the request
+    
+    Returns:
+        render: Renders the login form
+        redirect: Redirects the user to the home page
+    """
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -56,6 +86,14 @@ def login(request):
 
 @login_required
 def create_group(request):
+    """A view to allow the user to create a group
+    
+    Args:
+        request (request): A handle to the request
+    
+    Returns:
+        render: Renders the group creation form
+    """
     if request.method == "POST":
         name = request.POST["name"]
         description = request.POST["description"]
@@ -69,6 +107,19 @@ def create_group(request):
 
 @login_required
 def view_group(request, pk):
+    """A view to allow the user to view a specified group
+    
+    Args:
+        request (request): A handle to the request
+        pk (int): The promary key of the group
+    
+    Raises:
+        PermissionDenied: Raised when a user who is not a member of the group
+                          tries to access the group
+    
+    Returns:
+        render: Renders the group information
+    """
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
         # Get all references to do with the group
@@ -83,6 +134,21 @@ def view_group(request, pk):
 
 @login_required
 def add(request, pk):
+    """A view to allow the user to add a reference to a group
+    
+    Args:
+        request (request): A handle to the request
+        pk (int): The primary key of the group
+    
+    Raises:
+        PermissionDenied: Raised when a user who is not a member of the group
+                          tries to access the group
+    
+    Returns:
+        render: The form to allow the addition of a reference
+        redirect: Redirects the user to the group home page upon successfull
+                  entry of a reference
+    """
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
         if request.method == 'POST':
@@ -96,7 +162,10 @@ def add(request, pk):
                             if val_number == key_number:
                                 pairs[request.POST[key]] = request.POST[value]
                                 break
-            reference = Reference(name=request.POST["name"], bibtex_dump=pairs, group=group)
+                                # Forgive me for the indentation
+            reference = Reference(name=request.POST["name"],
+                                  bibtex_dump=pairs,
+                                  group=group)
             reference.save()
             return redirect("view_group", pk=group.pk)
         else:

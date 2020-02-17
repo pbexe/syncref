@@ -28,13 +28,14 @@ class Reference(models.Model):
     def __str__(self):
         return self.name
 
+
 class ReferenceType(models.Model):
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.name
-    
+
 
 class ReferenceField(models.Model):
     name = models.CharField(max_length=200)
