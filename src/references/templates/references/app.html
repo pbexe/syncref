@@ -3,16 +3,20 @@
 
 {% block body %}
 <body class="bg-background text-paragraph">
-        This is main app
-
-        <p>You are in the following groups:</p>
-        <ul>
-                {% for group in groups %}
-                <li>{{ group.name }}</li>
-                {% endfor %}
-
-        </ul>
-        
-        <br><a href="{% url 'logout' %}">Logout</a>
+    This is main app
+    <p>You are in the following groups:</p>
+    <hr>
+    <ul>
+        {% for group in groups %}
+        <li>
+            <a href="{% url 'view_group' group.pk %}" >{{ group.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <p>
+        <a href="{% url 'create_group' %}">Create a new group</a>
+    </p>
+<br><a href="{% url 'logout' %}">Logout</a>
 </body>
 {% endblock %}

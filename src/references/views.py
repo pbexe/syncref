@@ -7,6 +7,10 @@ from django.contrib.auth import logout
 from .models import GroupMembership, Group, Reference
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from django.core.exceptions import PermissionDenied
+import re
+import json
 
 def index(request):
     if request.user.is_authenticated:
@@ -61,3 +65,43 @@ def create_group(request):
         membership.save()
         return HttpResponse("OK")
     return render(request, "references/create_group.html")
+
+
+@login_required
+def view_group(request, pk):
+    group = get_object_or_404(Group, pk=pk)
+    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+        # Get all references to do with the group
+        references = Reference.objects.filter(group=group)
+        return render(request, "references/group.html", {
+            "group":group,
+            "references": references
+        })
+    else:
+        raise PermissionDenied
+
+
+@login_required
+def add(request, pk):
+    group = get_object_or_404(Group, pk=pk)
+    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+        if request.method == 'POST':
+            pairs = {}
+            for key in request.POST:
+                if "key" in key:
+                    key_number = re.findall(r"[0-9]*$", key)[0]
+                    for value in request.POST:
+                        if "value" in value:
+                            val_number = re.findall(r"[0-9]*$", value)[0]
+                            if val_number == key_number:
+                                pairs[request.POST[key]] = request.POST[value]
+                                break
+            reference = Reference(name=request.POST["name"], bibtex_dump=pairs, group=group)
+            reference.save()
+            return redirect("view_group", pk=group.pk)
+        else:
+            return render(request, "references/add.html", {
+                "pk": group.pk
+            })
+    else:
+        raise PermissionDenied

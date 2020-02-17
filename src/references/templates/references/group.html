@@ -1,0 +1,19 @@
+{% extends "references/base.html" %}
+{% load static %}
+
+{% block body %}
+<body class="bg-background text-paragraph">
+    {{group.name}}
+    <br>
+    Citations are as follows:
+    <hr>
+    <ul>
+        {% for reference in references %}
+            <li>{{reference.name}}</li>
+        {% endfor %}
+    </ul>
+<hr>
+    <a href="{% url 'add' group.pk %}">Add citation</a>
+<br><a href="{% url 'logout' %}">Logout</a>
+</body>
+{% endblock %}

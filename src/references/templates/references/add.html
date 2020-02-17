@@ -1,0 +1,58 @@
+{% extends "references/base.html" %}
+{% load static %}
+
+{% block body %}
+<body class="bg-background text-paragraph">
+        Create Reference
+
+        <form action="{% url 'add' pk %}" method="POST">
+            {% csrf_token %}
+            <input type='text' placeholder='Name' id='name' name="name">
+            <div class="container" >
+                <div class='element' id='div_1'>
+                    <input type='text' placeholder='Key' id='key_1' name="key_1">
+                    <input type='text' placeholder='Value' id='value_1' name="value_1">
+                </div>
+            </div>
+            <span class='add'>Add Field</span>
+            <input type="submit" value="Add Citation">
+        </form>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    
+                    // Add new element
+                    $(".add").click(function(){
+                        
+                        // Finding total number of elements added
+                        var total_element = $(".element").length;
+                        
+                        // last <div> with element class id
+                            var lastid = $(".element:last").attr("id");
+                            var split_id = lastid.split("_");
+                            var nextindex = Number(split_id[1]) + 1;
+
+                                // Adding new div container after last occurance of element class
+                                $(".element:last").after("<div class='element' id='div_"+ nextindex +"'></div>");
+                                
+                                // Adding element to <div>
+                                    $("#div_" + nextindex).append("<input type='text' placeholder='Key' id='key_"+ nextindex +"' name='key_"+ nextindex +"'><input type='text' placeholder='Value' id='value_"+ nextindex +"' name='value_"+ nextindex +"' >&nbsp;<span id='remove_" + nextindex + "' class='remove'>X</span>");
+                                
+                            });
+                            
+                            // Remove element
+                            $('.container').on('click','.remove',function(){
+                                
+                                var id = this.id;
+                                var split_id = id.split("_");
+                                var deleteindex = split_id[1];
+                                
+                                // Remove <div> with id
+                                    $("#div_" + deleteindex).remove();
+                                    
+                                }); 
+                            });
+                        </script>
+        <br><a href="{% url 'logout' %}">Logout</a>
+</body>
+{% endblock %}
