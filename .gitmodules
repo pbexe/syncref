@@ -1,0 +1,3 @@
+[submodule "biblio-glutton"]
+	path = biblio-glutton
+	url = git@github.com:kermitt2/biblio-glutton.git
