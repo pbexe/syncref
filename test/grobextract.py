@@ -1,7 +1,10 @@
+import sys
+from difflib import SequenceMatcher
+
 import requests
 from bs4 import BeautifulSoup
-import sys
 from habanero import Crossref, cn
+
 
 def extract(fp):
     files = {"input": fp,
@@ -10,13 +13,14 @@ def extract(fp):
         "consolidateHeader": "1"
     })
     title = ""
-    print(r.text)
+    
     try:
         soup = BeautifulSoup(r.text, "xml")
-        print("Title:", soup.find("title").string)
+        # print("Title:", soup.find("title").string)
         title = soup.find("title").string
     except AttributeError:
-        print("Title not found")
+        # print("Title not found")
+        ...
 
     a = []
     try:
@@ -28,24 +32,37 @@ def extract(fp):
                 # print("Not valid author")
                 ...
     except AttributeError:
-        print("No authors found")
+        # print("No authors found")
+        ...
 
 
     cr = Crossref(mailto="miles@budden.net")
-    print("Query:", title + " " + " ".join(list(set(a))))
-    r = cr.works(query=title + " " + " ".join(list(set(a))))
-    if r["status"] == "ok":
-        print("Result Title:", r["message"]["items"][0]["title"][0])
-        # print("DOI:", r["message"]["items"][0]["DOI"])
-        print("\n=========================\n")
-        print(cn.content_negotiation(ids = r["message"]["items"][0]["DOI"], format = "bibentry"))
+    if a:
+        r = cr.works(query=title + " " + a[0])
     else:
-        ... # Uh oh
+        r = cr.works(query=title)
+    BibTeX = ""
+    if r["status"] == "ok":
+        for result in r["message"]["items"]:
+            # If the titles are similar enough
+            if SequenceMatcher(None, result["title"][0].upper(), title.upper()).ratio() > 0.9:
+                # print("Result Title:", result["title"][0])
+                # print("\n=========================\n")
+                # print(cn.content_negotiation(ids = result["DOI"], format = "bibentry"))
+                BibTeX = cn.content_negotiation(ids = result["DOI"], format = "bibentry")
+                break
+        else:
+            raise ExtractionError("No matches found")
 
+    else:
+        raise ExtractionError("Error with Crossref API")
+    return BibTeX
+
+class ExtractionError(Exception):
+    pass
 
 
 if __name__ == "__main__":
     with open(sys.argv[1], "rb") as fp:
-        extract(fp)
-# print(len(list(set(a))))
-# print(r.text)
+        data = extract(fp)
+        print(data)
