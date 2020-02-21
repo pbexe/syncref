@@ -10,5 +10,6 @@ urlpatterns = [
     path('create_group/', views.create_group, name="create_group"),
     path('view/<int:pk>/', views.view_group, name="view_group"),
     path('add/<int:pk>/', views.add, name="add"),
+    path('upload/<int:pk>/', views.uploadReference, name="upload"),
     path('', views.index, name="home")
 ]

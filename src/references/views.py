@@ -12,6 +12,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .models import Group, GroupMembership, Reference
+from .forms import ReferenceUpload
 
 
 def index(request):
@@ -174,3 +175,15 @@ def add(request, pk):
             })
     else:
         raise PermissionDenied
+
+def uploadReference(request, pk):
+    if request.method == 'POST':
+        form = ReferenceUpload(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ReferenceUpload()
+    return render(request, 'references/upload.html', {
+        'form': form
+    })

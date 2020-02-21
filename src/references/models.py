@@ -19,7 +19,7 @@ class GroupMembership(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     
     def __str__():
-        return user.username " is a member of " + group.name
+        return user.username + " is a member of " + group.name
 
 
 class Reference(models.Model):
@@ -46,3 +46,11 @@ class ReferenceField(models.Model):
     
     def __str__(self):
         return self.type_.name + " " + self.name
+
+
+class ReferenceFile(models.Model):
+    pdf = models.FileField(upload_to='papers')
+    reference = models.ForeignKey(Reference, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return "PDF of " + self.reference.name

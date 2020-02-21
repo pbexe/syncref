@@ -23,7 +23,8 @@ def extract(fp):
     files = {"input": fp}
     
     # Upload the file to the server
-    r = requests.post("http://localhost:8080/api/processHeaderDocument", files=files)
+    r = requests.post("http://localhost:8080/api/processHeaderDocument",
+                      files=files)
     title = ""
     
     # Try fetching the name and authors from the results
@@ -40,7 +41,9 @@ def extract(fp):
         authors = soup.find_all("author")
         for author in authors:
             try:
-                a.append(author.persName.forename.string + " " + author.persName.surname.string)
+                a.append(author.persName.forename.string
+                         + " " +
+                         author.persName.surname.string)
             except AttributeError:
                 # print("Not valid author")
                 ...
@@ -58,9 +61,12 @@ def extract(fp):
     if r["status"] == "ok":
         for result in r["message"]["items"]:
             # If the titles are similar enough
-            if SequenceMatcher(None, result["title"][0].upper(), title.upper()).ratio() > 0.9:
+            if SequenceMatcher(None,
+                               result["title"][0].upper(),
+                               title.upper()).ratio() > 0.9:
                 # If the title is similar enough, perform content negotiaiton
-                BibTeX = cn.content_negotiation(ids = result["DOI"], format = "bibentry")
+                BibTeX = cn.content_negotiation(ids = result["DOI"],
+                                                format = "bibentry")
                 break
         else:
             raise ExtractionError("No matches found")
