@@ -1,5 +1,6 @@
 import sys
 from difflib import SequenceMatcher
+import json
 
 import requests
 from bs4 import BeautifulSoup
@@ -26,7 +27,7 @@ def extract(fp):
     r = requests.post("http://localhost:8080/api/processHeaderDocument",
                       files=files)
     title = ""
-    
+    print(r.text, file=open("recent.xml", "w"))
     # Try fetching the name and authors from the results
     try:
         soup = BeautifulSoup(r.text, "xml")
@@ -51,25 +52,31 @@ def extract(fp):
         # print("No authors found")
         ...
 
+    return (title, a)
+
+
+def contentNegotiation(title, author):
     # Search for the paper on Crossref
     cr = Crossref(mailto="miles@budden.net")
-    if a:
-        r = cr.works(query=title + " " + a[0])
+    if author:
+        r = cr.works(query=title + " " + author[0])
     elif title:
         r = cr.works(query=title)
     else:
         raise ExtractionError("No suitable search criteria extracted")
     BibTeX = ""
+    print(json.dumps(r), file=open("cn.json", "w"))
     if r["status"] == "ok":
         for result in r["message"]["items"]:
             # If the titles are similar enough
-            if SequenceMatcher(None,
-                               result["title"][0].upper(),
-                               title.upper()).ratio() > 0.9:
-                # If the title is similar enough, perform content negotiaiton
-                BibTeX = cn.content_negotiation(ids = result["DOI"],
-                                                format = "bibentry")
-                break
+            if "title" in result:
+                if SequenceMatcher(None,
+                                result["title"][0].upper(),
+                                title.upper()).ratio() > 0.9:
+                    # If the title is similar enough, perform content negotiaiton
+                    BibTeX = cn.content_negotiation(ids = result["DOI"],
+                                                    format = "bibentry")
+                    break
         else:
             raise ExtractionError("No matches found")
     else:
@@ -104,9 +111,17 @@ if __name__ == "__main__":
     with open(sys.argv[1], "rb") as fp:
         import parser
         from pprint import pprint
-        data = extract(fp)
-        print(data)
-        print("\n\n")
-        pprint(parser.bib2py(data))
-        print("\n\n")
-        print(parser.py2bib(parser.bib2py(data)))
+        info = extract(fp)
+        try:
+            data = contentNegotiation(*info)
+            print(data)
+            print("\n\n")
+            pprint(parser.bib2py(data))
+            print("\n\n")
+            print(parser.py2bib(parser.bib2py(data)))
+        except ExtractionError as e:
+            print(e)
+            if info[0] or info[1]:
+                print("Extracted info:", info)
+            else:
+                print("No info extracted")

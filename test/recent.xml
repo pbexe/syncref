@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /opt/grobid/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Seeking Ground Truth for GABA Quantification by Edited Magnetic Resonance Spectroscopy: Comparative Analysis of TARQUIN, LCModel, JMRUI and GANNET</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Jenkins</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">College of Science (Physics)</orgName>
+								<orgName type="institution">Swansea University</orgName>
+								<address>
+									<postCode>SA2 8PP</postCode>
+									<settlement>Swansea</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Institute for Life Science</orgName>
+								<orgName type="laboratory">Centre for Nanohealth &amp; Clinical Imaging Unit</orgName>
+								<orgName type="institution">Swansea University</orgName>
+								<address>
+									<postCode>SA2 8PP</postCode>
+									<settlement>Swansea</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="institution">Cardiff University Brain Research Imaging Centre (CUBRIC)</orgName>
+								<address>
+									<addrLine>Maindy Rd</addrLine>
+									<postCode>CF24 4HQ</postCode>
+									<settlement>Cardiff</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">|</forename><forename type="middle">M</forename><surname>Chandler</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">School of Computer Science and Informatics</orgName>
+								<orgName type="institution">Cardiff University</orgName>
+								<address>
+									<postCode>CF24 3AA</postCode>
+									<settlement>Cardiff</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">|</forename><forename type="middle">F C</forename><surname>Langbein</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="department">School of Computer Science and Informatics</orgName>
+								<orgName type="institution">Cardiff University</orgName>
+								<address>
+									<postCode>CF24 3AA</postCode>
+									<settlement>Cardiff</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">|</forename><forename type="middle">S M</forename><surname>Shermer</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">College of Science (Physics)</orgName>
+								<orgName type="institution">Swansea University</orgName>
+								<address>
+									<postCode>SA2 8PP</postCode>
+									<settlement>Swansea</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Institute for Life Science</orgName>
+								<orgName type="laboratory">Centre for Nanohealth &amp; Clinical Imaging Unit</orgName>
+								<orgName type="institution">Swansea University</orgName>
+								<address>
+									<postCode>SA2 8PP</postCode>
+									<settlement>Swansea</settlement>
+									<country key="GB">United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Seeking Ground Truth for GABA Quantification by Edited Magnetic Resonance Spectroscopy: Comparative Analysis of TARQUIN, LCModel, JMRUI and GANNET</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<note>O R I G I N A L A R T I C L E Correspondence S. M. Shermer, PhD Funding information Royal Society Leverhulme Trust Senior Fellowship (SMS); ABMU Health Board, College of Science, Welcome trust strategic award (CJ); EPSRC studentship (MC)</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+
+		<encodingDesc>
+			<appInfo>
+				<application version="0.5.6" ident="GROBID" when="2020-02-21T14:37+0000">
+					<ref target="https://github.com/kermitt2/grobid">GROBID - A machine learning software for extracting information from scholarly documents</ref>
+				</application>
+			</appInfo>
+		</encodingDesc>		<profileDesc>
+			<abstract>
+				<p>Purpose: Many tools exist for quantifying magnetic resonance spectroscopy (MRS) data. Literature comparing them is sparse but indicates potential methodological bias. We benchmark MRS analysis tools to elucidate this. Methods: Four series of phantom experiments, including both solutions and tissue-mimicking gels, with constant concentrations of NAA, Creatine, Glutamine and Glutamate, and iteratively increased concentrations of GABA are performed. MEGA-PRESS spectra are acquired and quantified with several state-of-the-art MRS analysis tools (LCModel, TARQUIN, JMRUI, GANNET) and in-house code (LWFIT). GABA-to-NAA ratios for reported metabolite amplitudes are compared to the ground truth of known concentration ratios. Overall estimation accuracy is assessed by linear fits of reported vs. actual ratios and coefficients of determination. Simulations further elucidate the experimental results. Results: Significant differences in reported GABA-to-NAA amplitude ratios are observed. TARQUIN consistently overestimates , while most tools underestimate ratios to vary-* Equally contributing authors.</p>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+	</text>
+</TEI>
+
