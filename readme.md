@@ -1,8 +1,5 @@
-<p align="center">
-  <img src="logo.png">
-  <br>
-  <br>
+# Syncref
 
 [![Build Status](https://travis-ci.com/pbexe/syncref.svg?token=AeAAwB1rsJ3YfHiyXGQy&branch=master)](https://travis-ci.com/pbexe/syncref)
 
-</p>
+> README coming soon

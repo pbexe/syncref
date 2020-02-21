@@ -55,8 +55,10 @@ def extract(fp):
     cr = Crossref(mailto="miles@budden.net")
     if a:
         r = cr.works(query=title + " " + a[0])
-    else:
+    elif title:
         r = cr.works(query=title)
+    else:
+        raise ExtractionError("No suitable search criteria extracted")
     BibTeX = ""
     if r["status"] == "ok":
         for result in r["message"]["items"]:
@@ -84,7 +86,27 @@ class ExtractionError(Exception):
     pass
 
 
+def pdf2bib(fp):
+    """Converts a PDF to a dictionary
+    
+    Args:
+        fp (File): A handle to the PDF
+    
+    Returns:
+        dict: A dictionary as specified at
+    https://bibtexparser.readthedocs.io/en/master/tutorial.html#step-2-parse-it
+    """
+    bib_data = extract(fp)
+    return bib2py(data)
+
+
 if __name__ == "__main__":
     with open(sys.argv[1], "rb") as fp:
+        import parser
+        from pprint import pprint
         data = extract(fp)
         print(data)
+        print("\n\n")
+        pprint(parser.bib2py(data))
+        print("\n\n")
+        print(parser.py2bib(parser.bib2py(data)))
