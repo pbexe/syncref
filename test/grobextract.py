@@ -2,6 +2,7 @@ import sys
 from difflib import SequenceMatcher
 import json
 
+import arxiv
 import requests
 from bs4 import BeautifulSoup
 from habanero import Crossref, cn
@@ -58,6 +59,7 @@ def extract(fp):
 def contentNegotiation(title, author):
     # Search for the paper on Crossref
     cr = Crossref(mailto="miles@budden.net")
+    print("Querying Crossref")
     if author:
         r = cr.works(query=title + " " + author[0])
     elif title:
@@ -78,7 +80,22 @@ def contentNegotiation(title, author):
                                                     format = "bibentry")
                     break
         else:
-            raise ExtractionError("No matches found")
+            print("Querying arXiv")
+            results = arxiv.query(title, max_results=10)
+            for result in results:
+                pprint(result)
+                if SequenceMatcher(None,
+                                result["title"].upper(),
+                                title.upper()).ratio() > 0.9:
+                    if result["doi"]:
+                        BibTeX = cn.content_negotiation(ids = result["doi"],
+                                                        format = "bibentry")
+                    else:
+                        print("Entry found but no DOI")
+                    break
+                    
+            else:
+                raise ExtractionError("No matches found")
     else:
         raise ExtractionError("Error with Crossref API")
     return BibTeX

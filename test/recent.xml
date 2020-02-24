@@ -6,113 +6,124 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /opt/grobid/grobid-home/schemas/
 	<teiHeader xml:lang="en">
 		<fileDesc>
 			<titleStmt>
-				<title level="a" type="main">Seeking Ground Truth for GABA Quantification by Edited Magnetic Resonance Spectroscopy: Comparative Analysis of TARQUIN, LCModel, JMRUI and GANNET</title>
+				<title level="a" type="main">Mathematical Analysis of N-R Algorithm for Experimental Implementation of SHEPWM Control on Single-phase Inverter</title>
 			</titleStmt>
 			<publicationStmt>
 				<publisher/>
 				<availability status="unknown"><licence/></availability>
+				<date>Volume68 Issue 2-Feb 2020</date>
 			</publicationStmt>
 			<sourceDesc>
 				<biblStruct>
 					<analytic>
 						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Jenkins</surname></persName>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Alla</forename><forename type="middle">Eddine</forename><surname>Toubal</surname></persName>
 							<affiliation key="aff0">
-								<orgName type="department">College of Science (Physics)</orgName>
-								<orgName type="institution">Swansea University</orgName>
+								<orgName type="department">Electrical Engineering Department</orgName>
+								<orgName type="laboratory">Laboratoire Génie Electrique et Energies Renouvelables (LGEER)</orgName>
+								<orgName type="institution">Hassiba Benbouali University of Chlef</orgName>
 								<address>
-									<postCode>SA2 8PP</postCode>
-									<settlement>Swansea</settlement>
-									<country key="GB">United Kingdom</country>
+									<settlement>Chlef</settlement>
+									<country key="DZ">Algeria</country>
 								</address>
 							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Maamar</forename><surname>#1 , M&amp;apos;hamed</surname></persName>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Helaimi</forename><surname>#2</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Electrical Engineering Department</orgName>
+								<orgName type="laboratory">Laboratoire Génie Electrique et Energies Renouvelables (LGEER)</orgName>
+								<orgName type="institution">Hassiba Benbouali University of Chlef</orgName>
+								<address>
+									<settlement>Chlef</settlement>
+									<country key="DZ">Algeria</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Rachid</forename><surname>Taleb #3</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Electrical Engineering Department</orgName>
+								<orgName type="laboratory">Laboratoire Génie Electrique et Energies Renouvelables (LGEER)</orgName>
+								<orgName type="institution">Hassiba Benbouali University of Chlef</orgName>
+								<address>
+									<settlement>Chlef</settlement>
+									<country key="DZ">Algeria</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Hadj</forename><surname>Mouloudj</surname></persName>
 							<affiliation key="aff1">
-								<orgName type="department">Institute for Life Science</orgName>
-								<orgName type="laboratory">Centre for Nanohealth &amp; Clinical Imaging Unit</orgName>
-								<orgName type="institution">Swansea University</orgName>
+								<orgName type="department">Faculté des Science Exactes et Informatique</orgName>
+								<orgName type="laboratory">LPPPS Laboratory</orgName>
+								<orgName type="institution" key="instit1">Hassiba Benbouali University of Chlef</orgName>
+								<orgName type="institution" key="instit2">Ecole Normale Supérieure</orgName>
 								<address>
-									<postCode>SA2 8PP</postCode>
-									<settlement>Swansea</settlement>
-									<country key="GB">United Kingdom</country>
+									<addrLine>Vieux Kouba</addrLine>
+									<settlement>Alger</settlement>
+									<country key="DZ">Algeria</country>
 								</address>
 							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Oumaymah</forename><surname>Elamri</surname></persName>
 							<affiliation key="aff2">
-								<orgName type="institution">Cardiff University Brain Research Imaging Centre (CUBRIC)</orgName>
+								<orgName type="laboratory">Laboratoire de Génie Electrique et Commande des Systèmes (LGECOS)</orgName>
+								<orgName type="institution" key="instit1">Ecole Nationale des Sciences Appliquées de Marrakech</orgName>
+								<orgName type="institution" key="instit2">Cadi Ayyad University</orgName>
 								<address>
-									<addrLine>Maindy Rd</addrLine>
-									<postCode>CF24 4HQ</postCode>
-									<settlement>Cardiff</settlement>
-									<country key="GB">United Kingdom</country>
+									<country key="MA">Morocco</country>
 								</address>
 							</affiliation>
 						</author>
 						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">|</forename><forename type="middle">M</forename><surname>Chandler</surname></persName>
-							<affiliation key="aff3">
-								<orgName type="department">School of Computer Science and Informatics</orgName>
-								<orgName type="institution">Cardiff University</orgName>
-								<address>
-									<postCode>CF24 3AA</postCode>
-									<settlement>Cardiff</settlement>
-									<country key="GB">United Kingdom</country>
-								</address>
-							</affiliation>
-						</author>
-						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">|</forename><forename type="middle">F C</forename><surname>Langbein</surname></persName>
-							<affiliation key="aff3">
-								<orgName type="department">School of Computer Science and Informatics</orgName>
-								<orgName type="institution">Cardiff University</orgName>
-								<address>
-									<postCode>CF24 3AA</postCode>
-									<settlement>Cardiff</settlement>
-									<country key="GB">United Kingdom</country>
-								</address>
-							</affiliation>
-						</author>
-						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">|</forename><forename type="middle">S M</forename><surname>Shermer</surname></persName>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Abdelatif</forename><surname>Gadoum</surname></persName>
 							<affiliation key="aff0">
-								<orgName type="department">College of Science (Physics)</orgName>
-								<orgName type="institution">Swansea University</orgName>
+								<orgName type="department">Electrical Engineering Department</orgName>
+								<orgName type="laboratory">Laboratoire Génie Electrique et Energies Renouvelables (LGEER)</orgName>
+								<orgName type="institution">Hassiba Benbouali University of Chlef</orgName>
 								<address>
-									<postCode>SA2 8PP</postCode>
-									<settlement>Swansea</settlement>
-									<country key="GB">United Kingdom</country>
-								</address>
-							</affiliation>
-							<affiliation key="aff1">
-								<orgName type="department">Institute for Life Science</orgName>
-								<orgName type="laboratory">Centre for Nanohealth &amp; Clinical Imaging Unit</orgName>
-								<orgName type="institution">Swansea University</orgName>
-								<address>
-									<postCode>SA2 8PP</postCode>
-									<settlement>Swansea</settlement>
-									<country key="GB">United Kingdom</country>
+									<settlement>Chlef</settlement>
+									<country key="DZ">Algeria</country>
 								</address>
 							</affiliation>
 						</author>
-						<title level="a" type="main">Seeking Ground Truth for GABA Quantification by Edited Magnetic Resonance Spectroscopy: Comparative Analysis of TARQUIN, LCModel, JMRUI and GANNET</title>
+						<title level="a" type="main">Mathematical Analysis of N-R Algorithm for Experimental Implementation of SHEPWM Control on Single-phase Inverter</title>
 					</analytic>
 					<monogr>
+						<title level="j" type="main">International Journal of Engineering Trends and Technology(IJETT)</title>
 						<imprint>
-							<date/>
+							<date type="published">Volume68 Issue 2-Feb 2020</date>
 						</imprint>
 					</monogr>
-					<note>O R I G I N A L A R T I C L E Correspondence S. M. Shermer, PhD Funding information Royal Society Leverhulme Trust Senior Fellowship (SMS); ABMU Health Board, College of Science, Welcome trust strategic award (CJ); EPSRC studentship (MC)</note>
+					<note>Page 9</note>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 
 		<encodingDesc>
 			<appInfo>
-				<application version="0.5.6" ident="GROBID" when="2020-02-21T14:37+0000">
+				<application version="0.5.6" ident="GROBID" when="2020-02-24T15:46+0000">
 					<ref target="https://github.com/kermitt2/grobid">GROBID - A machine learning software for extracting information from scholarly documents</ref>
 				</application>
 			</appInfo>
 		</encodingDesc>		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Power Electronics</term>
+					<term>Newton-Raphson Algorithm</term>
+					<term>Selective Harmonic Elimination SHE</term>
+					<term>MATLAB/Simulink</term>
+					<term>Half-bridge Inverter Topology</term>
+					<term>Arduino Microcontroller</term>
+				</keywords>
+			</textClass>
 			<abstract>
-				<p>Purpose: Many tools exist for quantifying magnetic resonance spectroscopy (MRS) data. Literature comparing them is sparse but indicates potential methodological bias. We benchmark MRS analysis tools to elucidate this. Methods: Four series of phantom experiments, including both solutions and tissue-mimicking gels, with constant concentrations of NAA, Creatine, Glutamine and Glutamate, and iteratively increased concentrations of GABA are performed. MEGA-PRESS spectra are acquired and quantified with several state-of-the-art MRS analysis tools (LCModel, TARQUIN, JMRUI, GANNET) and in-house code (LWFIT). GABA-to-NAA ratios for reported metabolite amplitudes are compared to the ground truth of known concentration ratios. Overall estimation accuracy is assessed by linear fits of reported vs. actual ratios and coefficients of determination. Simulations further elucidate the experimental results. Results: Significant differences in reported GABA-to-NAA amplitude ratios are observed. TARQUIN consistently overestimates , while most tools underestimate ratios to vary-* Equally contributing authors.</p>
+				<p>This paper presents a simulation and experimental validation of H-bridge inverter with the implementation of a Newton-Raphson algorithm for selective harmonics elimination. Contributions are made in interfacing and programming of Arduino ATmega328P microcontroller and use it to control of single-phase inverter by selective harmonic elimination technique. Through this work, we have given a general analytical description of the total harmonic distortion and present the method of application of the Newton-Raphson algorithm for selective harmonic elimination. MATLAB Simulink used for simulation and Arduino IDE software was used to program the Arduino board. The validity of the simulation model is verified by experimental results, the inverter was realized and the algorithm control is tested, results of the simulation and realization are compared, they show the efficiency of the system analysis and demonstrate the ability of Arduino to control the inverter and to generate complex signals for the electrical systems control.</p>
 			</abstract>
 		</profileDesc>
 	</teiHeader>
