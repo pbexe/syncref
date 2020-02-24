@@ -1,11 +1,14 @@
+import json
+import socket
 import sys
 from difflib import SequenceMatcher
-import json
 
 import arxiv
 import requests
 from bs4 import BeautifulSoup
 from habanero import Crossref, cn
+
+socket.setdefaulttimeout(10)
 
 
 def extract(fp):
@@ -114,6 +117,7 @@ def query_arXiv(title, author):
     Returns:
         str: A BibTeX entry for the queried data
     """
+    print("Querying arXiv")
     if author and title:
         results = arxiv.query(title + " " + author[0])
     elif title:
@@ -130,6 +134,7 @@ def query_arXiv(title, author):
                                                 format = "bibentry")
                 return BibTeX
             else:
+                # TODO return data anyway
                 raise ExtractionError("Entry found but no DOI")
             
     else:
@@ -150,12 +155,15 @@ def content_negotiation(title, author):
         str: A BibTeX entry for the queried data
     """
     try:
-        return query_crossref(title, author)
-    except ExtractionError:
         try:
-            return query_arXiv(title, author)
+            return query_crossref(title, author)
         except ExtractionError:
-            raise ExtractionError("No sources returned results")
+            try:
+                return query_arXiv(title, author)
+            except ExtractionError:
+                raise ExtractionError("No sources returned results")
+    except requests.exceptions.HTTPError as e:
+        raise ExtractionError(e)
 
 
 class ExtractionError(Exception):
