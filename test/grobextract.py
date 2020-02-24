@@ -12,10 +12,10 @@ def extract(fp):
     """Extracts the BibTex entry for a given PDF file
     
     Arguments:
-        fp {File} -- A hanfle to the PDF file to extract
+        fp {File} -- A handle to the PDF file to extract
     
     Raises:
-        ExtractionError: An error has occured when extracting the BibTeX entry
+        ExtractionError: An error has occurred when extracting the BibTeX entry
     
     Returns:
         str -- The BibTeX entry
@@ -56,11 +56,25 @@ def extract(fp):
     return (title, a)
 
 
-def contentNegotiation(title, author):
+def query_crossref(title, author):
+    """Query Crossref for extracted data
+    
+    Args:
+        title (str): The title of the paper
+        author (List(str)): A list of the authors of the paper
+    
+    Raises:
+        ExtractionError: No suitable search criteria extracted
+        ExtractionError: No suitable Crossref candidates
+        ExtractionError: Crossref returned an error
+    
+    Returns:
+        str: A BibTeX entry for the queried data
+    """
     # Search for the paper on Crossref
     cr = Crossref(mailto="miles@budden.net")
     print("Querying Crossref")
-    if author:
+    if author and title:
         r = cr.works(query=title + " " + author[0])
     elif title:
         r = cr.works(query=title)
@@ -78,27 +92,70 @@ def contentNegotiation(title, author):
                     # If the title is similar enough, perform content negotiaiton
                     BibTeX = cn.content_negotiation(ids = result["DOI"],
                                                     format = "bibentry")
-                    break
+                    return BibTeX
         else:
-            print("Querying arXiv")
-            results = arxiv.query(title, max_results=10)
-            for result in results:
-                pprint(result)
-                if SequenceMatcher(None,
-                                result["title"].upper(),
-                                title.upper()).ratio() > 0.9:
-                    if result["doi"]:
-                        BibTeX = cn.content_negotiation(ids = result["doi"],
-                                                        format = "bibentry")
-                    else:
-                        print("Entry found but no DOI")
-                    break
-                    
-            else:
-                raise ExtractionError("No matches found")
+            raise ExtractionError("No suitable Crossref candidates")
     else:
-        raise ExtractionError("Error with Crossref API")
-    return BibTeX
+        raise ExtractionError("Crossref returned an error")
+
+
+def query_arXiv(title, author):
+    """Query arXiv for the extracted data
+    
+    Args:
+        title (str): The title of the paper
+        author (List(str)): A list of the authors of the paper
+    
+    Raises:
+        ExtractionError: No suitable search criteria extracted
+        ExtractionError: Entry found but no DOI
+        ExtractionError: No matches found
+    
+    Returns:
+        str: A BibTeX entry for the queried data
+    """
+    if author and title:
+        results = arxiv.query(title + " " + author[0])
+    elif title:
+        results = arxiv.query(title)
+    else:
+        raise ExtractionError("No suitable search criteria extracted")
+    for result in results:
+        # pprint(result)
+        if SequenceMatcher(None,
+                        result["title"].upper(),
+                        title.upper()).ratio() > 0.9:
+            if result["doi"]:
+                BibTeX = cn.content_negotiation(ids = result["doi"],
+                                                format = "bibentry")
+                return BibTeX
+            else:
+                raise ExtractionError("Entry found but no DOI")
+            
+    else:
+        raise ExtractionError("No matches found")
+
+
+def content_negotiation(title, author):
+    """Attempts to perform contant negotiation on the extracted data
+    
+    Args:
+        title (str): The title of the paper
+        author (List(str)): The list of authors of the paper
+    
+    Raises:
+        ExtractionError: No sources returned results
+    
+    Returns:
+        str: A BibTeX entry for the queried data
+    """
+    try:
+        return query_crossref(title, author)
+    except ExtractionError:
+        try:
+            return query_arXiv(title, author)
+        except ExtractionError:
+            raise ExtractionError("No sources returned results")
 
 
 class ExtractionError(Exception):
@@ -130,7 +187,7 @@ if __name__ == "__main__":
         from pprint import pprint
         info = extract(fp)
         try:
-            data = contentNegotiation(*info)
+            data = content_negotiation(*info)
             print(data)
             print("\n\n")
             pprint(parser.bib2py(data))
