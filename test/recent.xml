@@ -6,124 +6,37 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /opt/grobid/grobid-home/schemas/
 	<teiHeader xml:lang="en">
 		<fileDesc>
 			<titleStmt>
-				<title level="a" type="main">Mathematical Analysis of N-R Algorithm for Experimental Implementation of SHEPWM Control on Single-phase Inverter</title>
+				<title level="a" type="main">CM3112-COURSEWORK REPORT 1. Heuristic Effectiveness</title>
 			</titleStmt>
 			<publicationStmt>
 				<publisher/>
 				<availability status="unknown"><licence/></availability>
-				<date>Volume68 Issue 2-Feb 2020</date>
+				<date type="published" when="2019-11">November 2019</date>
 			</publicationStmt>
 			<sourceDesc>
 				<biblStruct>
 					<analytic>
-						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Alla</forename><forename type="middle">Eddine</forename><surname>Toubal</surname></persName>
-							<affiliation key="aff0">
-								<orgName type="department">Electrical Engineering Department</orgName>
-								<orgName type="laboratory">Laboratoire Génie Electrique et Energies Renouvelables (LGEER)</orgName>
-								<orgName type="institution">Hassiba Benbouali University of Chlef</orgName>
-								<address>
-									<settlement>Chlef</settlement>
-									<country key="DZ">Algeria</country>
-								</address>
-							</affiliation>
-						</author>
-						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Maamar</forename><surname>#1 , M&amp;apos;hamed</surname></persName>
-						</author>
-						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Helaimi</forename><surname>#2</surname></persName>
-							<affiliation key="aff0">
-								<orgName type="department">Electrical Engineering Department</orgName>
-								<orgName type="laboratory">Laboratoire Génie Electrique et Energies Renouvelables (LGEER)</orgName>
-								<orgName type="institution">Hassiba Benbouali University of Chlef</orgName>
-								<address>
-									<settlement>Chlef</settlement>
-									<country key="DZ">Algeria</country>
-								</address>
-							</affiliation>
-						</author>
-						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Rachid</forename><surname>Taleb #3</surname></persName>
-							<affiliation key="aff0">
-								<orgName type="department">Electrical Engineering Department</orgName>
-								<orgName type="laboratory">Laboratoire Génie Electrique et Energies Renouvelables (LGEER)</orgName>
-								<orgName type="institution">Hassiba Benbouali University of Chlef</orgName>
-								<address>
-									<settlement>Chlef</settlement>
-									<country key="DZ">Algeria</country>
-								</address>
-							</affiliation>
-						</author>
-						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Hadj</forename><surname>Mouloudj</surname></persName>
-							<affiliation key="aff1">
-								<orgName type="department">Faculté des Science Exactes et Informatique</orgName>
-								<orgName type="laboratory">LPPPS Laboratory</orgName>
-								<orgName type="institution" key="instit1">Hassiba Benbouali University of Chlef</orgName>
-								<orgName type="institution" key="instit2">Ecole Normale Supérieure</orgName>
-								<address>
-									<addrLine>Vieux Kouba</addrLine>
-									<settlement>Alger</settlement>
-									<country key="DZ">Algeria</country>
-								</address>
-							</affiliation>
-						</author>
-						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Oumaymah</forename><surname>Elamri</surname></persName>
-							<affiliation key="aff2">
-								<orgName type="laboratory">Laboratoire de Génie Electrique et Commande des Systèmes (LGECOS)</orgName>
-								<orgName type="institution" key="instit1">Ecole Nationale des Sciences Appliquées de Marrakech</orgName>
-								<orgName type="institution" key="instit2">Cadi Ayyad University</orgName>
-								<address>
-									<country key="MA">Morocco</country>
-								</address>
-							</affiliation>
-						</author>
-						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Abdelatif</forename><surname>Gadoum</surname></persName>
-							<affiliation key="aff0">
-								<orgName type="department">Electrical Engineering Department</orgName>
-								<orgName type="laboratory">Laboratoire Génie Electrique et Energies Renouvelables (LGEER)</orgName>
-								<orgName type="institution">Hassiba Benbouali University of Chlef</orgName>
-								<address>
-									<settlement>Chlef</settlement>
-									<country key="DZ">Algeria</country>
-								</address>
-							</affiliation>
-						</author>
-						<title level="a" type="main">Mathematical Analysis of N-R Algorithm for Experimental Implementation of SHEPWM Control on Single-phase Inverter</title>
+						<title level="a" type="main">CM3112-COURSEWORK REPORT 1. Heuristic Effectiveness</title>
 					</analytic>
 					<monogr>
-						<title level="j" type="main">International Journal of Engineering Trends and Technology(IJETT)</title>
 						<imprint>
-							<date type="published">Volume68 Issue 2-Feb 2020</date>
+							<date type="published" when="2019-11">November 2019</date>
 						</imprint>
 					</monogr>
-					<note>Page 9</note>
+					<note>Lewis Hemming C1771290</note>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 
 		<encodingDesc>
 			<appInfo>
-				<application version="0.5.6" ident="GROBID" when="2020-02-24T16:02+0000">
+				<application version="0.5.6" ident="GROBID" when="2020-02-24T20:49+0000">
 					<ref target="https://github.com/kermitt2/grobid">GROBID - A machine learning software for extracting information from scholarly documents</ref>
 				</application>
 			</appInfo>
 		</encodingDesc>		<profileDesc>
-			<textClass>
-				<keywords>
-					<term>Power Electronics</term>
-					<term>Newton-Raphson Algorithm</term>
-					<term>Selective Harmonic Elimination SHE</term>
-					<term>MATLAB/Simulink</term>
-					<term>Half-bridge Inverter Topology</term>
-					<term>Arduino Microcontroller</term>
-				</keywords>
-			</textClass>
 			<abstract>
-				<p>This paper presents a simulation and experimental validation of H-bridge inverter with the implementation of a Newton-Raphson algorithm for selective harmonics elimination. Contributions are made in interfacing and programming of Arduino ATmega328P microcontroller and use it to control of single-phase inverter by selective harmonic elimination technique. Through this work, we have given a general analytical description of the total harmonic distortion and present the method of application of the Newton-Raphson algorithm for selective harmonic elimination. MATLAB Simulink used for simulation and Arduino IDE software was used to program the Arduino board. The validity of the simulation model is verified by experimental results, the inverter was realized and the algorithm control is tested, results of the simulation and realization are compared, they show the efficiency of the system analysis and demonstrate the ability of Arduino to control the inverter and to generate complex signals for the electrical systems control.</p>
+				<p>My chosen heuristic is effective in comparison to always returning 0 because if an A* search&apos;s heuristic always returns 0 then it doesn&apos;t take into account the cost of each path so is effectively a breadth-first search, due to the fact all paths in this situation have a cost of one (moving any number of squares is a cost of one). With small trees that have a low number of nodes breadth-first could be as effective as A* search in this situation. But, in the case of rush hour some of the trees with A* search expand tens of thousands of nodes, so breadth-first won&apos;t be as effective. An example of this is shown on the right using the rush hour game random11.txt which expands 224,259 nodes when the heuristic returns 0 as for using my heuristic, only 50,203 nodes are expanded. Although the time to complete is similar and the route is the same, in other examples the optimal route may not be the first route found so breadth-first could return a result that isn&apos;t optimal as it just returns the first result found. Therefore, the heuristic is effective as when tested against different examples my heuristic always found the optimal route with less nodes expanded than when the heuristic was equal to 0. This also helps with the issue of running out of memory as if the heuristic is too small, too many nodes maybe expanded and then a memory-overload error is returned. 2. Admissibility of chosen Heuristic A heuristic is considered admissible if it never overestimates the true cost to reach the goal state. My heuristic is based on how many cars are blocking the row spaces to the right of the goal car and whether those cars are able to move entirely out of the path of the goal car. This way it can be considered admissible as it is impossible to reach a goal state if there are still cars both occupying a space in the same row and to the right of the goal car. Then if said cars cannot move either up or down to clear the goal path then the cost is increased again. This is due to the fact every puzzle has a solution, therefore the only other reason the car can&apos;t move up or down is that anouther car is blocking the way. This means that anouther car must also move to free the goal car and therefore the heuristic must be one higher. This means it&apos;s admissible as it&apos;s impossible to reach the goal without completing all of these moves. 3. Heuristic Improvement One way to further improve this heuristic would be to calculate how many cars need to be moved for each vertical car, that occupies a space along the same row as the goal car and is to the right of the goal car, to move out of the path of the goal car. This heuristic would be a lot tougher to implement but for each vertical car you can calculate whether the car blocking it (if there is one) can be moved then calculate if there&apos;s a car blocking that car and so on, until you calculate how many cars need to be moved to free each vertical car blocking the goal car. A way to implement this would be to have a while loop that stays active, increasing the cost by one each time it&apos;s incremented, until a car that can be moved is found. The spaces occupied could be kept in an array list that can then check if each location the car would like to move too is taken. This way, say a vertical car can&apos;t move until 3 other cars move then the heuristic would be 2 higher than in my current heuristic so even less nodes will be expanded and it would still be admissible.</p>
 			</abstract>
 		</profileDesc>
 	</teiHeader>
