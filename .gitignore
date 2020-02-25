@@ -234,3 +234,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+test/cn.json
+test/recent.xml
