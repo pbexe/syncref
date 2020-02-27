@@ -1,13 +1,18 @@
 import json
 import socket
 import sys
+from datetime import datetime
 from difflib import SequenceMatcher
+from pprint import pprint
 
 import arxiv
 import requests
 from bs4 import BeautifulSoup
 from habanero import Crossref, cn
 
+from parser import py2bib
+
+# Required so arXiv doesn't hang forever
 socket.setdefaulttimeout(10)
 
 
@@ -76,7 +81,7 @@ def query_crossref(title, author):
     """
     # Search for the paper on Crossref
     cr = Crossref(mailto="miles@budden.net")
-    print("Querying Crossref")
+    # print("Querying Crossref")
     if author and title:
         r = cr.works(query=title + " " + author[0])
     elif title:
@@ -117,15 +122,14 @@ def query_arXiv(title, author):
     Returns:
         str: A BibTeX entry for the queried data
     """
-    print("Querying arXiv")
+    # print("Querying arXiv")
     if author and title:
-        results = arxiv.query(title + " " + author[0])
+        results = arxiv.query(title + " " + author[0], max_results=5)
     elif title:
-        results = arxiv.query(title)
+        results = arxiv.query(title, max_results=5)
     else:
         raise ExtractionError("No suitable search criteria extracted")
     for result in results:
-        # pprint(result)
         if SequenceMatcher(None,
                         result["title"].upper(),
                         title.upper()).ratio() > 0.9:
@@ -134,12 +138,33 @@ def query_arXiv(title, author):
                                                 format = "bibentry")
                 return BibTeX
             else:
-                # TODO return data anyway
-                raise ExtractionError("Entry found but no DOI")
-            
+                BibTeX = generate_bibtex_from_arXiv(result)
+                return BibTeX            
     else:
         raise ExtractionError("No matches found")
 
+
+def generate_bibtex_from_arXiv(result):
+    bibtex = {}
+    year = str(datetime.fromisoformat(result["published"][:len(result["published"])-1]).year)
+    month = str(datetime.fromisoformat(result["published"][:len(result["published"])-1]).strftime("%b"))
+    bibtex["ENTRYTYPE"] = "misc"
+    bibtex["ID"] = result["author"].split().pop() + year
+    if "authors" in result:
+        bibtex["author"] = " and ".join(result["authors"])
+    if "published" in result:
+        bibtex["year"] = year
+        bibtex["month"] = month
+    if "title" in result:
+        bibtex["title"] = result["title"]
+    if "arxiv_primary_category" in result:
+        if "term" in result["arxiv_primary_category"]:
+            bibtex["primaryClass"] = result["arxiv_primary_category"]["term"]
+    if result["id"]:
+        bibtex["url"] = result["id"]
+        
+    
+    return py2bib([bibtex])
 
 def content_negotiation(title, author):
     """Attempts to perform contant negotiation on the extracted data

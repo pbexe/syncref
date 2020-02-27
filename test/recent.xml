@@ -6,37 +6,59 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /opt/grobid/grobid-home/schemas/
 	<teiHeader xml:lang="en">
 		<fileDesc>
 			<titleStmt>
-				<title level="a" type="main">CM3112-COURSEWORK REPORT 1. Heuristic Effectiveness</title>
+				<title level="a" type="main">When a measure of quantum correlation is polygamous</title>
 			</titleStmt>
 			<publicationStmt>
 				<publisher/>
 				<availability status="unknown"><licence/></availability>
-				<date type="published" when="2019-11">November 2019</date>
+				<date type="published" when="2017-10-17">17 Oct 2017</date>
 			</publicationStmt>
 			<sourceDesc>
 				<biblStruct>
 					<analytic>
-						<title level="a" type="main">CM3112-COURSEWORK REPORT 1. Heuristic Effectiveness</title>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Yu</forename><surname>Guo</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Institute of Quantum Information Science</orgName>
+								<orgName type="institution">Shanxi Datong University</orgName>
+								<address>
+									<postCode>037009</postCode>
+									<settlement>Datong</settlement>
+									<region>Shanxi</region>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">School of Mathematics and Computer Science</orgName>
+								<orgName type="institution">Shanxi Datong University</orgName>
+								<address>
+									<postCode>037009</postCode>
+									<settlement>Datong</settlement>
+									<region>shanxi</region>
+									<country key="CN">China</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">When a measure of quantum correlation is polygamous</title>
 					</analytic>
 					<monogr>
 						<imprint>
-							<date type="published" when="2019-11">November 2019</date>
+							<date type="published" when="2017-10-17">17 Oct 2017</date>
 						</imprint>
 					</monogr>
-					<note>Lewis Hemming C1771290</note>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 
 		<encodingDesc>
 			<appInfo>
-				<application version="0.5.6" ident="GROBID" when="2020-02-24T20:49+0000">
+				<application version="0.5.6" ident="GROBID" when="2020-02-27T15:24+0000">
 					<ref target="https://github.com/kermitt2/grobid">GROBID - A machine learning software for extracting information from scholarly documents</ref>
 				</application>
 			</appInfo>
 		</encodingDesc>		<profileDesc>
 			<abstract>
-				<p>My chosen heuristic is effective in comparison to always returning 0 because if an A* search&apos;s heuristic always returns 0 then it doesn&apos;t take into account the cost of each path so is effectively a breadth-first search, due to the fact all paths in this situation have a cost of one (moving any number of squares is a cost of one). With small trees that have a low number of nodes breadth-first could be as effective as A* search in this situation. But, in the case of rush hour some of the trees with A* search expand tens of thousands of nodes, so breadth-first won&apos;t be as effective. An example of this is shown on the right using the rush hour game random11.txt which expands 224,259 nodes when the heuristic returns 0 as for using my heuristic, only 50,203 nodes are expanded. Although the time to complete is similar and the route is the same, in other examples the optimal route may not be the first route found so breadth-first could return a result that isn&apos;t optimal as it just returns the first result found. Therefore, the heuristic is effective as when tested against different examples my heuristic always found the optimal route with less nodes expanded than when the heuristic was equal to 0. This also helps with the issue of running out of memory as if the heuristic is too small, too many nodes maybe expanded and then a memory-overload error is returned. 2. Admissibility of chosen Heuristic A heuristic is considered admissible if it never overestimates the true cost to reach the goal state. My heuristic is based on how many cars are blocking the row spaces to the right of the goal car and whether those cars are able to move entirely out of the path of the goal car. This way it can be considered admissible as it is impossible to reach a goal state if there are still cars both occupying a space in the same row and to the right of the goal car. Then if said cars cannot move either up or down to clear the goal path then the cost is increased again. This is due to the fact every puzzle has a solution, therefore the only other reason the car can&apos;t move up or down is that anouther car is blocking the way. This means that anouther car must also move to free the goal car and therefore the heuristic must be one higher. This means it&apos;s admissible as it&apos;s impossible to reach the goal without completing all of these moves. 3. Heuristic Improvement One way to further improve this heuristic would be to calculate how many cars need to be moved for each vertical car, that occupies a space along the same row as the goal car and is to the right of the goal car, to move out of the path of the goal car. This heuristic would be a lot tougher to implement but for each vertical car you can calculate whether the car blocking it (if there is one) can be moved then calculate if there&apos;s a car blocking that car and so on, until you calculate how many cars need to be moved to free each vertical car blocking the goal car. A way to implement this would be to have a while loop that stays active, increasing the cost by one each time it&apos;s incremented, until a car that can be moved is found. The spaces occupied could be kept in an array list that can then check if each location the car would like to move too is taken. This way, say a vertical car can&apos;t move until 3 other cars move then the heuristic would be 2 higher than in my current heuristic so even less nodes will be expanded and it would still be admissible.</p>
+				<p>We present here an approach of characterizing polygamy of quantum correlations without the traditional polygamy inequalities. It can induce the standard polygamy inequalities for any continuous measure of quantum correlation with the polygamy power. We show that any faithful entanglement measure is not polygamous and any entanglement of assistance is polygamous but not monogamous. Monogamy law of quantum correlations as one of the most striking features in quantum world has been explored ever since the distribution of three qubit state en-tanglement discovered by Coffman, Kundu, and Woot-ters (CKW) [1-32]. A monogamy relation is quantitatively displayed as an inequality of the following form: Q(A|BC) ≥ Q(A|B) + Q(A|C) , (1) where Q is a measure of bipartite quantum correlation and A, B, C are three subsystems of a composite quantum system. Dually, the polygamy relation in literature is expressed as Q(A|BC) ≤ Q(A|B) + Q(A|C). (2) However, Eq. (1) [resp. Eq. (2)] captures only partially the property that Q is monogamous (resp. polygamous). For example, it is well known that if Q does not satisfy these relations, it is still possible to find a positive power α ∈ R + , such that Q α satisfies the relation. It was shown that many other measures of entanglement satisfy the monogamy relation (1) or polygamy relation (2) if Q is replaced by Q α for some α &gt; 1 [1-11]. Very recently, we introduced a definition of monogamy without inequalities in [33], which capture the nature of monogamy relation completely. In this paper we present a condition of polygamy without inequalities as in Eq. (2). Our definition of polygamy (see Definition 1 below) does not present as a polygamy relation. But, as what we will show, our definition is consistent with the traditional notion of polygamy, by showing that Q is polygamous according to our definition if and only if there exists an β &gt; 0 such that Q β satisfy (2). Consequently , any entanglement of assistance is monogamous according to our definition. We also prove that any faithful entanglement measure (a measure is said to be faithful if it is zero only on separable states) is not polygamy and any entanglement of assistance is not monogamous. Throughout this paper, a measure of quantum correlation Q refers to any quantity that characterizes the &quot;quantumness&quot; contained in bipartite quantum systems , such as entanglement, quantum discord [34, 35], measurement-induced nonlocality [36], quantum * Electronic address: guoyu3@aliyun.com deficit [37], and other quantum correlations introduce recent years [38-43], etc. We denote by S(H ABC) ≡ S ABC the set of density matrices acting on a tripartite Hilbert space H A ⊗ H B ⊗ H C ≡ H ABC associated with some tripartite system. For ρ ABC ∈ S ABC , ρ AB ≡ Tr C ρ ABC and ρ AC ≡ Tr B ρ ABC denote the marginal states on H AB and H AC , respectively. Definition 1. Let Q be a measure of quantum correlation. We call Q is polygamous if for any ρ ABC ∈ S ABC that satisfies Q(ρ A|BC) &gt; max{Q(ρ AB), Q(ρ AC)} &gt; 0 , (3) we have min{Q(ρ AB), Q(ρ AC)} &gt; 0. Definition 1 does not involve the standard polygamy relation as (2). However, we can derive a more quantitative inequality from (3): Theorem 1. Let Q be a continuous measure of quantum correlation. Then, Q is pologamous according to Definition 1 if and only if there exists 0 &lt; β &lt; ∞ such that Q β (ρ A|BC) ≤ Q β (ρ AB) + Q β (ρ AC) (4) holds for any ρ ABC ∈ S ABC with fixed dim H ABC = d &lt; ∞.</p>
 			</abstract>
 		</profileDesc>
 	</teiHeader>
