@@ -10,9 +10,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from habanero import cn
 
-from .models import Group, GroupMembership, Reference
+from .dublincore import url2doi
 from .forms import ReferenceUpload
+from .models import Group, GroupMembership, Reference
 
 
 def index(request):
@@ -187,3 +189,19 @@ def uploadReference(request, pk):
     return render(request, 'references/upload.html', {
         'form': form
     })
+
+
+@login_required
+def submit_url(request, pk):
+    if request.method == 'POST':
+        url = request.POST["url"]
+        try:
+            doi = url2doi(url)
+            bibtex = cn.content_negotiation(ids = doi, format = "bibentry")
+            return HttpResponse(bibtex)
+        except:
+            return HttpResponse("Whoops")
+    else:
+        return render(request, "references/url.html", {
+            "pk": pk
+        })

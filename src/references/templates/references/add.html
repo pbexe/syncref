@@ -8,6 +8,7 @@
         <form action="{% url 'add' pk %}" method="POST">
             {% csrf_token %}
             <input type='text' placeholder='Name' id='name' name="name">
+            <input type='text' placeholder='Type' id='type' name="type">
             <div class="container" >
                 <div class='element' id='div_1'>
                     <input type='text' placeholder='Key' id='key_1' name="key_1">
@@ -16,6 +17,13 @@
             </div>
             <span class='add'>Add Field</span>
             <input type="submit" value="Add Citation">
+        </form>
+        <hr>
+        Add by URL instead: <br>
+        <form method="post" action="{% url 'submit_url' pk %}">
+            {% csrf_token %}
+            <input type="text" name="url" id="url" placeholder="URL" />
+            <input type="submit" value="Submit">
         </form>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script>

@@ -8,6 +8,7 @@ urlpatterns = [
     path('login/', views.login, name="login"),
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
     path('create_group/', views.create_group, name="create_group"),
+    path('submit_url/<int:pk>/', views.submit_url, name="submit_url"),
     path('view/<int:pk>/', views.view_group, name="view_group"),
     path('add/<int:pk>/', views.add, name="add"),
     path('upload/<int:pk>/', views.uploadReference, name="upload"),

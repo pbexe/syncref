@@ -10,6 +10,8 @@ django = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 uvicorn = "*"
+habanero = "*"
+beautifulsoup4 = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3"
