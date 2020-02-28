@@ -37,7 +37,6 @@ def url2doi(url):
     # Assume the first DOI is the correct one because it is usually close to
     # the top in the metadata
     if matches:
-        print(matches[0])
         return matches[0]
     else:
         return None
