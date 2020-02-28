@@ -12,8 +12,10 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from habanero import cn
 
+from .bibparser import bib2py, py2bib
 from .dublincore import url2doi
 from .forms import ReferenceUpload
+from .grobextract import ExtractionError
 from .models import Group, GroupMembership, Reference
 
 
@@ -104,7 +106,7 @@ def create_group(request):
         group.save()
         membership = GroupMembership(group=group, user=request.user)
         membership.save()
-        return HttpResponse("OK")
+        return redirect("view_group", pk=group.pk)
     return render(request, "references/create_group.html")
 
 
@@ -193,15 +195,75 @@ def uploadReference(request, pk):
 
 @login_required
 def submit_url(request, pk):
-    if request.method == 'POST':
-        url = request.POST["url"]
-        try:
-            doi = url2doi(url)
-            bibtex = cn.content_negotiation(ids = doi, format = "bibentry")
-            return HttpResponse(bibtex)
-        except:
-            return HttpResponse("Whoops")
+    group = get_object_or_404(Group, pk=pk)
+    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+        if request.method == 'POST':
+            url = request.POST["url"]
+            try:
+                doi = url2doi(url)
+                bibtex = cn.content_negotiation(ids = doi, format = "bibentry")
+                entry = bib2py(bibtex)
+                reference = Reference(name=entry[0]["title"], bibtex_dump=entry, group=group)
+                reference.save()
+                return redirect("view_reference", pk=group.pk, reference=reference.pk)
+            except ExtractionError as e:
+                return HttpResponse(e)
+        else:
+            return render(request, "references/url.html", {
+                "pk": pk
+            })
     else:
-        return render(request, "references/url.html", {
-            "pk": pk
+        raise PermissionDenied
+
+
+@login_required
+def add_template(request, pk, template):
+    group = get_object_or_404(Group, pk=pk)
+    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+        if request.method == 'POST':
+            pairs = {}
+            for key in request.POST:
+                if "key" in key:
+                    key_number = re.findall(r"[0-9]*$", key)[0]
+                    for value in request.POST:
+                        if "value" in value:
+                            val_number = re.findall(r"[0-9]*$", value)[0]
+                            if val_number == key_number:
+                                pairs[request.POST[key]] = request.POST[value]
+                                break
+                                # Forgive me for the indentation
+            reference = Reference(name=request.POST["name"],
+                                  bibtex_dump=pairs,
+                                  group=group)
+            reference.save()
+            return redirect("view_group", pk=group.pk)
+        else:
+            return render(request, "references/add.html", {
+                "pk": group.pk
+            })
+    else:
+        raise PermissionDenied
+
+
+@login_required
+def view_references(request, pk, reference):
+    group = get_object_or_404(Group, pk=pk)
+    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+        reference = Reference.objects.get(pk=reference)
+        key_pairs = reference.bibtex_dump[0]
+        new_key_pairs = {}
+        print(key_pairs)
+        for i, key in enumerate(key_pairs, 1):
+            new_key_pairs[key] = (key_pairs[key], i)
+        return render(request, "references/view_reference.html", {
+            "reference": reference,
+            "bibtex_py": new_key_pairs,
+            "bibtex": py2bib(reference.bibtex_dump)
         })
+        return HttpResponse(py2bib(reference.bibtex_dump))
+    else:
+        raise PermissionDenied
+    
+
+def view_404(request):
+    return render(request, "references/404.html")

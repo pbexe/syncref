@@ -1,0 +1,78 @@
+{% extends "references/base.html" %}
+{% load static %}
+
+{% block body %}
+<body class="bg-background text-paragraph">
+    {{reference.name}}
+    <br>
+    <hr>
+    {# <form action="{% url 'edit_reference' reference.group.pk reference.pk %}" method="POST"> #}
+    <form action="/need/to/implement/this" method="POST">
+        {% csrf_token %}
+        <input type='text' placeholder='Name' id='name' name="name">
+        <input type='text' placeholder='Type' id='type' name="type">
+        <div class="container" >
+            {% for key, value in bibtex_py.items %}
+                <div class='element' id='div_{{value.1}}'>
+                    <input type='text' placeholder='Key' id='key_{{value.1}}' name="key_{{value.1}}", value="{{key}}">
+                    <input type='text' placeholder='Value' id='value_{{value.1}}' name="value_{{value.1}}", value="{{value.0}}" class="w-3/4">
+                    &nbsp;<span id='remove_{{value.1}}' class='remove'>X</span>
+                </div>
+            {% endfor %}
+        </div>
+        <span class='add'>Add Field</span>
+        <input type="submit" value="Update">
+    </form>
+    <hr>
+    <br>
+    {% for key, value in bibtex_py.items %}
+        {{key}} - {{value.0}}<br>
+    {% endfor %}
+    <br>
+    <hr>
+    <br>
+    <code>
+<pre>{{bibtex}}</pre>
+    </code>
+<hr>
+<br><a href="{% url 'view_group' reference.group.pk%}">Back</a>
+
+<br><a href="{% url 'logout' %}">Logout</a>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        
+        // Add new element
+        $(".add").click(function(){
+            
+            // Finding total number of elements added
+            var total_element = $(".element").length;
+            
+            // last <div> with element class id
+                var lastid = $(".element:last").attr("id");
+                var split_id = lastid.split("_");
+                var nextindex = Number(split_id[1]) + 1;
+
+                    // Adding new div container after last occurance of element class
+                    $(".element:last").after("<div class='element' id='div_"+ nextindex +"'></div>");
+                    
+                    // Adding element to <div>
+                        $("#div_" + nextindex).append("<input type='text' placeholder='Key' id='key_"+ nextindex +"' name='key_"+ nextindex +"'><input type='text' placeholder='Value' id='value_"+ nextindex +"' name='value_"+ nextindex +"' >&nbsp;<span id='remove_" + nextindex + "' class='remove'>X</span>");
+                    
+                });
+                
+                // Remove element
+                $('.container').on('click','.remove',function(){
+                    
+                    var id = this.id;
+                    var split_id = id.split("_");
+                    var deleteindex = split_id[1];
+                    
+                    // Remove <div> with id
+                        $("#div_" + deleteindex).remove();
+                        
+                    }); 
+                });
+            </script>
+</body>
+{% endblock %}

@@ -9,7 +9,10 @@
     <hr>
     <ul>
         {% for reference in references %}
+       
+        <a href="{% url 'view_reference' group.pk reference.pk %}">
             <li>{{reference.name}}</li>
+        </a>   
         {% endfor %}
     </ul>
 <hr>

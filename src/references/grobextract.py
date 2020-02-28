@@ -10,7 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 from habanero import Crossref, cn
 
-from parser import py2bib
+from .bibparser import py2bib
 
 # Required so arXiv doesn't hang forever
 socket.setdefaulttimeout(10)

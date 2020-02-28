@@ -18,7 +18,7 @@ class GroupMembership(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     
-    def __str__():
+    def __str__(self):
         return user.username + " is a member of " + group.name
 
 
