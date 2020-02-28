@@ -1,11 +1,14 @@
 {% extends 'references/base.html' %}
 
 {% block body %}
+
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    <p><label for="id_pdf">Pdf:</label> <input type="file" name="pdf" required id="id_pdf"></p>
+</select></p>
     <button type="submit">Upload</button>
   </form>
+
 
   <p><a href="{% url 'home' %}">Return to home</a></p>
 {% endblock %}

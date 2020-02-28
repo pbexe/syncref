@@ -236,3 +236,4 @@ dmypy.json
 .pyre/
 test/cn.json
 test/recent.xml
+src/media/

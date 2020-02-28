@@ -16,7 +16,7 @@ from .bibparser import bib2py, py2bib
 from .dublincore import url2doi
 from .forms import ReferenceUpload
 from .grobextract import ExtractionError
-from .models import Group, GroupMembership, Reference
+from .models import Group, GroupMembership, Reference, ReferenceFile
 
 
 def index(request):
@@ -180,11 +180,12 @@ def add(request, pk):
     else:
         raise PermissionDenied
 
-def uploadReference(request, pk):
+def uploadReference(request, pk, reference):
     if request.method == 'POST':
         form = ReferenceUpload(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            reference_file = ReferenceFile(pdf=request.FILES['pdf'], reference=Reference.objects.get(pk=reference))
+            reference_file.save()
             return redirect('home')
     else:
         form = ReferenceUpload()

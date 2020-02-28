@@ -33,7 +33,7 @@ class Reference(models.Model):
 
 
 class ReferenceType(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
@@ -50,7 +50,7 @@ class ReferenceField(models.Model):
 
 class ReferenceFile(models.Model):
     pdf = models.FileField(upload_to='papers')
-    reference = models.ForeignKey(Reference, on_delete=models.CASCADE)
+    reference = models.ForeignKey(Reference, on_delete=models.CASCADE, unique=True)
     
     def __str__(self):
         return "PDF of " + self.reference.name
