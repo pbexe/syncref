@@ -13,7 +13,7 @@ urlpatterns = [
     path('view/<int:pk>/<int:reference>/', views.view_references, name="view_reference"),
     path('add/<int:pk>/', views.add, name="add"),
     path('add/<int:pk>/<str:template>/', views.add_template, name="add_template"),
-    path('upload/<int:pk>/<int:reference>/', views.uploadReference, name="upload"),
+    path('upload/<int:pk>/', views.uploadReference, name="upload"),
     path('view_404', views.view_404, name="view_404"),
     path('', views.index, name="home")
 ]

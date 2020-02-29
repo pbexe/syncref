@@ -237,3 +237,4 @@ dmypy.json
 test/cn.json
 test/recent.xml
 src/media/
+src/media/papers/

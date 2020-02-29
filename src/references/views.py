@@ -15,7 +15,7 @@ from habanero import cn
 from .bibparser import bib2py, py2bib
 from .dublincore import url2doi
 from .forms import ReferenceUpload
-from .grobextract import ExtractionError
+from .grobextract import ExtractionError, extract, content_negotiation
 from .models import Group, GroupMembership, Reference, ReferenceFile
 
 
@@ -180,18 +180,33 @@ def add(request, pk):
     else:
         raise PermissionDenied
 
-def uploadReference(request, pk, reference):
-    if request.method == 'POST':
-        form = ReferenceUpload(request.POST, request.FILES)
-        if form.is_valid():
-            reference_file = ReferenceFile(pdf=request.FILES['pdf'], reference=Reference.objects.get(pk=reference))
-            reference_file.save()
-            return redirect('home')
+
+@login_required
+def uploadReference(request, pk):
+    group = get_object_or_404(Group, pk=pk)
+    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+        if request.method == 'POST':
+            form = ReferenceUpload(request.POST, request.FILES)
+            if form.is_valid():
+                # reference_file = ReferenceFile(pdf=request.FILES['pdf'], reference=Reference.objects.get(pk=reference))
+                # reference_file.save()
+                # pdf = reference_file.pdf
+                pdf = request.FILES['pdf']
+                info = extract(pdf)
+                bibtex = content_negotiation(*info)
+                bibtex_py = bib2py(bibtex)
+                reference = Reference(name=bibtex_py[0]["title"],
+                                      bibtex_dump=bibtex_py,
+                                      group=group)
+                reference.save()
+                return redirect("view_reference", pk=group.pk, reference=reference.pk)
+        else:
+            form = ReferenceUpload()
+        return render(request, 'references/upload.html', {
+            'form': form
+        })
     else:
-        form = ReferenceUpload()
-    return render(request, 'references/upload.html', {
-        'form': form
-    })
+        raise PermissionDenied
 
 
 @login_required

@@ -5,6 +5,16 @@
 <body class="bg-background text-paragraph">
         Create Reference
 
+  <form method="post" enctype="multipart/form-data" action="{% url 'upload' pk %}">
+    {% csrf_token %}
+    <p><label for="id_pdf">Pdf:</label> <input type="file" name="pdf" required id="id_pdf"></p>
+</select></p>
+    <button type="submit">Upload</button>
+  </form>
+<br>
+  <hr>
+  <br>
+
         <form action="{% url 'add' pk %}" method="POST">
             {% csrf_token %}
             <input type='text' placeholder='Name' id='name' name="name">
@@ -18,7 +28,9 @@
             <span class='add'>Add Field</span>
             <input type="submit" value="Add Citation">
         </form>
+        <br>
         <hr>
+        <br>
         Add by URL instead: <br>
         <form method="post" action="{% url 'submit_url' pk %}">
             {% csrf_token %}
