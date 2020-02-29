@@ -188,9 +188,6 @@ def uploadReference(request, pk):
         if request.method == 'POST':
             form = ReferenceUpload(request.POST, request.FILES)
             if form.is_valid():
-                # reference_file = ReferenceFile(pdf=request.FILES['pdf'], reference=Reference.objects.get(pk=reference))
-                # reference_file.save()
-                # pdf = reference_file.pdf
                 pdf = request.FILES['pdf']
                 info = extract(pdf)
                 bibtex = content_negotiation(*info)
@@ -199,6 +196,8 @@ def uploadReference(request, pk):
                                       bibtex_dump=bibtex_py,
                                       group=group)
                 reference.save()
+                reference_file = ReferenceFile(pdf=pdf, reference=reference)
+                reference_file.save()
                 return redirect("view_reference", pk=group.pk, reference=reference.pk)
         else:
             form = ReferenceUpload()
@@ -207,6 +206,26 @@ def uploadReference(request, pk):
         })
     else:
         raise PermissionDenied
+
+
+@login_required
+def uploadPDFToReference(request, pk, reference):
+    group = get_object_or_404(Group, pk=pk)
+    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+        if request.method == 'POST':
+            form = ReferenceUpload(request.POST, request.FILES)
+            if form.is_valid():
+                reference_file = ReferenceFile(pdf=request.FILES['pdf'], reference=get_object_or_404(Reference, pk=reference))
+                reference_file.save()
+                return redirect("view_reference", pk=group.pk, reference=reference)
+        else:
+            form = ReferenceUpload()
+        return render(request, 'references/upload.html', {
+            'form': form
+        })
+    else:
+        raise PermissionDenied
+
 
 
 @login_required
@@ -271,10 +290,12 @@ def view_references(request, pk, reference):
         print(key_pairs)
         for i, key in enumerate(key_pairs, 1):
             new_key_pairs[key] = (key_pairs[key], i)
+        files = ReferenceFile.objects.filter(reference=reference)
         return render(request, "references/view_reference.html", {
             "reference": reference,
             "bibtex_py": new_key_pairs,
-            "bibtex": py2bib(reference.bibtex_dump)
+            "bibtex": py2bib(reference.bibtex_dump),
+            "files": files
         })
         return HttpResponse(py2bib(reference.bibtex_dump))
     else:

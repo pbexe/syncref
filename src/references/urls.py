@@ -11,6 +11,7 @@ urlpatterns = [
     path('submit_url/<int:pk>/', views.submit_url, name="submit_url"),
     path('view/<int:pk>/', views.view_group, name="view_group"),
     path('view/<int:pk>/<int:reference>/', views.view_references, name="view_reference"),
+    path('view/<int:pk>/<int:reference>/upload', views.uploadPDFToReference, name="upload_to_reference"),
     path('add/<int:pk>/', views.add, name="add"),
     path('add/<int:pk>/<str:template>/', views.add_template, name="add_template"),
     path('upload/<int:pk>/', views.uploadReference, name="upload"),

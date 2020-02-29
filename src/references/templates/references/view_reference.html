@@ -35,6 +35,22 @@
 <pre>{{bibtex}}</pre>
     </code>
 <hr>
+<form method="post" enctype="multipart/form-data" action="{% url 'upload_to_reference' reference.group.pk reference.pk %}">
+    {% csrf_token %}
+    <p><label for="id_pdf">Pdf:</label> <input type="file" name="pdf" required id="id_pdf"></p>
+</select></p>
+<button type="submit">Upload</button>
+</form>
+<hr>
+Files:
+<ul>
+    {% for file in files %}
+    <li>
+        <a href="{{file.pdf.url}}">{{file.pdf.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
+<hr>
 <br><a href="{% url 'view_group' reference.group.pk%}">Back</a>
 
 <br><a href="{% url 'logout' %}">Logout</a>
