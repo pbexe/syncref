@@ -50,7 +50,7 @@ class ReferenceField(models.Model):
 
 class ReferenceFile(models.Model):
     pdf = models.FileField(upload_to='papers')
-    reference = models.ForeignKey(Reference, on_delete=models.CASCADE, unique=True)
+    reference = models.ForeignKey(Reference, on_delete=models.CASCADE)
     
     def __str__(self):
         return "PDF of " + self.reference.name

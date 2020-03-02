@@ -6,11 +6,10 @@
     {{reference.name}}
     <br>
     <hr>
-    {# <form action="{% url 'edit_reference' reference.group.pk reference.pk %}" method="POST"> #}
-    <form action="/need/to/implement/this" method="POST">
+    <form action="{% url 'edit_references' reference.group.pk reference.pk %}" method="POST">
         {% csrf_token %}
-        <input type='text' placeholder='Name' id='name' name="name">
-        <input type='text' placeholder='Type' id='type' name="type">
+        <input type='text' placeholder='Name' id='name' name="name" value="{{name}}">
+        <input type='text' placeholder='Type' id='type' name="type" value="{{entrytype}}">
         <div class="container" >
             {% for key, value in bibtex_py.items %}
                 <div class='element' id='div_{{value.1}}'>

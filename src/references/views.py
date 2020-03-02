@@ -7,6 +7,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -55,12 +56,9 @@ def signup(request):
             username = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
-            user.is_superuser = True 
-            user.is_staff = True 
+            user.is_active = False
             user.save()
-            auth_login(request, user)
-
-            return redirect("home")
+            return HttpResponse("Your accound needs to be verified by an administrator")
     else:
         form = UserCreationForm()
     return render(request, "references/signup.html", {"form": form})
@@ -167,12 +165,61 @@ def add(request, pk):
                             if val_number == key_number:
                                 pairs[request.POST[key]] = request.POST[value]
                                 break
-                                # Forgive me for the indentation
+            # TODO ensure proper ID TYPE etc
+            pairs["ENTRYTYPE"] = request.POST["type"]
+            pairs["ID"] = request.POST["name"]
             reference = Reference(name=request.POST["name"],
-                                  bibtex_dump=pairs,
+                                  bibtex_dump=[pairs],
                                   group=group)
             reference.save()
             return redirect("view_group", pk=group.pk)
+        else:
+            return render(request, "references/add.html", {
+                "pk": group.pk
+            })
+    else:
+        raise PermissionDenieds
+
+
+@login_required
+def edit_references(request, pk, reference):
+    """A view to allow the user to add a reference to a group
+    
+    Args:
+        request (request): A handle to the request
+        pk (int): The primary key of the group
+    
+    Raises:
+        PermissionDenied: Raised when a user who is not a member of the group
+                          tries to access the group
+    
+    Returns:
+        render: The form to allow the addition of a reference
+        redirect: Redirects the user to the group home page upon successfull
+                  entry of a reference
+    """
+    group = get_object_or_404(Group, pk=pk)
+    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+        if request.method == 'POST':
+            pairs = {}
+            for key in request.POST:
+                if "key" in key:
+                    key_number = re.findall(r"[0-9]*$", key)[0]
+                    for value in request.POST:
+                        if "value" in value:
+                            val_number = re.findall(r"[0-9]*$", value)[0]
+                            if val_number == key_number:
+                                pairs[request.POST[key]] = request.POST[value]
+                                break
+                                # Forgive me for the indentation
+            pairs["ID"] = request.POST["name"]
+            pairs["ENTRYTYPE"] = request.POST["type"]
+            reference_object = Reference.objects.get(pk=reference)
+            reference_object.name = request.POST["name"]
+            reference_object.bibtex_dump = [pairs]
+            reference_object.group = group
+            reference_object.save()
+            return redirect("view_reference", pk=group.pk, reference=reference)
         else:
             return render(request, "references/add.html", {
                 "pk": group.pk
@@ -252,6 +299,26 @@ def submit_url(request, pk):
 
 
 @login_required
+def add_user_to_group(request, pk):
+    group = get_object_or_404(Group, pk=pk)
+    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+        if request.method == 'POST':
+            if "user" in request.POST:
+                username = request.POST["user"]
+                user = get_object_or_404(User, username=username)
+                # user = User.objects.get(username=username)
+                member = GroupMembership(group=group, user=user)
+                member.save()
+                return HttpResponse("Added " + username + " to group")
+            else:
+                return HttpResponse("User does not exist")
+        else:
+            raise Http404
+    else:
+        raise PermissionDenied
+
+
+@login_required
 def add_template(request, pk, template):
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
@@ -285,9 +352,13 @@ def view_references(request, pk, reference):
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
         reference = Reference.objects.get(pk=reference)
-        key_pairs = reference.bibtex_dump[0]
+        key_pairs = reference.bibtex_dump[0].copy()
         new_key_pairs = {}
         print(key_pairs)
+        name = key_pairs["ID"]
+        del key_pairs["ID"]
+        entrytype = key_pairs["ENTRYTYPE"]
+        del key_pairs["ENTRYTYPE"]
         for i, key in enumerate(key_pairs, 1):
             new_key_pairs[key] = (key_pairs[key], i)
         files = ReferenceFile.objects.filter(reference=reference)
@@ -295,7 +366,9 @@ def view_references(request, pk, reference):
             "reference": reference,
             "bibtex_py": new_key_pairs,
             "bibtex": py2bib(reference.bibtex_dump),
-            "files": files
+            "files": files,
+            "name": name,
+            "entrytype": entrytype
         })
         return HttpResponse(py2bib(reference.bibtex_dump))
     else:
