@@ -3,8 +3,7 @@
 
 {% block body %}
 <body class="bg-background text-paragraph">
-    {{reference.name}}
-    <br>
+   <h1>{{reference.name}}</h1>
     <hr>
     <form action="{% url 'edit_references' reference.group.pk reference.pk %}" method="POST">
         {% csrf_token %}
@@ -74,7 +73,7 @@ Files:
                     $(".element:last").after("<div class='element' id='div_"+ nextindex +"'></div>");
                     
                     // Adding element to <div>
-                        $("#div_" + nextindex).append("<input type='text' placeholder='Key' id='key_"+ nextindex +"' name='key_"+ nextindex +"'><input type='text' placeholder='Value' id='value_"+ nextindex +"' name='value_"+ nextindex +"' >&nbsp;<span id='remove_" + nextindex + "' class='remove'>X</span>");
+                        $("#div_" + nextindex).append("<input type='text' placeholder='Key' id='key_"+ nextindex +"' name='key_"+ nextindex +"'> <input type='text' placeholder='Value' id='value_"+ nextindex +"' name='value_"+ nextindex +"' >&nbsp;<span id='remove_" + nextindex + "' class='remove'>X</span>");
                     
                 });
                 
