@@ -36,7 +36,6 @@ def extract(fp):
     r = requests.post("http://localhost:8080/api/processHeaderDocument",
                       files=files)
     title = ""
-    print(r.text, file=open("recent.xml", "w"))
     # Try fetching the name and authors from the results
     try:
         soup = BeautifulSoup(r.text, "xml")
@@ -89,7 +88,6 @@ def query_crossref(title, author):
     else:
         raise ExtractionError("No suitable search criteria extracted")
     BibTeX = ""
-    print(json.dumps(r), file=open("cn.json", "w"))
     if r["status"] == "ok":
         for result in r["message"]["items"]:
             # If the titles are similar enough
