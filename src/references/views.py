@@ -1,50 +1,56 @@
-import json
 import re
 
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
-from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.cache import never_cache
 from habanero import cn
 
 from .bibparser import bib2py, py2bib
 from .dublincore import url2doi
 from .forms import ReferenceUpload
-from .grobextract import ExtractionError, extract, content_negotiation
+from .grobextract import ExtractionError, content_negotiation, extract
 from .models import Group, GroupMembership, Reference, ReferenceFile
 
 
+@never_cache
 def index(request):
     """View to handle the root directory of the website. If the user is logged
     in, then it is the app home page. If the user is not logged in, then a
-    landing page is shown. 
-    
+    landing page is shown.
+
     Args:
         request (request): A handle to the request
-    
+
     Returns:
         render: Renders the specified template
     """
     if request.user.is_authenticated:
         group_relations = GroupMembership.objects.filter(user=request.user)
         groups = [i.group for i in group_relations]
-        return render(request, "references/app.html", {"groups": groups})
+        references = []
+        for group in groups:
+            references += Reference.objects.filter(group=group)
+        return render(request, "references/app.html", {
+            "groups": groups,
+            "references": references
+            })
     else:
         return render(request, "references/index.html")
 
 
 def signup(request):
     """A view to handle the user registration process
-    
+
     Args:
         request (request): A handle to the request
-    
+
     Returns:
         render: Renders the registration form
         redirect: Redirects the user to the home page
@@ -58,7 +64,7 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             user.is_active = False
             user.save()
-            return HttpResponse("Your accound needs to be verified by an administrator")
+            return HttpResponse("Your accound must be verified by an admin")
     else:
         form = UserCreationForm()
     return render(request, "references/signup.html", {"form": form})
@@ -66,10 +72,10 @@ def signup(request):
 
 def login(request):
     """A view to handle the login process
-    
+
     Args:
         request (request): A handle to the request
-    
+
     Returns:
         render: Renders the login form
         redirect: Redirects the user to the home page
@@ -83,17 +89,17 @@ def login(request):
                 auth_login(request, user)
                 return redirect("home")
         else:
-            messages.error(request,"Invalid Credentials")
+            messages.error(request, "Invalid Credentials")
     return render(request, "references/login.html")
 
 
 @login_required
 def create_group(request):
     """A view to allow the user to create a group
-    
+
     Args:
         request (request): A handle to the request
-    
+
     Returns:
         render: Renders the group creation form
     """
@@ -109,17 +115,18 @@ def create_group(request):
 
 
 @login_required
+@never_cache
 def view_group(request, pk):
     """A view to allow the user to view a specified group
-    
+
     Args:
         request (request): A handle to the request
         pk (int): The promary key of the group
-    
+
     Raises:
         PermissionDenied: Raised when a user who is not a member of the group
                           tries to access the group
-    
+
     Returns:
         render: Renders the group information
     """
@@ -128,7 +135,7 @@ def view_group(request, pk):
         # Get all references to do with the group
         references = Reference.objects.filter(group=group)
         return render(request, "references/group.html", {
-            "group":group,
+            "group": group,
             "references": references
         })
     else:
@@ -138,15 +145,15 @@ def view_group(request, pk):
 @login_required
 def add(request, pk):
     """A view to allow the user to add a reference to a group
-    
+
     Args:
         request (request): A handle to the request
         pk (int): The primary key of the group
-    
+
     Raises:
         PermissionDenied: Raised when a user who is not a member of the group
                           tries to access the group
-    
+
     Returns:
         render: The form to allow the addition of a reference
         redirect: Redirects the user to the group home page upon successfull
@@ -163,7 +170,8 @@ def add(request, pk):
                         if "value" in value:
                             val_number = re.findall(r"[0-9]*$", value)[0]
                             if val_number == key_number:
-                                pairs[request.POST[key]] = request.POST[value]
+                                pairs[request.POST[key].casefold()] = request.POST[value]
+
                                 break
             # TODO ensure proper ID TYPE etc
             pairs["ENTRYTYPE"] = request.POST["type"]
@@ -178,21 +186,21 @@ def add(request, pk):
                 "pk": group.pk
             })
     else:
-        raise PermissionDenieds
+        raise PermissionDenied
 
 
 @login_required
 def edit_references(request, pk, reference):
     """A view to allow the user to add a reference to a group
-    
+
     Args:
         request (request): A handle to the request
         pk (int): The primary key of the group
-    
+
     Raises:
         PermissionDenied: Raised when a user who is not a member of the group
                           tries to access the group
-    
+
     Returns:
         render: The form to allow the addition of a reference
         redirect: Redirects the user to the group home page upon successfull
@@ -209,7 +217,7 @@ def edit_references(request, pk, reference):
                         if "value" in value:
                             val_number = re.findall(r"[0-9]*$", value)[0]
                             if val_number == key_number:
-                                pairs[request.POST[key]] = request.POST[value]
+                                pairs[request.POST[key].casefold()] = request.POST[value]
                                 break
                                 # Forgive me for the indentation
             pairs["ID"] = request.POST["name"]
@@ -262,7 +270,9 @@ def uploadPDFToReference(request, pk, reference):
         if request.method == 'POST':
             form = ReferenceUpload(request.POST, request.FILES)
             if form.is_valid():
-                reference_file = ReferenceFile(pdf=request.FILES['pdf'], reference=get_object_or_404(Reference, pk=reference))
+                reference_file = ReferenceFile(pdf=request.FILES['pdf'],
+                                               reference=get_object_or_404(Reference,
+                                                                           pk=reference))
                 reference_file.save()
                 return redirect("view_reference", pk=group.pk, reference=reference)
         else:
@@ -274,7 +284,6 @@ def uploadPDFToReference(request, pk, reference):
         raise PermissionDenied
 
 
-
 @login_required
 def submit_url(request, pk):
     group = get_object_or_404(Group, pk=pk)
@@ -283,7 +292,7 @@ def submit_url(request, pk):
             url = request.POST["url"]
             try:
                 doi = url2doi(url)
-                bibtex = cn.content_negotiation(ids = doi, format = "bibentry")
+                bibtex = cn.content_negotiation(ids=doi, format="bibentry")
                 entry = bib2py(bibtex)
                 reference = Reference(name=entry[0]["title"], bibtex_dump=entry, group=group)
                 reference.save()
@@ -300,6 +309,8 @@ def submit_url(request, pk):
 
 @login_required
 def add_user_to_group(request, pk):
+    # TODO It is never checked if the reference is in the group. This happens
+    # for every authentication in this style.
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
         if request.method == 'POST':
@@ -313,7 +324,20 @@ def add_user_to_group(request, pk):
             else:
                 return HttpResponse("User does not exist")
         else:
-            raise Http404
+            raise PermissionDenied
+    else:
+        raise PermissionDenied
+
+
+@login_required
+def delete_reference(request, reference):
+    # TODO This is a better way of checking the reference is allower=d to be
+    # modified
+    reference = get_object_or_404(Reference, pk=reference)
+    group = reference.group
+    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+        reference.delete()
+        return HttpResponse("OK")
     else:
         raise PermissionDenied
 
@@ -347,6 +371,7 @@ def add_template(request, pk, template):
         raise PermissionDenied
 
 
+@never_cache
 @login_required
 def view_references(request, pk, reference):
     group = get_object_or_404(Group, pk=pk)
@@ -373,7 +398,42 @@ def view_references(request, pk, reference):
         return HttpResponse(py2bib(reference.bibtex_dump))
     else:
         raise PermissionDenied
-    
+
+
+def combine(references):
+    """Makes sure that the `ID` key in each dictionary is unique
+
+    Arguments:
+        references {List} -- List of disctionaries representing BibTeX entries
+
+    Returns:
+        List -- The modified list of BibTeX entries
+    """
+    seen = []
+    for reference in references:
+        for i, val in enumerate(seen):
+            if val[0] == reference["ID"]:
+                reference["ID"] = reference["ID"] + "_" + str(val[1])
+                seen[i][1] += 1
+                break
+        else:
+            seen.append([reference["ID"], 1])
+    return references
+
+
+@never_cache
+@login_required
+def export(request, pk):
+    group = get_object_or_404(Group, pk=pk)
+    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+        references = Reference.objects.filter(group=group)
+        output = []
+        for reference in references:
+            output += reference.bibtex_dump
+        return HttpResponse(py2bib(combine(output)), content_type='application/bibtex')
+    else:
+        raise PermissionDenied
+
 
 def view_404(request):
     return render(request, "references/404.html")

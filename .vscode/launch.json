@@ -11,9 +11,10 @@
             "program": "${workspaceFolder}/src/manage.py",
             "args": [
                 "runserver",
+                "--noreload"
             ],
             "django": true,
-            "subProcess": true
+            // "subProcess": true
         }
     ]
 }

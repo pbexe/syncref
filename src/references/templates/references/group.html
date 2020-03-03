@@ -3,7 +3,7 @@
 
 {% block body %}
 <body class="bg-background text-paragraph">
-    {{group.name}}
+    <h1 class="text-3xl">{{group.name}}</h1><i>{{group.description}}</i><br>
     <br>
     Citations are as follows:
     <hr>
@@ -11,11 +11,15 @@
         {% for reference in references %}
        
         <a href="{% url 'view_reference' group.pk reference.pk %}">
-            <li>{{reference.name}}</li>
+            <li>{{reference.bibtex_dump.0.title}}</li>
         </a>   
         {% endfor %}
     </ul>
-<hr>
+    <hr>
+    <a href="{% url 'export' group.pk %}">Export BibTeX file</a>
+    
+    <hr>
+
 Add user to the group:
 <form method="post" action="{% url 'add_user_to_group' group.pk %}">
     {% csrf_token %}

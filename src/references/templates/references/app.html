@@ -17,6 +17,16 @@
     <p>
         <a href="{% url 'create_group' %}">Create a new group</a>
     </p>
+    <hr>
+    All your references:
+    <ul>
+        {% for reference in references %}
+       
+        <a href="{% url 'view_reference' reference.group.pk reference.pk %}">
+            <li>{{reference.bibtex_dump.0.title}} - {{reference.group.name}}</li>
+        </a>   
+        {% endfor %}
+    </ul>
 <br><a href="{% url 'logout' %}">Logout</a>
 </body>
 {% endblock %}

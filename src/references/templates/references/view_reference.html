@@ -50,6 +50,8 @@ Files:
     {% endfor %}
 </ul>
 <hr>
+<a href="{% url 'delete_reference' reference.pk %}">DELETE REFERENCE</a>
+<hr>
 <br><a href="{% url 'view_group' reference.group.pk%}">Back</a>
 
 <br><a href="{% url 'logout' %}">Logout</a>
