@@ -32,8 +32,7 @@ def index(request):
         render: Renders the specified template
     """
     if request.user.is_authenticated:
-        group_relations = GroupMembership.objects.filter(user=request.user)
-        groups = [i.group for i in group_relations]
+        groups = [i.group for i in GroupMembership.objects.filter(user=request.user)]
         references = []
         for group in groups:
             references += Reference.objects.filter(group=group)
@@ -67,7 +66,10 @@ def signup(request):
             return HttpResponse("Your accound must be verified by an admin")
     else:
         form = UserCreationForm()
-    return render(request, "references/signup.html", {"form": form})
+    return render(request, "references/signup.html", {
+        "form": form,
+        "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+        })
 
 
 def login(request):
@@ -111,7 +113,9 @@ def create_group(request):
         membership = GroupMembership(group=group, user=request.user)
         membership.save()
         return redirect("view_group", pk=group.pk)
-    return render(request, "references/create_group.html")
+    return render(request, "references/create_group.html",{
+        "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+    })
 
 
 @login_required
@@ -136,7 +140,9 @@ def view_group(request, pk):
         references = Reference.objects.filter(group=group)
         return render(request, "references/group.html", {
             "group": group,
-            "references": references
+            "references": references,
+            "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+
         })
     else:
         raise PermissionDenied
@@ -183,7 +189,9 @@ def add(request, pk):
             return redirect("view_group", pk=group.pk)
         else:
             return render(request, "references/add.html", {
-                "pk": group.pk
+                "pk": group.pk,
+                "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+
             })
     else:
         raise PermissionDenied
@@ -230,7 +238,9 @@ def edit_references(request, pk, reference):
             return redirect("view_reference", pk=group.pk, reference=reference)
         else:
             return render(request, "references/add.html", {
-                "pk": group.pk
+                "pk": group.pk,
+                "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+
             })
     else:
         raise PermissionDenied
@@ -257,7 +267,9 @@ def uploadReference(request, pk):
         else:
             form = ReferenceUpload()
         return render(request, 'references/upload.html', {
-            'form': form
+            'form': form,
+            "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+
         })
     else:
         raise PermissionDenied
@@ -278,7 +290,9 @@ def uploadPDFToReference(request, pk, reference):
         else:
             form = ReferenceUpload()
         return render(request, 'references/upload.html', {
-            'form': form
+            'form': form,
+            "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+
         })
     else:
         raise PermissionDenied
@@ -301,7 +315,9 @@ def submit_url(request, pk):
                 return HttpResponse(e)
         else:
             return render(request, "references/url.html", {
-                "pk": pk
+                "pk": pk,
+                "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+
             })
     else:
         raise PermissionDenied
@@ -365,7 +381,9 @@ def add_template(request, pk, template):
             return redirect("view_group", pk=group.pk)
         else:
             return render(request, "references/add.html", {
-                "pk": group.pk
+                "pk": group.pk,
+                "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+
             })
     else:
         raise PermissionDenied
@@ -393,7 +411,9 @@ def view_references(request, pk, reference):
             "bibtex": py2bib(reference.bibtex_dump),
             "files": files,
             "name": name,
-            "entrytype": entrytype
+            "entrytype": entrytype,
+            "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+
         })
         return HttpResponse(py2bib(reference.bibtex_dump))
     else:

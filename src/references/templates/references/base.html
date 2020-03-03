@@ -6,9 +6,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}{% endblock %} - Syncref</title>
-    <!-- <link rel="stylesheet" href="{% static "references/css/tailwind.css" %}" /> -->
+    <title>{% block title %}{% endblock %}Syncref</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-{% block body %}
-{% endblock %}
+
+    <style>
+
+    header, main, footer {
+      padding-left: 300px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+    }
+    </style>
+
+</head>
+
+<body>
+
+  <nav class="hide-on-large-only">  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+</nav>
+
+  <ul id="slide-out" class="sidenav sidenav-fixed">
+    {% comment %} <li><div class="user-view">
+      <div class="background">
+        <img src="images/office.jpg">
+      </div>
+      <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+      <a href="#name"><span class="white-text name">John Doe</span></a>
+      <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+    </div></li> {% endcomment %}
+    <li>
+    <a href="{% url 'home' %}" ><i class="material-icons">home</i>Home</a>
+    </li>
+    <li><a class="subheader">Your Groups</a></li>
+    {% for group in groups %}
+        <li>
+            <a href="{% url 'view_group' group.pk %}" ><i class="material-icons">group</i>{{ group.name }}</a>
+        </li>
+        {% endfor %}
+        <li><div class="divider"></div></li>
+        <li><a href="{% url 'create_group' %}"><i class="material-icons">add</i>Create a new group</a></li>
+  </ul>
+<main>
+  {% block body %}
+  {% endblock %}
+</main>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+  </script>
+
+  {% block scripts %}
+  {% endblock %}
+
+</body>
+
+
 </html>
