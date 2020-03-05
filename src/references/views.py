@@ -256,8 +256,21 @@ def uploadReference(request, pk):
                 try:
                     pdf = request.FILES['pdf']
                     info = extract(pdf)
-                    bibtex = content_negotiation(*info)
-                    bibtex_py = bib2py(bibtex)
+                    try:
+                        bibtex = content_negotiation(*info)
+                        bibtex_py = bib2py(bibtex)
+                        messages.success(request, "PDF successfully parsed")
+                    except ExtractionError as e:
+                        bibtex = {}
+                        bibtex["ID"] = "Unknown"
+                        bibtex["ENTRYTYPE"] = "misc"
+                        if info[0]:
+                            bibtex["title"] = info[0]
+                        if info[1]:
+                            bibtex["author"] = " and ".join(data[1])
+                        bibtex["comment"] = "ERROR: No candidate was found. This is all the data I could extract"
+                        bibtex_py = [bibtex]
+                        messages.warning(request, "Could not match the PDF with any known papers. The reference has been filled with the extracted data. Expect this to be wrong.")
                     reference = Reference(name=bibtex_py[0]["title"],
                                         bibtex_dump=bibtex_py,
                                         group=group)

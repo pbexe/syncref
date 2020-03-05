@@ -4,96 +4,90 @@
 {% block body %}
 <h1>{{reference.name}}</h1>
 <hr>
-<form action="{% url 'edit_references' reference.group.pk reference.pk %}" method="POST">
-    {% csrf_token %}
-    <div class="grid-x grid-padding-x">
-        <div class="small-12 medium-6 cell">
-            <input type='text' placeholder='Name' id='name' name="name" value="{{name}}">
-        </div>
-        <div class="small-12 medium-6 cell">
-            <input type='text' placeholder='Type' id='type' name="type" value="{{entrytype}}">
-        </div>
-    </div>
-    <!-- <div class="container">
-        <div class='element grid-x grid-padding-x' id='div_1'>
-            <div class="small-12 medium-6 cell">
-                <input type='text' placeholder='Key' id='key_1' name="key_1">
-            </div>
-            <div class="small-12 medium-6 cell">
-                <input type='text' placeholder='Value' id='value_1' name="value_1">
-            </div>
-        </div>
+<ul class="tabs" data-tabs id="mode">
+    <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">View Reference</a></li>
+    <li class="tabs-title"><a data-tabs-target="panel2" href="#panel2">Edit Citation</a></li>
+</ul>
+<div class="tabs-content" data-tabs-content="mode">
+    <div class="tabs-panel is-active" id="panel1">
+        <br>
         {% for key, value in bibtex_py.items %}
-        <div class='element' id='div_{{value.1}}'>
-            <input type='text' placeholder='Key' id='key_{{value.1}}' name="key_{{value.1}}", value="{{key}}">
-            <input type='text' placeholder='Value' id='value_{{value.1}}' name="value_{{value.1}}", value="{{value.0}}" class="w-3/4">
-            &nbsp;<span id='remove_{{value.1}}' class='remove'>X</span>
-        </div>
+        <b>{{key}}</b> - {{value.0}}<br>
         {% endfor %}
-    </div>
-    <div class="grid-x grid-padding-x">
-        <div class="small-12 cell">
-            <span class='add button hollow small'><i class="fi-plus"></i> </span> <br>
-        </div>
-    </div> -->
-    <!-- <input type="submit" value="Add Citation" class="button"> -->
-    <!-- <input type='text' placeholder='Name' id='name' name="name" value="{{name}}">
-        <input type='text' placeholder='Type' id='type' name="type" value="{{entrytype}}"> -->
-        <div class="container">
-            {% for key, value in bibtex_py.items %}
-            <div class="element grid-x grid-padding-x" id='div_{{value.1}}'>
-                <div class='small-6 medium-6 cell'>
-                    <input type='text' placeholder='Key' id='key_{{value.1}}' name='key_{{value.1}}' value='{{key}}'>
-                </div>
-                <div class='small-5 medium-5 cell'>
-                    <input type='text' placeholder='Value' id='value_{{value.1}}' name='value_{{value.1}}' value='{{value.0}}'>
-                </div>
-                <div class='small-1 cell'>
-                    <span id='remove_{{value.1}}' class='remove hollow button alert small'>
-                        <i class='fi-x'></i>
-                    </span>
-                </div>
-            </div>
+        <br>
+<code class="code-block">{{bibtex}}</code>
+        Files:
+        <ul>
+            {% for file in files %}
+            <li>
+                <a href="{{file.pdf.url}}">{{file.pdf.name}}</a>
+            </li>
             {% endfor %}
-        </div>
-        <div class="grid-x grid-padding-x">
-            <div class="small-12 cell">
-                <span class='add button hollow small'><i class="fi-plus"></i> </span> <br>
+        </ul>
+    </div>
+    <div class="tabs-panel" id="panel2">
+        <h5>Edit fields:</h5>
+        <form action="{% url 'edit_references' reference.group.pk reference.pk %}" method="POST">
+            {% csrf_token %}
+            <div class="grid-x grid-padding-x">
+                <div class="small-12 medium-6 cell">
+                    <label>Name
+                        <input type='text' placeholder='Name' id='name' name="name" value="{{name}}">
+                    </label>
+                </div>
+                <div class="small-12 medium-6 cell">
+                    <label>
+                        Entry Type
+                        <input type='text' placeholder='Type' id='type' name="type" value="{{entrytype}}">
+                    </label>
+                </div>
             </div>
-        </div>
-    <input type="submit" value="Update" class="button">
+            <div class="grid-x grid-padding-x">
+                <div class="small-12 medium-6 cell">
+                    Keys:
+                </div>
+                <div class="small-12 medium-6 cell">
+                    Values:
+                </div>
+            </div>
+            <div class="container">
+                {% for key, value in bibtex_py.items %}
+                <div class="element grid-x grid-padding-x" id='div_{{value.1}}'>
+                    <div class='small-6 medium-6 cell'>
+                        <input type='text' placeholder='Key' id='key_{{value.1}}' name='key_{{value.1}}' value='{{key}}'>
+                    </div>
+                    <div class='small-5 medium-5 cell'>
+                        <input type='text' placeholder='Value' id='value_{{value.1}}' name='value_{{value.1}}' value='{{value.0}}'>
+                    </div>
+                    <div class='small-1 cell'>
+                        <span id='remove_{{value.1}}' class='remove hollow button alert small'>
+                            <i class='fi-x'></i>
+                        </span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="grid-x grid-padding-x">
+                <div class="small-12 cell">
+                    <span class='add button hollow small'><i class="fi-plus"></i> </span> <br>
+                </div>
+            </div>
+            <input type="submit" value="Update" class="button">
+        </form>
+        <hr>
+        <h5>Upload associated PDF</h5>
+        <form method="post" enctype="multipart/form-data" action="{% url 'upload_to_reference' reference.group.pk reference.pk %}">
+            {% csrf_token %}
+            <p><label for="id_pdf">Pdf:</label> <input type="file" name="pdf" required id="id_pdf"></p>
+        </select></p>
+        <button type="submit" class="button">Upload</button>
     </form>
     <hr>
-    <br>
-    {% for key, value in bibtex_py.items %}
-    {{key}} - {{value.0}}<br>
-    {% endfor %}
-    <br>
-    <hr>
-    <br>
-    <code class="code-block">
-{{bibtex}}
-    </code>
-    <hr>
-    <form method="post" enctype="multipart/form-data" action="{% url 'upload_to_reference' reference.group.pk reference.pk %}">
-        {% csrf_token %}
-        <p><label for="id_pdf">Pdf:</label> <input type="file" name="pdf" required id="id_pdf"></p>
-    </select></p>
-    <button type="submit">Upload</button>
-</form>
-<hr>
-Files:
-<ul>
-    {% for file in files %}
-    <li>
-        <a href="{{file.pdf.url}}">{{file.pdf.name}}</a>
-    </li>
-    {% endfor %}
-</ul>
-<hr>
-<a href="{% url 'delete_reference' reference.pk %}">DELETE REFERENCE</a>
-<hr>
-<br><a href="{% url 'view_group' reference.group.pk%}">Back</a>
+    <a href="{% url 'delete_reference' reference.pk %}" class="button alert">DELETE REFERENCE</a>
+    
+</div>
+</div>
+<!-- <br><a href="{% url 'view_group' reference.group.pk%}">Back</a> -->
 
 <br><a href="{% url 'logout' %}">Logout</a>
 {% endblock %}
