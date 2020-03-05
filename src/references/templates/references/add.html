@@ -2,76 +2,95 @@
 {% load static %}
 
 {% block body %}
-<body class="bg-background text-paragraph">
-        Create Reference
-
-  <form method="post" enctype="multipart/form-data" action="{% url 'upload' pk %}">
-    {% csrf_token %}
-    <p><label for="id_pdf">Pdf:</label> <input type="file" name="pdf" required id="id_pdf"></p>
-</select></p>
-    <button type="submit">Upload</button>
-  </form>
-<br>
-  <hr>
-  <br>
-
-        <form action="{% url 'add' pk %}" method="POST">
+<h1>Add citation</h1>
+<ul class="tabs" data-tabs id="method-chooser">
+    <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">PDF Upload</a></li>
+    <li class="tabs-title"><a data-tabs-target="panel2" href="#panel2">URL Entry</a></li>
+    <li class="tabs-title"><a data-tabs-target="panel3" href="#panel3">Manual Entry</a></li>
+</ul>
+<div class="tabs-content" data-tabs-content="method-chooser">
+    <div class="tabs-panel is-active" id="panel1">
+        <form method="post" enctype="multipart/form-data" action="{% url 'upload' pk %}">
             {% csrf_token %}
-            <input type='text' placeholder='Name' id='name' name="name">
-            <input type='text' placeholder='Type' id='type' name="type">
-            <div class="container" >
-                <div class='element' id='div_1'>
-                    <input type='text' placeholder='Key' id='key_1' name="key_1">
-                    <input type='text' placeholder='Value' id='value_1' name="value_1">
-                </div>
-            </div>
-            <span class='add'>Add Field</span>
-            <input type="submit" value="Add Citation">
+            <label for="pdf" class="">Choose PDF:</label>
+            <input type="file" id="pdf" class="" name="pdf">
+            <button type="submit" class="button">Upload</button>
         </form>
-        <br>
-        <hr>
-        <br>
-        Add by URL instead: <br>
+    </div>
+    <div class="tabs-panel" id="panel2">
         <form method="post" action="{% url 'submit_url' pk %}">
             {% csrf_token %}
             <input type="text" name="url" id="url" placeholder="URL" />
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" class="button">
         </form>
-            <script>
-                $(document).ready(function(){
-                    
-                    // Add new element
-                    $(".add").click(function(){
-                        
-                        // Finding total number of elements added
-                        var total_element = $(".element").length;
-                        
-                        // last <div> with element class id
-                            var lastid = $(".element:last").attr("id");
-                            var split_id = lastid.split("_");
-                            var nextindex = Number(split_id[1]) + 1;
-
-                                // Adding new div container after last occurance of element class
-                                $(".element:last").after("<div class='element' id='div_"+ nextindex +"'></div>");
-                                
-                                // Adding element to <div>
-                                    $("#div_" + nextindex).append("<input type='text' placeholder='Key' id='key_"+ nextindex +"' name='key_"+ nextindex +"'> <input type='text' placeholder='Value' id='value_"+ nextindex +"' name='value_"+ nextindex +"' >&nbsp;<span id='remove_" + nextindex + "' class='remove'>X</span>");
-                                
-                            });
-                            
-                            // Remove element
-                            $('.container').on('click','.remove',function(){
-                                
-                                var id = this.id;
-                                var split_id = id.split("_");
-                                var deleteindex = split_id[1];
-                                
-                                // Remove <div> with id
-                                    $("#div_" + deleteindex).remove();
-                                    
-                                }); 
-                            });
-                        </script>
-        <br><a href="{% url 'logout' %}">Logout</a>
-</body>
+    </div>
+    <div class="tabs-panel" id="panel3">
+        <form action="{% url 'add' pk %}" method="POST">
+            {% csrf_token %}
+            <div class="grid-x grid-padding-x">
+                <div class="small-12 medium-6 cell">
+                    <input type='text' placeholder='Name' id='name' name="name">
+                </div>
+                <div class="small-12 medium-6 cell">
+                    <input type='text' placeholder='Type' id='type' name="type">
+                </div>
+            </div>
+            <div class="container">
+                <div class='element grid-x grid-padding-x' id='div_1'>
+                    <div class="small-12 medium-6 cell">
+                        <input type='text' placeholder='Key' id='key_1' name="key_1">
+                    </div>
+                    <div class="small-12 medium-6 cell">
+                        <input type='text' placeholder='Value' id='value_1' name="value_1">
+                    </div>
+                </div>
+            </div>
+            <div class="grid-x grid-padding-x">
+                <div class="small-12 cell">
+                    <span class='add button hollow small'><i class="fi-plus"></i> </span> <br>
+                </div>
+            </div>
+            <input type="submit" value="Add Citation" class="button">
+        </form>
+    </div>
+</div>
+<br><a href="{% url 'logout' %}">Logout</a>
 {% endblock %}
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+        
+        // Add new element
+        $(".add").click(function(){
+            
+            // Finding total number of elements added
+            var total_element = $(".element").length;
+            
+            // last <div> with element class id
+                var lastid = $(".element:last").attr("id");
+                var split_id = lastid.split("_");
+                var nextindex = Number(split_id[1]) + 1;
+                
+                // Adding new div container after last occurance of element class
+                $(".element:last").after("<div class='element grid-x grid-padding-x' id='div_"+ nextindex +"'></div>");
+                
+                // Adding element to <div>
+                    $("#div_" + nextindex).append("<div class='small-6 medium-6 cell'><input type='text' placeholder='Key' id='key_"+ nextindex +"' name='key_"+ nextindex +"'></div> <div class='small-5 medium-5 cell'><input type='text' placeholder='Value' id='value_"+ nextindex +"' name='value_"+ nextindex +"' ></div><div class='small-1 cell'><span id='remove_" + nextindex + "' class='remove hollow button alert small'><i class='fi-x'></i></span></div>");
+                    
+                });
+                
+                // Remove element
+                $('.container').on('click','.remove',function(){
+                    
+                    var id = this.id;
+                    var split_id = id.split("_");
+                    var deleteindex = split_id[1];
+                    
+                    // Remove <div> with id
+                        $("#div_" + deleteindex).remove();
+                        
+                    }); 
+                });
+            </script>
+            
+            {% endblock %}

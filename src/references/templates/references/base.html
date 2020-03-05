@@ -38,7 +38,16 @@
         <div class="cell small-12 medium-10">                
             <main>
                 <div class="grid-container">
-
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="callout {% if message.tags %} {{ message.tags }}{% endif %}" data-closable>
+                            <button class="close-button" aria-label="Close alert" type="button" data-close>
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <p>{{ message }}</p>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
                     {% block body %}
                     {% endblock %}
                 </div>

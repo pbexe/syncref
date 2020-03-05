@@ -2,29 +2,71 @@
 {% load static %}
 
 {% block body %}
-<body class="bg-background text-paragraph">
-   <h1>{{reference.name}}</h1>
-    <hr>
-    <form action="{% url 'edit_references' reference.group.pk reference.pk %}" method="POST">
-        {% csrf_token %}
-        <input type='text' placeholder='Name' id='name' name="name" value="{{name}}">
-        <input type='text' placeholder='Type' id='type' name="type" value="{{entrytype}}">
-        <div class="container" >
+<h1>{{reference.name}}</h1>
+<hr>
+<form action="{% url 'edit_references' reference.group.pk reference.pk %}" method="POST">
+    {% csrf_token %}
+    <div class="grid-x grid-padding-x">
+        <div class="small-12 medium-6 cell">
+            <input type='text' placeholder='Name' id='name' name="name" value="{{name}}">
+        </div>
+        <div class="small-12 medium-6 cell">
+            <input type='text' placeholder='Type' id='type' name="type" value="{{entrytype}}">
+        </div>
+    </div>
+    <!-- <div class="container">
+        <div class='element grid-x grid-padding-x' id='div_1'>
+            <div class="small-12 medium-6 cell">
+                <input type='text' placeholder='Key' id='key_1' name="key_1">
+            </div>
+            <div class="small-12 medium-6 cell">
+                <input type='text' placeholder='Value' id='value_1' name="value_1">
+            </div>
+        </div>
+        {% for key, value in bibtex_py.items %}
+        <div class='element' id='div_{{value.1}}'>
+            <input type='text' placeholder='Key' id='key_{{value.1}}' name="key_{{value.1}}", value="{{key}}">
+            <input type='text' placeholder='Value' id='value_{{value.1}}' name="value_{{value.1}}", value="{{value.0}}" class="w-3/4">
+            &nbsp;<span id='remove_{{value.1}}' class='remove'>X</span>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="grid-x grid-padding-x">
+        <div class="small-12 cell">
+            <span class='add button hollow small'><i class="fi-plus"></i> </span> <br>
+        </div>
+    </div> -->
+    <!-- <input type="submit" value="Add Citation" class="button"> -->
+    <!-- <input type='text' placeholder='Name' id='name' name="name" value="{{name}}">
+        <input type='text' placeholder='Type' id='type' name="type" value="{{entrytype}}"> -->
+        <div class="container">
             {% for key, value in bibtex_py.items %}
-                <div class='element' id='div_{{value.1}}'>
-                    <input type='text' placeholder='Key' id='key_{{value.1}}' name="key_{{value.1}}", value="{{key}}">
-                    <input type='text' placeholder='Value' id='value_{{value.1}}' name="value_{{value.1}}", value="{{value.0}}" class="w-3/4">
-                    &nbsp;<span id='remove_{{value.1}}' class='remove'>X</span>
+            <div class="element grid-x grid-padding-x" id='div_{{value.1}}'>
+                <div class='small-6 medium-6 cell'>
+                    <input type='text' placeholder='Key' id='key_{{value.1}}' name='key_{{value.1}}' value='{{key}}'>
                 </div>
+                <div class='small-5 medium-5 cell'>
+                    <input type='text' placeholder='Value' id='value_{{value.1}}' name='value_{{value.1}}' value='{{value.0}}'>
+                </div>
+                <div class='small-1 cell'>
+                    <span id='remove_{{value.1}}' class='remove hollow button alert small'>
+                        <i class='fi-x'></i>
+                    </span>
+                </div>
+            </div>
             {% endfor %}
         </div>
-        <span class='add'>Add Field</span>
-        <input type="submit" value="Update">
+        <div class="grid-x grid-padding-x">
+            <div class="small-12 cell">
+                <span class='add button hollow small'><i class="fi-plus"></i> </span> <br>
+            </div>
+        </div>
+    <input type="submit" value="Update" class="button">
     </form>
     <hr>
     <br>
     {% for key, value in bibtex_py.items %}
-        {{key}} - {{value.0}}<br>
+    {{key}} - {{value.0}}<br>
     {% endfor %}
     <br>
     <hr>
@@ -32,12 +74,12 @@
     <code class="code-block">
 {{bibtex}}
     </code>
-<hr>
-<form method="post" enctype="multipart/form-data" action="{% url 'upload_to_reference' reference.group.pk reference.pk %}">
-    {% csrf_token %}
-    <p><label for="id_pdf">Pdf:</label> <input type="file" name="pdf" required id="id_pdf"></p>
-</select></p>
-<button type="submit">Upload</button>
+    <hr>
+    <form method="post" enctype="multipart/form-data" action="{% url 'upload_to_reference' reference.group.pk reference.pk %}">
+        {% csrf_token %}
+        <p><label for="id_pdf">Pdf:</label> <input type="file" name="pdf" required id="id_pdf"></p>
+    </select></p>
+    <button type="submit">Upload</button>
 </form>
 <hr>
 Files:
@@ -54,7 +96,9 @@ Files:
 <br><a href="{% url 'view_group' reference.group.pk%}">Back</a>
 
 <br><a href="{% url 'logout' %}">Logout</a>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block scripts %}
 <script>
     $(document).ready(function(){
         
@@ -68,12 +112,12 @@ Files:
                 var lastid = $(".element:last").attr("id");
                 var split_id = lastid.split("_");
                 var nextindex = Number(split_id[1]) + 1;
-
-                    // Adding new div container after last occurance of element class
-                    $(".element:last").after("<div class='element' id='div_"+ nextindex +"'></div>");
-                    
-                    // Adding element to <div>
-                        $("#div_" + nextindex).append("<input type='text' placeholder='Key' id='key_"+ nextindex +"' name='key_"+ nextindex +"'> <input type='text' placeholder='Value' id='value_"+ nextindex +"' name='value_"+ nextindex +"' >&nbsp;<span id='remove_" + nextindex + "' class='remove'>X</span>");
+                
+                // Adding new div container after last occurance of element class
+                $(".element:last").after("<div class='element grid-x grid-padding-x' id='div_"+ nextindex +"'></div>");
+                
+                // Adding element to <div>
+                    $("#div_" + nextindex).append("<div class='small-6 medium-6 cell'><input type='text' placeholder='Key' id='key_"+ nextindex +"' name='key_"+ nextindex +"'></div> <div class='small-5 medium-5 cell'><input type='text' placeholder='Value' id='value_"+ nextindex +"' name='value_"+ nextindex +"' ></div><div class='small-1 cell'><span id='remove_" + nextindex + "' class='remove hollow button alert small'><i class='fi-x'></i></span></div>");
                     
                 });
                 
@@ -90,5 +134,5 @@ Files:
                     }); 
                 });
             </script>
-</body>
-{% endblock %}
+            
+            {% endblock %}

@@ -253,17 +253,21 @@ def uploadReference(request, pk):
         if request.method == 'POST':
             form = ReferenceUpload(request.POST, request.FILES)
             if form.is_valid():
-                pdf = request.FILES['pdf']
-                info = extract(pdf)
-                bibtex = content_negotiation(*info)
-                bibtex_py = bib2py(bibtex)
-                reference = Reference(name=bibtex_py[0]["title"],
-                                      bibtex_dump=bibtex_py,
-                                      group=group)
-                reference.save()
-                reference_file = ReferenceFile(pdf=pdf, reference=reference)
-                reference_file.save()
-                return redirect("view_reference", pk=group.pk, reference=reference.pk)
+                try:
+                    pdf = request.FILES['pdf']
+                    info = extract(pdf)
+                    bibtex = content_negotiation(*info)
+                    bibtex_py = bib2py(bibtex)
+                    reference = Reference(name=bibtex_py[0]["title"],
+                                        bibtex_dump=bibtex_py,
+                                        group=group)
+                    reference.save()
+                    reference_file = ReferenceFile(pdf=pdf, reference=reference)
+                    reference_file.save()
+                    return redirect("view_reference", pk=group.pk, reference=reference.pk)
+                except ExtractionError as e:
+                    messages.error(request, "Error extracting from PDF: " + str(e))
+                    return redirect("add", pk)
         else:
             form = ReferenceUpload()
         return render(request, 'references/upload.html', {
@@ -306,13 +310,18 @@ def submit_url(request, pk):
             url = request.POST["url"]
             try:
                 doi = url2doi(url)
+                if not doi:
+                    messages.error(request, "No DOI was found on the page")
+                    return redirect("add", pk=pk)
                 bibtex = cn.content_negotiation(ids=doi, format="bibentry")
                 entry = bib2py(bibtex)
                 reference = Reference(name=entry[0]["title"], bibtex_dump=entry, group=group)
                 reference.save()
+                messages.success(request, "URL successfully parsed")
                 return redirect("view_reference", pk=group.pk, reference=reference.pk)
-            except ExtractionError as e:
-                return HttpResponse(e)
+            except Exception as e:
+                messages.error(request, 'There was an error adding the link: ' + str(e))
+                return redirect("add", pk=pk)
         else:
             return render(request, "references/url.html", {
                 "pk": pk,
