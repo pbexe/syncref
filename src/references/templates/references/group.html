@@ -3,32 +3,54 @@
 
 {% block body %}
 <body class="bg-background text-paragraph">
-    <h1 class="text-3xl">{{group.name}}</h1><i>{{group.description}}</i><br>
-    <br>
-    Citations are as follows:
-    <hr>
-    <ul>
-        {% for reference in references %}
-       
-        <a href="{% url 'view_reference' group.pk reference.pk %}">
-            <li>{{reference.bibtex_dump.0.title}}</li>
-        </a>   
-        {% endfor %}
-    </ul>
-    <hr>
-    <a href="{% url 'export' group.pk %}">Export BibTeX file</a>
-    
-    <hr>
+    <p>
+        <h1 class="text-3xl">{{group.name}}</h1>
+        <blockquote>
+            {{group.description}}
+        </blockquote>
+    </p>
+    <p>
+        Citations are as follows:
+        <ul>
+            {% for reference in references %}
+            
+            <a href="{% url 'view_reference' group.pk reference.pk %}">
+                <li>{{reference.bibtex_dump.0.title}}</li>
+            </a>   
+            {% endfor %}
+        </ul>
+    </p>
+    <p>
+        <div class="button-group">
+            <a href="{% url 'add' group.pk %}" class="button success">Add citation</a>
+            <a href="{% url 'export' group.pk %}" class="button">Export BibTeX file</a>
 
-Add user to the group:
-<form method="post" action="{% url 'add_user_to_group' group.pk %}">
-    {% csrf_token %}
-    <input type="text" name="user" id="user" placeholder="Username" />
-    <input type="submit" value="Submit">
-</form>
-<hr>
-    <a href="{% url 'add' group.pk %}">Add citation</a>
-   <br> <a href="{% url 'home' %}">Back</a>
-<br><a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </p>
+    <p>
+        <div class="callout">
+            Add user to the group:
+            <form method="post" action="{% url 'add_user_to_group' group.pk %}">
+                {% csrf_token %}
+                <div class="grid-x grid-margin-x">
+                    <div class="medium-6 cell">
+                        <label>Username
+                            <input type="text" name="user">
+                        </label>
+                    </div>
+                    <div class="medium-12 cell">
+                        <input type="submit" value="Add user" class="button">
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        
+        
+    </p>
+    <div class="button-group">
+
+        <a href="{% url 'home' %}" class="button">Back</a><a href="{% url 'logout' %}" class="button">Logout</a>
+    </div>
 </body>
 {% endblock %}

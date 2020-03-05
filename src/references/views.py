@@ -408,7 +408,7 @@ def view_references(request, pk, reference):
         return render(request, "references/view_reference.html", {
             "reference": reference,
             "bibtex_py": new_key_pairs,
-            "bibtex": py2bib(reference.bibtex_dump),
+            "bibtex": py2bib(reference.bibtex_dump).strip(),
             "files": files,
             "name": name,
             "entrytype": entrytype,
