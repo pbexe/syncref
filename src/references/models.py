@@ -45,7 +45,7 @@ class ReferenceField(models.Model):
     referenceType = models.ForeignKey(ReferenceType, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.type_.name + " " + self.name
+        return self.referenceType.name + " " + self.name
 
 
 class ReferenceFile(models.Model):

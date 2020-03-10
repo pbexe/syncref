@@ -1,0 +1,21 @@
+
+{% extends "references/add.html" %}
+
+{% block prefilled %}
+
+{% for value in fields %}
+<div class="element grid-x grid-padding-x" id='div_{{value.1}}'>
+    <div class='small-6 medium-6 cell'>
+        <input type='text' placeholder='Key' id='key_{{value.1}}' name='key_{{value.1}}' value='{{value.0.name}}'>
+    </div>
+    <div class='small-5 medium-5 cell'>
+        <input type='text' placeholder='Value' id='value_{{value.1}}' name='value_{{value.1}}'>
+    </div>
+    <div class='small-1 cell'>
+        <span id='remove_{{value.1}}' class='remove hollow button alert small'>
+            <i class='fi-x'></i>
+        </span>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

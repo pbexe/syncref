@@ -16,7 +16,8 @@ from .bibparser import bib2py, py2bib
 from .dublincore import url2doi
 from .forms import ReferenceUpload
 from .grobextract import ExtractionError, content_negotiation, extract
-from .models import Group, GroupMembership, Reference, ReferenceFile
+from .models import (Group, GroupMembership, Reference, ReferenceField,
+                     ReferenceFile, ReferenceType)
 
 
 @never_cache
@@ -190,8 +191,8 @@ def add(request, pk):
         else:
             return render(request, "references/add.html", {
                 "pk": group.pk,
-                "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
-
+                "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)],
+                "types": ReferenceType.objects.all()
             })
     else:
         raise PermissionDenied
@@ -384,29 +385,17 @@ def delete_reference(request, reference):
 def add_template(request, pk, template):
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
-        if request.method == 'POST':
-            pairs = {}
-            for key in request.POST:
-                if "key" in key:
-                    key_number = re.findall(r"[0-9]*$", key)[0]
-                    for value in request.POST:
-                        if "value" in value:
-                            val_number = re.findall(r"[0-9]*$", value)[0]
-                            if val_number == key_number:
-                                pairs[request.POST[key]] = request.POST[value]
-                                break
-                                # Forgive me for the indentation
-            reference = Reference(name=request.POST["name"],
-                                  bibtex_dump=pairs,
-                                  group=group)
-            reference.save()
-            return redirect("view_group", pk=group.pk)
-        else:
-            return render(request, "references/add.html", {
-                "pk": group.pk,
-                "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
-
-            })
+        template = get_object_or_404(ReferenceType, pk=template)
+        fields = ReferenceField.objects.filter(referenceType=template)
+        numbers = list(range(1,len(fields)+1))
+        fields = zip(fields, numbers)
+        return render(request, "references/add_template.html", {
+            "pk": group.pk,
+            "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)],
+            "fields": fields,
+            "types": ReferenceType.objects.all(),
+            "type": template.name
+        })
     else:
         raise PermissionDenied
 

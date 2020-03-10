@@ -3,7 +3,7 @@
 
 {% block body %}
 <h1>Add citation</h1>
-<ul class="tabs" data-tabs id="method-chooser">
+<ul class="tabs" data-deep-link="true" data-update-history="true" data-deep-link-smudge="true" data-deep-link-smudge-delay="500" data-tabs id="method-chooser">
     <li class="tabs-title is-active"><a href="#panel1" aria-selected="true"><i class="fi-paperclip"></i> PDF Upload</a></li>
     <li class="tabs-title"><a data-tabs-target="panel2" href="#panel2"><i class="fi-link"></i> URL Entry</a></li>
     <li class="tabs-title"><a data-tabs-target="panel3" href="#panel3"><i class="fi-pencil"></i> Manual Entry</a></li>
@@ -25,6 +25,16 @@
         </form>
     </div>
     <div class="tabs-panel" id="panel3">
+        <ul class="dropdown menu" data-dropdown-menu>
+            <li>
+              <span class="button">Prefill</span>
+              <ul class="menu">
+                  {% for type in types %}
+                    <li><a href="{% url 'add_template' pk type.pk %}#panel3">{{type.name}}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+          </ul>
         <form action="{% url 'add' pk %}" method="POST">
             {% csrf_token %}
             <div class="grid-x grid-padding-x">
@@ -32,18 +42,20 @@
                     <input type='text' placeholder='Name' id='name' name="name">
                 </div>
                 <div class="small-12 medium-6 cell">
-                    <input type='text' placeholder='Type' id='type' name="type">
+                    <input type='text' placeholder='Type' id='type' name="type" value="{{type}}">
                 </div>
             </div>
             <div class="container">
-                <div class='element grid-x grid-padding-x' id='div_1'>
-                    <div class="small-12 medium-6 cell">
-                        <input type='text' placeholder='Key' id='key_1' name="key_1">
+                {% block prefilled %}
+                    <div class='element grid-x grid-padding-x' id='div_1'>
+                        <div class="small-12 medium-6 cell">
+                            <input type='text' placeholder='Key' id='key_1' name="key_1">
+                        </div>
+                        <div class="small-12 medium-6 cell">
+                            <input type='text' placeholder='Value' id='value_1' name="value_1">
+                        </div>
                     </div>
-                    <div class="small-12 medium-6 cell">
-                        <input type='text' placeholder='Value' id='value_1' name="value_1">
-                    </div>
-                </div>
+                {% endblock %}
             </div>
             <div class="grid-x grid-padding-x">
                 <div class="small-12 cell">
