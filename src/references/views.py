@@ -1,6 +1,7 @@
 import json
 import re
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
@@ -474,6 +475,16 @@ def view_404(request):
     return render(request, "references/404.html")
 
 
+def search_vectors_from_keys(keys, attribute_name):
+    vector = None
+    for key in keys:
+        if vector:
+            vector += SearchVector(attribute_name + "__" + key, weight="A")
+        else:
+            vector = SearchVector(attribute_name + "__" + key, weight="A")
+    return vector
+
+
 @login_required
 @never_cache
 def search(request):
@@ -481,17 +492,22 @@ def search(request):
         if "query" in request.POST:
             query = request.POST["query"]
             vector = SearchVector('fulltext', weight="C") \
-                + SearchVector('bibtex_dump__title', weight="A") \
-                + SearchVector('bibtex_dump__author', weight="A")
+                + search_vectors_from_keys(
+                    settings.DEFAULT_SEARCH_TAGS, "bibtex_dump__0"
+                    )
+            # vector = SearchVector('fulltext', weight="C") \
+            #     + SearchVector('bibtex_dump__0__title', weight="A") \
+            #     + SearchVector('bibtex_dump__0__author', weight="A")
             query = SearchQuery(query)
-            references = Reference.objects.annotate(rank=SearchRank(vector, query))\
-                                .order_by('-rank')\
-                                .filter(rank__gt=0)
+            references = Reference.objects.annotate(
+                rank=SearchRank(vector, query))\
+                .order_by('-rank')\
+                # .filter(rank__gt=0)
             groups = GroupMembership.objects.filter(user=request.user)
             r = []
             for reference in references:
-                if reference.group in groups:
-                    r.append(reference)    
+                if reference.group in [group.group for group in groups]:
+                    r.append(reference)
             if r:
                 return render(request, "references/search_results.html", {
                     "results": r,

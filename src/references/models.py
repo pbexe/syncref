@@ -32,6 +32,14 @@ class Reference(models.Model):
     def __str__(self):
         return self.name
 
+class ReferenceKeyPair(models.Model):
+    reference = models.ForeignKey(Reference, on_delete=models.CASCADE)
+    key = models.TextField()
+    value = models.TextField()
+    
+    def __str__(self):
+        return self.reference.name + "(" + self.key + ": " + self.value + ")"
+
 
 class ReferenceType(models.Model):
     name = models.CharField(max_length=200, unique=True)

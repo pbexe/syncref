@@ -158,3 +158,10 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR: 'alert',
 }
+
+DEFAULT_SEARCH_TAGS = [
+    "title",
+    "author",
+    "year",
+    "publisher"
+]
