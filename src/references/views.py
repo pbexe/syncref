@@ -1,3 +1,4 @@
+import json
 import re
 
 from django.contrib import messages
@@ -6,6 +7,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.postgres.search import (SearchQuery, SearchRank,
+                                            SearchVector)
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -69,7 +72,7 @@ def signup(request):
         form = UserCreationForm()
     return render(request, "references/signup.html", {
         "form": form,
-        "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+        # "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
         })
 
 
@@ -258,7 +261,7 @@ def uploadReference(request, pk):
                     pdf = request.FILES['pdf']
                     info = extract(pdf)
                     try:
-                        bibtex = content_negotiation(*info)
+                        bibtex = content_negotiation(*info[:2])
                         bibtex_py = bib2py(bibtex)
                         messages.success(request, "PDF successfully parsed")
                     except ExtractionError as e:
@@ -274,7 +277,8 @@ def uploadReference(request, pk):
                         messages.warning(request, "Could not match the PDF with any known papers. The reference has been filled with the extracted data. Expect this to be wrong.")
                     reference = Reference(name=bibtex_py[0]["title"],
                                         bibtex_dump=bibtex_py,
-                                        group=group)
+                                        group=group,
+                                        fulltext=info[2])
                     reference.save()
                     reference_file = ReferenceFile(pdf=pdf, reference=reference)
                     reference_file.save()
@@ -468,3 +472,35 @@ def export(request, pk):
 
 def view_404(request):
     return render(request, "references/404.html")
+
+
+@login_required
+@never_cache
+def search(request):
+    if request.method == "POST":
+        if "query" in request.POST:
+            query = request.POST["query"]
+            vector = SearchVector('fulltext', weight="C") \
+                + SearchVector('bibtex_dump__title', weight="A") \
+                + SearchVector('bibtex_dump__author', weight="A")
+            query = SearchQuery(query)
+            references = Reference.objects.annotate(rank=SearchRank(vector, query))\
+                                .order_by('-rank')\
+                                .filter(rank__gt=0)
+            groups = GroupMembership.objects.filter(user=request.user)
+            r = []
+            for reference in references:
+                if reference.group in groups:
+                    r.append(reference)    
+            if r:
+                return render(request, "references/search_results.html", {
+                    "results": r,
+                    "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+
+                })
+            else:
+                return HttpResponse("No results")
+        else:
+            return HttpResponse("Please submit a query")
+    else:
+        raise PermissionDenied("Please use POST")

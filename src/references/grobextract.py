@@ -33,18 +33,18 @@ def extract(fp):
     files = {"input": fp}
     
     # Upload the file to the server
-    r = requests.post("http://localhost:8080/api/processHeaderDocument",
+    r = requests.post("http://localhost:8080/api/processFulltextDocument",
                       files=files)
     title = ""
     # Try fetching the name and authors from the results
+    soup = BeautifulSoup(r.text, "xml")
     try:
-        soup = BeautifulSoup(r.text, "xml")
         # print("Title:", soup.find("title").string)
         title = soup.find("title").string
     except AttributeError:
         # print("Title not found")
         ...
-
+    print(r.text, file=open("extracted.xml", "w"))
     a = []
     try:
         authors = soup.find_all("author")
@@ -59,8 +59,14 @@ def extract(fp):
     except AttributeError:
         # print("No authors found")
         ...
+    text = []
+    try:
+        text = soup.find("body").text
+    except AttributeError:
+        ...
+        
 
-    return (title, a)
+    return (title, a, text)
 
 
 def query_crossref(title, author):
@@ -218,7 +224,7 @@ if __name__ == "__main__":
         from pprint import pprint
         info = extract(fp)
         try:
-            data = content_negotiation(*info)
+            data = content_negotiation(*info[:2])
             print(data)
             print("\n\n")
             pprint(parser.bib2py(data))

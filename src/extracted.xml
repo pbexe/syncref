@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /opt/grobid/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">XGAN: Unsupervised Image-to-Image Translation for Many-to-Many Mappings</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Amélie</forename><surname>Royer</surname></persName>
+							<email>aroyer@ist.ac.at</email>
+							<affiliation key="aff0">
+								<orgName type="institution">IST Austria</orgName>
+								<address>
+									<postCode>3400</postCode>
+									<settlement>Klosterneuburg</settlement>
+									<country key="AT">Austria</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">]</forename></persName>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Konstantinos</forename><surname>Bousmalis</surname></persName>
+							<email>konstantinos@google.com</email>
+							<affiliation key="aff1">
+								<orgName type="department">Google Brain</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff5">
+								<orgName type="department">Currently at Deepmind</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Stephan</forename><surname>Gouws</surname></persName>
+							<email>sgouws@google.com</email>
+							<affiliation key="aff1">
+								<orgName type="department">Google Brain</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Fred</forename><surname>Bertsch</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Google Brain</orgName>
+								<address>
+									<addrLine>Mountain View</addrLine>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Inbar</forename><surname>Mosseri</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="institution">Google Research</orgName>
+								<address>
+									<settlement>Cambridge</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Forrester</forename><surname>Cole</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="institution">Google Research</orgName>
+								<address>
+									<settlement>Cambridge</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Kevin</forename><surname>Murphy</surname></persName>
+							<affiliation key="aff4">
+								<orgName type="department">Google Research</orgName>
+								<address>
+									<addrLine>Mountain View</addrLine>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">XGAN: Unsupervised Image-to-Image Translation for Many-to-Many Mappings</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<note>Work done while at Google Brain London, UK</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+
+		<encodingDesc>
+			<appInfo>
+				<application version="0.5.6" ident="GROBID" when="2020-03-12T13:20+0000">
+					<ref target="https://github.com/kermitt2/grobid">GROBID - A machine learning software for extracting information from scholarly documents</ref>
+				</application>
+			</appInfo>
+		</encodingDesc>		<profileDesc>
+			<textClass>
+				<keywords>Generative models · Style transfer · Domain adaptation</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Image translation refers to the task of mapping images from a visual domain to another. Given two unpaired collections of images, we aim to learn a mapping between the corpus-level style of each collection, while preserving semantic content shared across the two domains. We introduce xgan, a dual adversarial auto-encoder, which captures a shared representation of the common domain semantic content in an unsupervised way, while jointly learning the domain-to-domain image translations in both directions. We exploit ideas from the domain adaptation literature and define a semantic consistency loss which encourages the learned embedding to preserve semantics shared across domains. We report promising qualitative results for the task of face-to-cartoon translation. The cartoon dataset we collected for this purpose, "CartoonSet", is also publicly available as a new benchmark for semantic style transfer at https://google.github.io/cartoonset/index.html.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">Introduction</head><p>Image-to-image translation -learning to map images from one domain to another -covers several classical computer vision tasks such as style transfer (rendering an image in the style of a given input <ref type="bibr" target="#b3">[4]</ref>), colorization (mapping grayscale images to color images <ref type="bibr" target="#b25">[26]</ref>), super-resolution (increasing the resolution of an input image <ref type="bibr" target="#b12">[13]</ref>), or semantic segmentation (inferring pixel-wise semantic labeling of a scene <ref type="bibr" target="#b17">[18]</ref>). Learning such mappings requires an underlying understanding of the shared information between the two domains. In many cases, supervision encapsulates this knowledge in the form of labels or paired samples. This holds for instance for colorization, where ground-truth pairs are easily obtained by generating grayscale images from colored inputs. <ref type="figure">Fig. 1</ref>. Semantic style transfer is the task of adapting an image to the visual appearance of another domain without altering its semantic content given only two unpaired image collections without pairs supervision (left). We define semantic content as characteristic attributes which are shared across domains, but do not necessarily appear the same at the pixel-level. For instance, cartoons and faces have a similar range of hair color but with very different appearances, e.g., blonde hair is bright yellow in cartoons. The proposed xgan applied on the face-to-cartoon task yields a shared representation that preserves important face semantics such as hair style or face shape (right).</p><p>In this work, we consider the task of unsupervised semantic style transfer : learning to map an image from one domain into the style of another domain without altering its semantic content (see <ref type="figure">Figure 1</ref>). In particular, we experiment on the task of translating faces to cartoons. Note that without loss of generality, a photo of a face can be mapped to many valid cartoons, and vice-versa. Semantic style transfer is therefore a many-to-many mapping problem, for which obtaining labeled examples is ambiguous and costly. Furthermore in this unsupervised setting we do not have access to supervision on shared domain semantic content (e.g., facial attributes such as hair color, eye color, etc.). Instead, we propose an encoder-decoder structure with a bottleneck embedding shared across the two domains to capture common semantics as a latent representation.</p><p>The key issue is thus to learn an embedding that preserves semantic facial attributes (hair color, eye color, etc.) between the two domains with little supervision, and to incorporate it within a generative model to produce the actual domain translations. Although this paper specifically focuses on the face-tocartoon setting, many other examples fall under this category: mapping landscape pictures to paintings (where the different scene objects and their composition describe the input semantics), transforming sketches to images, or even cross-domain tasks such as generating images from text. We only rely on two unlabeled training image collections or corpora, one for each domain, with no known image pairings across domains. Hence, we are faced with a double domain shift, first in terms of global domain appearance, and second in terms of the content distribution of the two collections.</p><p>Recent work <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b26">27,</ref><ref type="bibr" target="#b24">25,</ref><ref type="bibr" target="#b0">1,</ref><ref type="bibr" target="#b5">6]</ref> report good performance using GAN-based models for unsupervised image-to-image translation when the two input domains share similar pixel-level structure (e.g., horses and zebras) but fail for more signifi-cant domain shifts (e.g., dogs and cats). Perhaps the best known recent example is CycleGAN <ref type="bibr" target="#b26">[27]</ref>. Given two image domains D 1 and D 2 , the model is trained with a pixel-level cycle-consistency loss which ensures that the mapping g 1→2 from D 1 to D 2 followed by its inverse, g 2→1 , yields the identity function; i.e., g 1→2 • g 2→1 = id. We argue that such a pixel-level constraint is not sufficient in our setting, and that we rather need a constraint in feature space to allow for more permissive transformations of the pixel input. To this end, we propose xgan ("Cross-GAN"), a dual adversarial auto-encoder which learns a shared semantic representation of the two input domains in an unsupervised way, while jointly learning both domain-to-domain translations. More specifically, the domain translation g 1→2 consists of an encoder e 1 taking inputs in D 1 , followed by a decoder d 2 with outputs in D 2 (and likewise for g 2→1 ) such that e 1 and e 2 , as well as d 1 and d 2 , are partially shared across domains.</p><p>The main novelty lies in how we constrain the shared embedding using techniques from the domain adaptation literature, as well as a novel semantic consistency loss. The latter ensures that the domain-to-domain translations preserve the semantic representation, i.e., that e 1 ≈ e 2 • g 1→2 and e 2 ≈ e 1 • g 2→1 . Therefore, it acts as a form of self-supervision which alleviates the need for paired examples and preserves semantic feature-level information rather than pixellevel content. In the following section, we review relevant recent work before discussing the xgan model in more detail in Section 3. In Section 4, we introduce CartoonSet, our dataset of cartoon faces for research on semantic style transfer. Finally, in Section 5 we report experimental results of xgan on the face-to-cartoon task.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">Related work</head><p>Recent literature suggests two main directions for tackling the semantic style transfer task: traditional style transfer and pixel-level domain adaptation. The first approach is inadequate as it only transfers texture information from a single style image, and therefore does not capture the style of an entire corpus. The latter category also fails in practice as it explicitly enforces pixel-level similarity which does not allow for significant structural change of the input. Instead, we draw inspiration from the domain adaptation and feature-level image-to-image translation literature.</p><p>Style Transfer. Neural style transfer refers to the task of transferring the texture of a specific style image while preserving the pixel-level structure of an input content image <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b8">9]</ref>. Recently, <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b14">15]</ref> proposed to instead use a dense local patchbased matching approach in the feature space, as opposed to global feature matching, allowing for convincing transformations between visually dissimilar domains. Still, these models only perform image-specific transfer rather than learning a global corpus-level style and do not provide a meaningful shared domain representation. Furthermore, the generated images are usually very close to the original input in terms of pixel structure (e.g., edges) which is not suitable for drastic transformations such as face-to-cartoon.</p><p>Domain adaptation. xgan relies on learning a shared feature representation of both domains in an unsupervised setting to capture semantic rather than pixel information. For this purpose, we make use of the domain-adversarial training scheme <ref type="bibr" target="#b2">[3]</ref>. Moreover, recent domain adaptation work <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b21">22,</ref><ref type="bibr" target="#b0">1]</ref> can be framed as semantic style transfer as they tackle the problem of mapping synthetic images, easy to generate, to natural images, which are more difficult to obtain. The generated samples are then used to train a model later applied to natural images. Contrary to our work however, they only consider pixel-level transformations.</p><p>Unsupervised Image-to-Image translation. Recent work <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b26">27,</ref><ref type="bibr" target="#b24">25,</ref><ref type="bibr" target="#b5">6</ref>] tackle the unsupervised pixel-level image-to-image translation task by learning both crossdomain mappings jointly, each as a separate generative adversarial network, via a cycle-consistency loss which ensures that applying each mapping followed by its reverse yields the identity function. This intuitive form of self-supervision leads to good results for pixel-level transformations, but often fails to capture significant structural changes <ref type="bibr" target="#b26">[27]</ref>. In comparison, our proposed semantic consistency loss acts at the feature-level, allowing for more flexible transformations.</p><p>Orthogonal to this line of work is UNIT <ref type="bibr" target="#b15">[16,</ref><ref type="bibr" target="#b6">7,</ref><ref type="bibr" target="#b18">19]</ref>. This model consists of a coupled VAEGAN architecture <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b16">17]</ref> with a shared embedding bottleneck, trained with pixel-level cycle-consistency. Similar to xgan, it learns a joint feature-level representation of the two domains, however UNIT assumes that sharing high-level layers in the architecture is a sufficient constraint, while xgan's objective explicitly introduces the semantic consistency component.</p><p>Finally, the Domain Transfer Network (DTN) <ref type="bibr" target="#b22">[23,</ref><ref type="bibr" target="#b23">24]</ref> is closest to our work in terms of objective and applications. The DTN architecture is a single autoencoder trained to map images from a source to a target domain with selfsupervised semantic consistency feedback. It was also successfully applied to the problem of feature-level image-to-image translation, in particular to the face-tocartoon problem. Contrary to xgan however, the DTN encoder is pretrained and fixed, and is assumed to produce meaningful embeddings for both the face and the cartoon domains. This assumption is very restrictive, as off-the-shelf models pretrained on natural images do not usually generalize well to other domains. In fact, we show in Section 5 that a fixed encoder does not generalize well in the presence of a large domain shift between the two domains.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">Proposed model: XGAN</head><p>Let D 1 and D 2 be two domains that differ in terms of visual appearance but share common semantic content. It is often easier to think of domain semantics as a high-level notion, e.g., semantic attributes, however we do not require such annotations in practice, but instead consider learning a feature-level representation that automatically captures these shared semantics. Our goal is thus to learn in an unsupervised fashion, i.e., without paired examples, a joint domain-invariant embedding: semantically similar inputs across domains will be embedded nearby in the learned feature space.</p><p>Architecture-wise, xgan is a dual auto-encoder on domains D 1 and D 2 Figure 2(A). We denote by e 1 the encoder and by d 1 the decoder for domain D 1 ; likewise e 2 and d 2 for D 2 . For simplicity, we also denote by g 1→2 = d 2 • e 1 the transformation from D 1 to D 2 ; likewise g 2→1 for D 2 to D 1 .  The training objective can be decomposed into five main components: the reconstruction loss, L rec , encourages the learned embedding to encode meaningful knowledge for each domain; the domain-adversarial loss, L dann , pushes embeddings from D 1 and D 2 to lie in the same subspace, bridging the domain gap at the semantic level; the semantic consistency loss, L sem , ensures that input semantics are preserved after domain translation; L gan is a simple generative adversarial (GAN) objective, encouraging the model to generate more realistic samples, and finally, L teach is an optional teacher loss that distills prior knowledge from a fixed pretrained teacher embedding, when available. The total loss function is defined as a weighted sum over these five loss terms:</p><formula xml:id="formula_0">L xgan = L rec + ω d L dann + ω s L sem + ω g L gan + ω t L teach ,</formula><p>where the ω hyper-parameters control the contributions from each of the individual objectives. An overview of the model is given in <ref type="figure" target="#fig_1">Figure 2</ref>, and we discuss each objective in more detail in the rest of this section.</p><p>Reconstruction loss, L rec . L rec encourages the model to encode enough information on each domain for to perfectly reconstruct the input. More specifically L rec = L rec,1 + L rec,2 is the sum of reconstruction losses for each domain.</p><formula xml:id="formula_1">L rec,1 = E x∼p D 1 ( x − d 1 (e 1 (x)) 2 ) , likewise for domain D 2<label>(1)</label></formula><p>Domain-adversarial loss, L dann . L dann is the domain-adversarial loss between D 1 and D 2 , as introduced in <ref type="bibr" target="#b2">[3]</ref>. It encourages the embeddings learned by e 1 and e 2 to lie in the same subspace. In particular, it guarantees the soundness of the cross-domain transformations g 1→2 and g 2→1 . More formally, this is achieved by training a binary classifier, c dann , on top of the embedding layer to categorize encoded images from both domains as coming from either D 1 or D 2 (see <ref type="figure" target="#fig_1">Figure 2</ref> (B1)). c dann is trained to maximize its classification accuracy while the encoders e 1 and e 2 simultaneously strive to minimize it, i.e., to confuse the domain-adversarial classifier. Denoting model parameters by θ and a classification loss function by (e.g., cross-entropy), we optimize</p><formula xml:id="formula_2">min θe 1 ,θe 2 max θ dann L dann , where<label>(2)</label></formula><formula xml:id="formula_3">L dann = E p D 1 (1, c dann (e 1 (x))) + E p D 2 (2, c dann (e 2 (x)))</formula><p>Semantic consistency loss, L sem . Our key contribution is a semantic consistency feedback loop that acts as self-supervision for the cross-domain translations g 1→2 and g 2→1 . Intuitively, we want the semantics of input x ∈ D 1 to be preserved when translated to the other domain, g 1→2 (x) ∈ D 2 , and similarly for the reverse mapping. However this consistency property is hard to assess at the pixel-level as we do not have paired data and pixel-level metrics are sub-optimal for image comparison. Instead, we introduce a feature-level semantic consistency loss, which encourages the network to preserve the learned embedding during domain translation. Formally, L sem = L sem,1→2 + L sem,2→1 , where:</p><formula xml:id="formula_4">L sem,1→2 = E x∼p D 1 e 1 (x) − e 2 (g 1→2 (x)) , likewise for L sem,2→1 .<label>(3)</label></formula><p>· denotes a distance between vectors.</p><p>GAN objective, L gan . We find that generating realistic image transformations has a crucial positive effect for learning a joint meaningful and semantically consistent embedding as the produced samples are fed back through the encoders when computing the semantic consistency loss: making the transformed distribution p(g 2→1 (D 2 )) as close as possible to the original domain p(D 1 ) ensures that the encoder e 1 does not have to cope with an additional domain shift. Thus, to improve sample quality, we add a generative adversarial loss <ref type="bibr" target="#b4">[5]</ref> L gan = L gan,1→2 + L gan,2→1 , where L gan,1→2 is a state-of-the-art GAN objective <ref type="bibr" target="#b4">[5]</ref> where the generator g 1→2 is paired against the discriminator D 1→2 (and likewise for g 2→1 and D 2→1 ). In this scheme, a discriminator D 1→2 strives to distinguish generated samples from real ones in D 2 , while the generator g 1→2 aims to produce samples that confuse the discriminator. The formal objective is</p><formula xml:id="formula_5">min θg 1→2 max θ D 1→2 L gan,1→2<label>(4)</label></formula><formula xml:id="formula_6">L gan,1→2 = E x∼p D 2 (log(D 1→2 (x))) + E x∼p D 1 (log(1 − D 1→2 (g 1→2 (x))))</formula><p>Likewise L gan,2→1 is defined for the transformation from D 2 to D 1 .</p><p>Note that the combination of the L gan and L sem objectives should subsume the role of the domain-adversarial loss L dann in theory. However, L dann plays an important role at the beginning of training to bring embeddings across domains closer, as the generated samples are typically poor and not yet representative of the actual input domains D 1 and D 2 .</p><p>Teacher loss, L teach . We introduce an optional component to incorporate prior knowledge in the model when available, e.g., in a semi-supervised setting. L teach encourages the learned embeddings to lie in a region of the subspace defined by the output representation of a pretrained teacher network, T . In other words, we distills feature-level knowledge from T and constrains the embeddings to a more meaningful sub-region, relative to the task on which T was trained; This can be seen as a form of regularization of the learned embedding. Moreover, L teach is asymmetric by definition. It should not be used for both domains simultaneously as each term would potentially push the learned embedding in two different directions. Formally, L teach (applied to domain D 1 ) is defined as:</p><formula xml:id="formula_7">L teach = E x∼p D 1 T (x) − e 1 (x) ,<label>(5)</label></formula><p>where · is a distance between vectors.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Architecture and Training procedure</head><p>We use a simple mirrored convolutional architecture for the auto-encoder. It consists of 5 convolutional blocks for each encoder, the two last ones being shared across domains, and likewise for the decoders (5 deconvolutional blocks with the two first ones shared). This encourages the model to learn shared representations at different levels of the architecture rather than only in the middle layer. A more detailed description is given in <ref type="table">Table 1</ref>. For the teacher network, we use the highest convolutional layer of FaceNet <ref type="bibr" target="#b20">[21]</ref>, a state-of-the-art face recognition model trained on natural images. The xgan training objective is to minimize (Eq. 1). In particular, the two adversarial losses (L gan and L dann ) lead to min-max optimization problems requiring careful optimization. For the GAN loss L gan , we use a standard adversarial training scheme <ref type="bibr" target="#b4">[5]</ref>. Furthermore, for simplicity we only use one discriminator in practice, namely D 1→2 which corresponds to the face-to-cartoon path, our target application. We first update the parameters of the generators g 1→2 and g 2→1 in one step. We then keep these fixed and update the parameters for the discriminator D 1→2 . We iterate this alternating process throughout training. The adversarial training scheme for L dann can be implemented in practice by connecting the classifier c dann and the embedding layer via a gradient reversal layer <ref type="bibr" target="#b2">[3]</ref>: the feed-forward pass is unaffected, however the gradient is backpropagated to the encoders with a sign-inversion representing the min-max alternation. We perform this update simultaneously when computing the generator parameters. Finally, we train the model with Adam optimizer <ref type="bibr" target="#b10">[11]</ref> and an initial learning rate of 1e-4. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">The CartoonSet Dataset</head><p>Although previous work has tackled the task of transforming frontal faces to a specific cartoon style, there is currently no such dataset publicly available. For this purpose, we introduce a new dataset, CartoonSet 7 , which we release publicly to further aid research on this topic.</p><p>Each cartoon face is composed of 16 components including 12 facial attributes (e.g., facial hair, eye shape, etc) and 4 color attributes (such as skin or hair color) which are chosen from a discrete set of RGB values. The number of options per attribute category ranges from 3 to 111, for the largest category, hairstyle. Each of these components and their variation were drawn by the same artist, resulting in approximately 250 cartoon components artworks and 10 8 possible combinations. The artwork components are divided into a fixed set of layers that define a Z-ordering for rendering. For instance, face shape is defined on a layer below eyes and glasses, so that the artworks are rendered in the correct order. For instance, hair style needs to be defined on two layers, one behind the face and one in front. There are 8 total layers: hair back, face, hair front, eyes, eyebrows, mouth, facial hair, and glasses. The mapping from attribute to artwork is also defined by the artist such that any random selection of attributes produces a visually appealing cartoon without any misaligned artwork; which sometimes involves handling interaction between attributes, e.g. the appearance of "short beard" will changed depending of the face shape. For example, the proper way to display a "short beard" changes for different face shapes, which required the artist to create a "short beard" artwork for each face shape. We create the CartoonSet dataset from arbitrary cartoon faces by randomly sampling a value for each attribute. We then filter out unusual hair colors (pink, green etc) or unrealistic attribute combinations, which results in a final dataset of approximately 9, 000 cartoons. In particular, the filtering step guarantees that the dataset only contains realistic cartoons, while being completely unrelated to the source dataset.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">Experiments</head><p>We experimentally evaluate our xgan model on semantic style transfer ; more specifically, on the task of converting images of frontal faces (source domain) to images of cartoon avatars (target domain) given an unpaired collection of such samples in each domain. Our source domain is composed of real-world frontalface images from the VGG-Face dataset <ref type="bibr" target="#b19">[20]</ref>. In particular, we use an image collection consisting of 18,054 uncropped celebrity frontal face pictures. As a preprocessing step, we align the faces based on eyes and mouth location and remove the background. The target domain is the CartoonSet dataset introduced in the previous section. Finally, we randomly select and take out 20% of the images from each dataset for testing purposes, and use the remaining 80% for training. For our experiments we also resize all images to 64 × 64. As shown in <ref type="figure" target="#fig_2">Figures 3 and 4</ref>, the two domains vary significantly in appearance. In particular, cartoon faces are rather simplistic compared to real faces, and do not display as much variety (e.g., noses or eyebrows only have a few shape options). Furthermore, we observe a major content distribution shift between the two domains due to the way we collected the data: for instance, certain hair color shades (e.g., bright red, gray) are over-represented in the cartoon domain compared to real faces. Similarly, the cartoon dataset contains many samples with eyeglasses while the source dataset only has a few. Comparison to the DTN baseline. Our first evaluation is a qualitative comparison between the Domain Transfer Network (DTN) <ref type="bibr" target="#b22">[23]</ref> and xgan on the semantic style transfer problem outlined above. To the best of our knowledge, DTN is the current state of the art for semantic style transfer given unpaired image corpora from two domains with significant visual shift. In particular, DTN was also applied to the task of transferring face pictures to cartoons (bitmojis) in the original paper 8 . <ref type="figure" target="#fig_5">Figure 6</ref> shows the results of both DTN and xgan applied to random VGG-Face samples from the test set to produce their cartoon counterpart. Evaluation metrics for style transfer are still an active research topic with no good unbiased solution yet. Hence we choose optimal hyperparameters by manually evaluating the quality of resulting samples, focusing on accurate transfer of semantic attributes, similarity of the resulting sample to the target domain, and crispness of samples. It is clear from <ref type="figure" target="#fig_5">Figure 6</ref> that DTN fails to capture the transformation function that semantically stylizes frontal faces to cartoons from our target domain. In contrast, XGAN is able to produce sensible cartoons both in terms of the style domain -the resulting cartoons look crisp and respect the specific Car-toonSet style -and in terms of semantic similarity to the input samples from VGG-Face. There are some failure cases such as hair or skin color mismatch, which emerge from the weakly supervised nature of the task and the significant content shift between the two domains (e.g., red hair is over-represented in the target cartoon dataset). In <ref type="figure" target="#fig_4">Figure 5</ref> we report selected xgan samples that we think best illustrate its semantic consistency abilities, showing that the model learns a meaningful shared representation that preserves common face semantics. Additional random samples are also reported in <ref type="figure" target="#fig_6">Figure 7</ref>. We believe the failure of DTN is primarily due to its assumption of a fixed joint encoder for both domains. Although the decoder learns to reconstruct inputs from the target domain almost perfectly, the semantics are not well preserved across domains and the decoder yields samples of poor quality for the domain transfer. In fact, FaceNet was originally trained on real faces inputs, hence there is no guarantee it can produce a meaningful representation for Car-toonSet samples. In contrast to our dataset, the target bitmoji domain in <ref type="bibr" target="#b22">[23]</ref> is visually closer to real faces, as bitmojis are more realistic and customizable than the cartoon style domain we use here. This might explain the original work performance even with a fixed encoder. Our experiments suggest that using a fixed encoder is too restrictive and does not adapt well to new scenarios. We also train a DTN with a finetuned encoder which yields samples of better quality than the original DTN. However, this setup is very sensitive to hyperparameters choice during training and prone to mode collapse (see Section 7.1).</p><p>Comparison to CycleGAN. As we have mentioned in the related work section, CycleGAN <ref type="bibr" target="#b26">[27]</ref>, DiscoGAN <ref type="bibr" target="#b9">[10]</ref> and DualGAN <ref type="bibr" target="#b24">[25]</ref> form another family of closely related work for image-to-image translation problems. However, differently from DTN and the proposed XGAN, these models only consider a pixel-level cycle consistency loss and do not use a shared domain embedding. Consequently, they fail to capture high-level shared semantics between significantly different domains. To explore this problem, we experiment with CycleGAN 9 on the face-to-cartoon task. We train a CycleGAN with a pix2pix <ref type="bibr" target="#b7">[8]</ref> generator as in the original paper, which is close to the generator we use in XGAN in terms of architecture choices and size (depth and width of the network). As shown in <ref type="figure">Figure 8</ref>, this approach yields poor results, which is explained by the explicit pixel-level cycle consistency loss and the fact that the pix2pix architecture contains backwards connections (U-net) between the encoder and the decoder; both these features enhance pixel structure similarities which is not desirable for this task. <ref type="figure">Fig. 8</ref>. The default CycleGAN model is not suitable for transformation between domains with very dissimilar appearances as it enforces pixel-level structural similarities <ref type="bibr" target="#b8">9</ref> CycleGAN-tensorflow, https://github.com/xhujoy/CycleGAN-tensorflow Ablation study. We conduct a number of insightful ablation experiments on xgan. We first consider training only with the reconstruction loss L rec and domain-adversarial loss L dann . In fact these form the core domain adaptation component in xgan and, as we will show, are already able to capture basic semantic knowledge across domains in practice. Secondly we experiment with the semantic consistency loss and teacher loss. We show that both have complementary constraining effects on the embedding space which contributes to improving the sample consistency.</p><p>We first experiment on xgan with only the reconstruction and domainadversarial losses active. These components prompt the model to (i) encode enough information for each decoder to correctly reconstruct images from the corresponding domain and (ii) to ensure that the embedding lies in a common subspace for both domains. In practice in this setting, the model is robust to hyperparameter choice and does not require much tuning to converge to a good regime, i.e., low reconstruction error and around 50% accuracy for the domainadversarial classifier. As a result of (ii), applying each decoder to the output of the other domain's encoder yields reasonable cross-domain translations, albeit of low quality (see <ref type="figure" target="#fig_8">Figure 9</ref>). Furthermore, we observe that some simple semantics such as skin tone or gender are overall well preserved by the learned embedding due to the shared auto-encoder structure. For comparison, failure modes occur in extreme cases, e.g., when the model capacity is too small, in which case transferred samples are of poor quality, or when the weight ω d is too low. In the latter case, the source and target embeddings are easily distinguishable and the cross-domain translations do not look realistic.  Secondly, we investigate the benefits of adding semantic consistency in xgan via the following three components: sharing high-level layers in the auto-encoder leads the model to capture common semantics earlier in the architecture. In general, high-level layers in convolutional neural networks are known to encode semantic information. We performed experiments with sharing only the middle layer in the dual auto-encoder. As expected, the resulting embedding does not capture relevant shared domain semantics. Second, we use the semantic consistency loss as self-supervision for the learned embedding, ensuring that it is preserved through the cross-domain transformations. It also reinforces the action of the domain-adversarial loss as it constrains embeddings from the two input domains to lie close to each other. Finally, the optional teacher loss leads the learned source embedding to lie near the teacher output (in our case, FaceNet's representation layer), which is meaningful for real faces. It acts in conjunction with the domain-adversarial loss and semantic consistency loss, whose role is to bring the source and target embedding distributions closer to each other.</p><p>(i) source to target (ii) target to source (a) Teacher loss inactive (i) source to target (ii) target to source (b) Semantic consistency loss inactive In <ref type="figure" target="#fig_9">Figure 10</ref> we report random test samples for both domain translations when ablating the teacher loss and semantic consistency loss respectively. While it is hard to draw conclusions from visual inspections, it seems that the teacher network has a positive regularization effect on the learned embedding by guiding it to a more realistic region: training the model without the teacher loss ( <ref type="figure" target="#fig_9">Figure  10</ref> (a)) yields more distorted samples, especially when the input is an outlier, e.g., person wearing a hat, or cartoons with unusual hairstyle. Conversely, when the semantic consistency is inactive <ref type="figure" target="#fig_9">(Figure 10 (b)</ref>), the generated samples overall display less variety. In particular, rare attributes (e.g., unusual hairstyle) are not as well preserved as when the semantic consistency term is present.</p><p>Discussions and Limitations. Our initial aim was to tackle the semantic style transfer problem in a fully unsupervised framework by combining techniques from domain adaptation and image-to-image translation: We first observe that using a simple setup where a partially shared dual auto-encoder is trained with reconstruction and domain-adversarial losses already suffices to produce an embedding that captures basic semantics rather well (for instance, skin tone). However, the generated samples are of poor quality and fine-grained attributes such as facial hair are not well captured. These two problems are greatly diminished after adding the GAN loss and the proposed semantic consistency loss, respectively. Failure cases still exist, especially on non-representative input samples (e.g., a person wearing a hat) which are mapped to unrealistic cartoons. Adding the teacher loss mitigates this problem by regularizing the learned embedding, however it requires additional supervision and makes the model dependent on the specific representation provided by the teacher network.</p><p>Future work will focus on evaluating xgan on different domain transfer tasks. In particular, though we introduced xgan for semantic style transfer, we think the model goes beyond this scope and can be applied to classical domain adaptation problems, where quantitative evaluation becomes possible: while the pixellevel transformations are not necessary for learning the shared embedding, they are beneficial for learning a meaningful representation across visual domains, when combined with the self-supervised semantic consistency loop.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">Conclusions</head><p>In this work, we introduced xgan, a model for unsupervised domain translation applied to the task of semantically-consistent style transfer. In particular, we argue that, similar to the domain adaptation task, learning image-to-image translation between two structurally different domains requires learning a highlevel joint semantic representation while discarding local pixel-level dependencies. Additionally, we proposed a semantic consistency loss acting on both domain translations as a form of self-supervision.</p><p>We reported promising experimental results on the task of face-to-cartoon that outperform the current baseline. We also showed that additional weak supervision, such as a pretrained feature representation, can easily be added to the model in the form of teacher knowledge. It acts as a good regularizer for the learned embeddings and generated samples. This is particularly useful for natural image datasets, for which off-the-shelf pretrained models are abundant.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">Appendix</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1">Finetuning the DTN encoder</head><p>As mentionned in Section 5, the main drawback of DTN is that it keeps a fixed pretrained encoder, which cannot bridge the visual appearance gap between domains. Following this observation, we perform another experiment in which we finetune the FaceNet encoder relatively to the semantic consistency loss, additionally to the decoder parameters.</p><p>While this yields visually better samples (see <ref type="figure" target="#fig_11">Figure 11</ref>(b)), it also raises the classical domain adaptation issue of guaranteeing that the initial FaceNet embedding knowledge is preserved when retraining the embedding. In comparison, xgan exploits a teacher network that can be used to distill prior domain knowledge throughout training, when available. Secondly, this finetuned DTN is prone to mode collapse. In fact, the encoder is now only trained relatively to the semantic consistency loss which can be easily minizimed by mapping each domain to the same point in the embedding space, leading to the same cartoon being generated for all of them. In xgan, the source embeddings are regularized by the reconstruction loss on the source domain. This allows us to learn a joint domain embedding from scratch in a proper domain adaptation framework.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2">Extensive qualitative evaluation</head><p>As mentioned in the main text, the DTN baseline fails to capture a meaningful shared embedding for the two input domains. Instead, we consider and experiment with three different models to tackle the semantic style transfer problem. Selected samples are reported in <ref type="figure" target="#fig_1">Figure 12</ref>:</p><p>-Finetuned DTN, as introduced previously. In practice, this model yields satisfactory samples but is very sensitive to hyperparameter choice and often collapses to one model.</p><p>-XGAN with L rec and L dann active only corresponds to a simple domainadaptation setting: the proposed xgan model where only the reconstruction loss L rec and the domain-adversarial loss L dann are active. We observe that semantics are globally well preserved across domains although the model still makes some basic mistakes (e.g., gender misclassifications) and the samples quality is poor. -XGAN, the full proposed model, yields the best visual samples out of the models we experiment on. In the rest of this section, we report a detailed study on its different components and possible failure modes. In <ref type="figure" target="#fig_6">Figure 7</ref> we also report a more extensive random selection of samples produced by xgan. Note that we only used a discriminator for the source to target path (i.e., L gan,2→1 is inactive); in fact the GAN objective tends to make training more unstable so we only use one for the transformation we care most about for this specific application, i.e., faces to cartoons. Other than the GAN objective, the model appears to be robust to the choice of hyperparameters.</p><p>Overall, the cartoon samples are visually very close to the original dataset and main identity characteristics such as face shape, hair style, skin tone, etc., are well preserved between the two domains. The main failure mode appears to be mismatched hair color: in particular, bright red hair appear very often in generated samples which is likely due to its abundance in the training cartoon dataset. In fact, when looking at the target to source generated samples, we observe that this color shade often gets mapped to dark brown hair in the real face domain. One could expect the teacher network to regularize the hair color mapping, however FaceNet was originally trained for face identification, hence is most likely more sensitive to structural characteristics such as face shape. More generally, most mistakes are due to the shift in content distribution rather than style distribution between the two domains. Other examples include bald faces being mapped to cartoons with light hair (most likely due to the lack of bald cartoon faces and the model mistaking the white background for hair color). Also, eyeglasses on cartoon faces disappear when mapped to the real face domain (only very few faces in the source dataset wear glasses).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3">Failure mode when training with L rec and L dann</head><p>In <ref type="figure" target="#fig_2">Figure 13</ref> we report examples of failure cases when ω dann is too high in the setting with the reconstruction and domain-adversarial loss only: the domainadversarial classifier c dann reaches perfect accuracy and cross-domain translation fails.</p><p>source to target target to source </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.4">GAN loss ablation experiment</head><p>As mentioned previously, we only use a GAN loss term for the source → target translation, to ease training. This prompts the face-to-cartoon path to generate more realistic samples. As expected, when the GAN loss is inactive, the generated samples are noisy and unrealistic (see <ref type="figure" target="#fig_3">Figure 14</ref>(a)). For comparison, tackling the low quality problem with simpler regularization techniques such as using total variation smoothness loss leads to more uniform samples but significantly worsen their blurriness on the long term (see <ref type="figure" target="#fig_3">Figure 14</ref>(b)). This shows the importance of the GAN objective for image generation applications, even though it makes the training process more complex.  </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Fig. 2 .</head><label>2</label><figDesc>The xgan (A) objective encourages the model to learn a meaningful joint embedding (B1) (Lrec and L dann ), which should be preserved through domain translation (B2) (Lsem), while producing output samples of good quality (B3) (Lgan and L teach )</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Fig. 3 .</head><label>3</label><figDesc>Random samples from our cartoon dataset, CartoonSet.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Fig. 4 .</head><label>4</label><figDesc>Random centered aligned samples from VGG-Face. We preprocess them with automatic portrait matting to avoid dealing with background noise.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Fig. 5 .</head><label>5</label><figDesc>Selected samples generated by xgan on the VGG-Face (left) to CartoonSet (right) task. The figure reads row-wise: for each face-cartoon pair, the target image (cartoon) on the right was generated from the source image (face) on the left.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Fig. 6 .</head><label>6</label><figDesc>A qualitative comparison between DTN and xgan. In both cases we present random test samples for the face-to-cartoon transformation. The tables are organized row-wise where each face input is mapped to the cartoon face immediately on its right.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Fig. 7 .</head><label>7</label><figDesc>a) Source to target mapping (face-to-cartoon) (b) Target to source mapping (cartoon-to-face) Random samples obtained by applying xgan on faces and cartoons from the testing set for both cross-domain mappings</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Fig. 9 .</head><label>9</label><figDesc>Test results for xgan with the reconstruction (Lrec) and domain-adversarial (L dann ) losses active only in the training objective Lxgan</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Fig. 10 .</head><label>10</label><figDesc>Results of ablating the teacher loss (L teach ) (top) and semantic consistency loss (Lsem) (bottom) in the xgan objective Lxgan.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Fig. 11 .</head><label>11</label><figDesc>Reproducing the Domain Transfer Network performs badly in our experimental setting (a); fine-tuning the encoder yields better results (b) but is unstable for training in practice.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_12"><head>( a )</head><label>a</label><figDesc>Baseline: DTN (b) Finetuned DTN (c) XGAN (Lr only) (d) XGAN Fig. 12. Cherry-picked samples for the DTN baseline and three improved models we consider for the semantic style transfer task</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_13"><head>Fig. 13 .</head><label>13</label><figDesc>Random test samples for both cross-domain translations in the failure mode for the Lrec + L dann only xgan setting</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_15"><head>Fig. 14 .</head><label>14</label><figDesc>Test samples for xgan when the GAN loss Lga is inactive</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0" validated="false"><head></head><label></label><figDesc>Overview of the XGAN architecture used in practice. The encoder and decoder have the same architecture for both domains, and (//) indicates that the layer is shared across domain.</figDesc><table>Layer 
+Size 
+Inputs 
+64x64x3 
+conv1 
+32x32x32 
+conv2 
+16x16x64 
+(//) conv3 8x8x128 
+(//) conv4 4x4x256 
+(//) FC1 1x1x1024 
+(//) FC2 1x1x1024 
+(a) Encoder 
+
+Layer 
+Size 
+Inputs 
+1x1x1024 
+(//) deconv1 4x4x512 
+(//) deconv2 8x8x256 
+deconv3 16x16x128 
+deconv4 
+32x32x64 
+deconv5 
+64x64x3 
+
+(b) Decoder 
+
+Layer 
+Size 
+Inputs 64x64x3 
+conv1 32x32x16 
+conv2 16x16x32 
+conv3 8x8x32 
+conv4 4x4x32 
+FC1 
+1x1x1 
+
+(c) Discriminator 
+Table 1. </table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7">CartoonSet, https://github.com/google/cartoonset</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="8">The original DTN code and dataset is not publicly available, hence we instead report results from our implementation applied to the VGG-Face to CartoonSet setting.</note>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Unsupervised pixel-level domain adaptation with generative adversarial networks</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Bousmalis</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">N</forename><surname>Silberman</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Dohan</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Erhan</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Krishnan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017" />
+			<publisher>CVPR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Domain separation networks</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Bousmalis</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><surname>Trigeorgis</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">N</forename><surname>Silberman</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Krishnan</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Erhan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016" />
+			<publisher>NIPS</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Domain-adversarial training of neural networks</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Y</forename><surname>Ganin</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">E</forename><surname>Ustinova</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">H</forename><surname>Ajakan</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">P</forename><surname>Germain</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">H</forename><surname>Larochelle</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Laviolette</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Marchand</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">V</forename><surname>Lempitsky</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Machine Learning Research</title>
+		<imprint>
+			<date type="published" when="2016" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">Image style transfer using convolutional neural networks</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><forename type="middle">A</forename><surname>Gatys</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><forename type="middle">S</forename><surname>Ecker</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Bethge</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016" />
+			<publisher>CVPR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+				<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">I</forename><surname>Goodfellow</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Pouget-Abadie</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Mirza</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">B</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Warde-Farley</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Ozair</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Courville</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Y</forename><surname>Bengio</surname></persName>
+		</author>
+		<title level="m">Generative adversarial nets</title>
+		<imprint>
+			<publisher>NIPS</publisher>
+			<date type="published" when="2014" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">CyCADA: Cycle-consistent adversarial domain adaptation</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Hoffman</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">E</forename><surname>Tzeng</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">P</forename><surname>Isola</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Saenko</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><forename type="middle">A</forename><surname>Efros</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Darrell</surname></persName>
+		</author>
+		<idno>CoRR abs/1711.03213</idno>
+		<imprint>
+			<date type="published" when="2017" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Multimodal unsupervised image-toimage translation</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">X</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><forename type="middle">Y</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Belongie</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Kautz</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1804.04732</idno>
+		<imprint>
+			<date type="published" when="2018" />
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Image-to-image translation with conditional adversarial networks</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">P</forename><surname>Isola</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><forename type="middle">Y</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><forename type="middle">A</forename><surname>Efros</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017" />
+			<publisher>CVPR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Perceptual losses for real-time style transfer and super-resolution</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Alahi</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Fei-Fei</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016" />
+			<publisher>ECCV</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">Learning to discover cross-domain relations with generative adversarial networks</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Cha</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">H</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><forename type="middle">K</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Kim</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Adam: A method for stochastic optimization</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><forename type="middle">P</forename><surname>Kingma</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Ba</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015" />
+			<publisher>ICLR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Autoencoding beyond pixels using a learned similarity metric</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><forename type="middle">B L</forename><surname>Larsen</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><forename type="middle">K</forename><surname>Sønderby</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">O</forename><surname>Winther</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016" />
+			<publisher>ICML</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Photo-realistic single image superresolution using a generative adversarial network</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Ledig</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Theis</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Huszár</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Caballero</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Cunningham</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Acosta</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Aitken</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Tejani</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Totz</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Z</forename><surname>Wang</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017" />
+			<publisher>CVPR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Combining Markov random fields and convolutional neural networks for image synthesis</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Wand</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016" />
+			<publisher>CVPR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Visual attribute transfer through deep image analogy</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Liao</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Y</forename><surname>Yao</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><surname>Hua</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><forename type="middle">B</forename><surname>Kang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Graphics</title>
+		<imprint>
+			<date type="published" when="2017" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Unsupervised image-to-image translation networks</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Breuel</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Kautz</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Coupled generative adversarial networks</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><forename type="middle">Y</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">O</forename><surname>Tuzel</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016" />
+			<publisher>NIPS</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Fully convolutional networks for semantic segmentation</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Long</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">E</forename><surname>Shelhamer</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Darrell</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015" />
+			<publisher>CVPR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Exemplar guided unsupervised image-to-image translation</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">X</forename><surname>Jia</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Georgoulis</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Tuytelaars</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Van Gool</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1805.11145</idno>
+		<imprint>
+			<date type="published" when="2018" />
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Deep face recognition</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">O</forename><forename type="middle">M</forename><surname>Parkhi</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Vedaldi</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Zisserman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015" />
+			<publisher>BMVC</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">FaceNet: A unified embedding for face recognition and clustering</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Schroff</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Kalenichenko</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Philbin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015" />
+			<publisher>CVPR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Learning from simulated and unsupervised images through adversarial training</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Shrivastava</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Pfister</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">O</forename><surname>Tuzel</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Susskind</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">W</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><surname>Webb</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017" />
+			<publisher>CVPR</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">Unsupervised cross-domain image generation</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Y</forename><surname>Taigman</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Polyak</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Wolf</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">Unsupervised creation of parameterized avatars</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Wolf</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Y</forename><surname>Taigman</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Polyak</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">DualGan: Unsupervised dual learning for image-to-image translation</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Z</forename><surname>Yi</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">H</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">P</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Gong</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Colorful image colorization</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">P</forename><surname>Isola</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><forename type="middle">A</forename><surname>Efros</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016" />
+			<publisher>ECCV</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">Unpaired image-to-image translation using cycle-consistent adversarial networks</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><forename type="middle">Y</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">P</forename><surname>Isola</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><forename type="middle">A</forename><surname>Efros</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>
+

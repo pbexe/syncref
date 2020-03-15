@@ -1,0 +1,14 @@
+{% extends "references/base.html" %}
+{% load static %}
+
+{% block title %}
+Login -
+{% endblock %}
+
+{% block body %}
+    {% for result in results %}
+        <p>
+            {{result.name}} - {{result.rank}}
+        </p>
+    {% endfor %}
+{% endblock %}

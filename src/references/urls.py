@@ -19,6 +19,7 @@ urlpatterns = [
     path('upload/<int:pk>/', views.uploadReference, name="upload"),
     path('delete/<int:reference>/', views.delete_reference, name="delete_reference"),
     path('export/<int:pk>/export.bib', views.export, name="export"),
+    path('search/', views.search, name="search"),
     path('view_404', views.view_404, name="view_404"),
     path('', views.index, name="home")
 ]

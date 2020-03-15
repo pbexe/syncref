@@ -37,6 +37,8 @@
                 
             </ul>
         </div>
+        <form action="{% url 'search' %}" method="POST">
+        {% csrf_token %}
         <div class="top-bar-right">
             <ul class="menu">
                 {% if user.is_authenticated %}
@@ -44,13 +46,14 @@
                 {% else %}
                 <li><a href="{% url 'login' %}">Login</a></li>
                 {% endif %}
-                <li><input type="search" placeholder="Search"></li>
-                <li><button type="button" class="button">Search</button></li>
-            </ul>
+                    <li><input name="query" type="search" placeholder="Search"></li>
+                    <li><button type="submit" class="button">Search</button></li>
+                </ul>
+            </form>
         </div>
     </div>
 
-    <div class="grid-x grid-margin-x">
+    <div class="grid-x">
         {% if user.is_authenticated %}
         <div class="small-2 cell show-for-large">
             <ul class="vertical menu">

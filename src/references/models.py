@@ -27,6 +27,7 @@ class Reference(models.Model):
     bibtex_dump = JSONField()
     created = models.DateTimeField(auto_now_add=True)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    fulltext = models.TextField(default="", null=True)
 
     def __str__(self):
         return self.name
