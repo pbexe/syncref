@@ -68,7 +68,7 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             user.is_active = False
             user.save()
-            return HttpResponse("Your accound must be verified by an admin")
+            return HttpResponse("Your account must be verified by an admin")
     else:
         form = UserCreationForm()
     return render(request, "references/signup.html", {

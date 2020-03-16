@@ -29,20 +29,19 @@ services:
   app:
     build: ./src
     container_name: app
-    command: bash -c "python manage.py makemigrations references && python manage.py collectstatic --no-input --clear && python manage.py migrate references && uvicorn syncref.asgi:application --workers 2 --host 0.0.0.0 --port 8000 --reload"
+    command: ["./start.sh", "db"]
     volumes:
       - static_volume:/code/static
       - ./src/logs/main/:/code/logs/
-      - ./src/:/code/
     ports:
       - 8000:8000
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
       - "traefik.http.routers.app-http.entrypoints=web"
-      - "traefik.http.routers.app-http.rule=Host(`localhost`)"
+      - "traefik.http.routers.app-http.rule=Host(`syncref.milesbudden.com`)"
       - "traefik.http.routers.app-http.middlewares=redirect-https@docker"
-      - "traefik.http.routers.app-https.rule=Host(`localhost`)"
+      - "traefik.http.routers.app-https.rule=Host(`syncref.milesbudden.com`)"
       - "traefik.http.routers.app-https.entrypoints=websecure"
       - "traefik.http.routers.app-https.tls.certresolver=mytlschallenge"
       - traefik.docker.network=proxy
@@ -64,7 +63,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.static-http.entrypoints=websecure"
-      - "traefik.http.routers.static-http.rule=Host(`localhost`) && PathPrefix(`/static`)" 
+      - "traefik.http.routers.static-http.rule=Host(`syncref.milesbudden.com`) && PathPrefix(`/static`)" 
       - "traefik.http.routers.static-http.tls.certresolver=mytlschallenge"
       - traefik.docker.network=proxy
     depends_on:

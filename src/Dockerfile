@@ -1,6 +1,6 @@
 FROM python:3
-# RUN curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-# RUN sudo apt-get install -y nodejs
+RUN apt-get update
+RUN apt-get install -y postgresql-client
 RUN mkdir /code
 WORKDIR /code
 RUN pip install pipenv
