@@ -83,6 +83,14 @@ services:
       - traefik.enable=false
     networks:
       - internal
+  grobid:
+    image: lfoppiano/grobid:0.5.6
+    labels:
+      - traefik.enable=false
+    networks:
+      - internal
+    ports:
+      - "8080"
 
 volumes:
   static_volume:

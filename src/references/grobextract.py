@@ -33,7 +33,7 @@ def extract(fp):
     files = {"input": fp}
     
     # Upload the file to the server
-    r = requests.post("http://localhost:8080/api/processFulltextDocument",
+    r = requests.post("http://cloud.science-miner.com/grobid//api/processFulltextDocument",
                       files=files)
     title = ""
     # Try fetching the name and authors from the results

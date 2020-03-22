@@ -17,13 +17,16 @@
         <br>
 <code class="code-block">{{bibtex}}</code>
         Files:
-        <ul>
+        <ul class="accordion" data-accordion data-allow-all-closed="true">
             {% for file in files %}
-            <li>
-                <a href="{{file.pdf.url}}">{{file.pdf.name}}</a>
-            </li>
-            {% endfor %}
-        </ul>
+                <li class="accordion-item" data-accordion-item>
+                    <a href="{{file.pdf.url}}" class="accordion-title">{{file.pdf.name}}</a>
+                    <div class="accordion-content" data-tab-content id="exclusive">
+                        <embed src="{{file.pdf.url}}" type="application/pdf" width="100%" style="min-height:90vh" />
+                    </div>
+                </li>
+              {% endfor %}
+          </ul>
     </div>
     <div class="tabs-panel" id="panel2">
         <h5>Edit fields:</h5>
@@ -94,8 +97,7 @@
 
 {% block scripts %}
 <script>
-    $(document).ready(function(){
-        
+    $(document).ready(function(){        
         // Add new element
         $(".add").click(function(){
             

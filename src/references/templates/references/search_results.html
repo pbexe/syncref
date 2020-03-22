@@ -2,13 +2,25 @@
 {% load static %}
 
 {% block title %}
-Login -
 {% endblock %}
 
 {% block body %}
+<div class="grid-x grid-margin-x">
     {% for result in results %}
-        <p>
-            {{result.name}} - {{result.rank}}
-        </p>
+    <div class="cell small-12">
+        <div class="card">
+            <div class="card-divider">
+                <a href="{% url 'view_reference' result.group.pk result.pk %}">
+                    <h6>{{result.bibtex_dump.0.title}}</h6> 
+                </a>
+            </div>            <div class="card-section">
+                <p>{{result.bibtex_dump.0.author}}</p>
+                <p>
+                    <span class="code-inline">{{result.rank}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
     {% endfor %}
+</div>
 {% endblock %}

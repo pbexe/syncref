@@ -66,9 +66,11 @@ def signup(request):
             username = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
-            user.is_active = False
+            if settings.REQUIRE_ADMIN_AUTH:
+                user.is_active = False
+                messages.info(request, "You account has been registered. An admin is required to authorise it")
             user.save()
-            return HttpResponse("Your account must be verified by an admin")
+            return redirect("home")
     else:
         form = UserCreationForm()
     return render(request, "references/signup.html", {
@@ -272,7 +274,7 @@ def uploadReference(request, pk):
                         if info[0]:
                             bibtex["title"] = info[0]
                         if info[1]:
-                            bibtex["author"] = " and ".join(data[1])
+                            bibtex["author"] = " and ".join(info[1])
                         bibtex["comment"] = "ERROR: No candidate was found. This is all the data I could extract"
                         bibtex_py = [bibtex]
                         messages.warning(request, "Could not match the PDF with any known papers. The reference has been filled with the extracted data. Expect this to be wrong.")
@@ -360,13 +362,18 @@ def add_user_to_group(request, pk):
         if request.method == 'POST':
             if "user" in request.POST:
                 username = request.POST["user"]
-                user = get_object_or_404(User, username=username)
-                # user = User.objects.get(username=username)
-                member = GroupMembership(group=group, user=user)
-                member.save()
-                return HttpResponse("Added " + username + " to group")
+                user = User.objects.filter(username=username)
+                if user:
+                    member = GroupMembership(group=group, user=user)
+                    member.save()
+                    messages.info(request, "Added " + username + " to group")
+                    return redirect("view_group", pk)
+                else:
+                    messages.error(request, "User does not exist")
+                    return redirect("view_group", pk)
             else:
-                return HttpResponse("User does not exist")
+                messages.error(request, "Please specify a user")
+                return redirect("view_group", pk)
         else:
             raise PermissionDenied
     else:
@@ -486,7 +493,6 @@ def search_vectors_from_keys(keys, attribute_name):
 
 
 @login_required
-@never_cache
 def search(request):
     if request.method == "POST":
         if "query" in request.POST:
@@ -495,18 +501,19 @@ def search(request):
                 + search_vectors_from_keys(
                     settings.DEFAULT_SEARCH_TAGS, "bibtex_dump__0"
                     )
-            # vector = SearchVector('fulltext', weight="C") \
-            #     + SearchVector('bibtex_dump__0__title', weight="A") \
-            #     + SearchVector('bibtex_dump__0__author', weight="A")
             query = SearchQuery(query)
             references = Reference.objects.annotate(
                 rank=SearchRank(vector, query))\
                 .order_by('-rank')\
-                # .filter(rank__gt=0)
+                .filter(rank__gt=0)
             groups = GroupMembership.objects.filter(user=request.user)
             r = []
             for reference in references:
                 if reference.group in [group.group for group in groups]:
+                    if "author" in reference.bibtex_dump[0]:
+                        reference.bibtex_dump[0]["author"] = " · ".join(
+                            reference.bibtex_dump[0]["author"].split(" and ")
+                            )
                     r.append(reference)
             if r:
                 return render(request, "references/search_results.html", {
@@ -520,3 +527,27 @@ def search(request):
             return HttpResponse("Please submit a query")
     else:
         raise PermissionDenied("Please use POST")
+
+
+def upload_bib(request, group):
+    group_obj = get_object_or_404(Group, pk=group)
+    if GroupMembership.objects.filter(group=group_obj, user=request.user).exists():
+        if request.method == 'POST':
+            try:
+                bib_file = request.FILES['bib_file']
+                s = ""
+                for line in bib_file:
+                    s += line.decode()
+                entries = bib2py(s)
+                for entry in entries:
+                    if entry["title"]:
+                        name = entry["title"]
+                    else:
+                        name = "Unknown"
+                    r = Reference(name=name,bibtex_dump=[entry], fulltext="", group=group_obj)
+                    r.save()
+                return redirect(view_group, group)
+            except Exception as e:
+                return HttpResponse(e)
+    else:
+        raise PermissionDenied

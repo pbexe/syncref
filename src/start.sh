@@ -1,5 +1,4 @@
 #!/bin/sh
-# wait-for-postgres.sh
 
 set -e
 
@@ -11,7 +10,7 @@ until psql -h "$host" -p 5432 -U "postgres" -c '\q'; do
   sleep 1
 done
 
->&2 echo "Postgres is up - executing command"
+>&2 echo "Postgres is up - executing commands"
 
 python manage.py collectstatic --no-input --clear 
 python manage.py migrate

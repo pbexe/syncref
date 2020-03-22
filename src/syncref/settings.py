@@ -83,27 +83,27 @@ WSGI_APPLICATION = 'syncref.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
-    }
-}
-
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'postgres',
 #         'USER': 'postgres',
-#         'PASSWORD': 'docker',
-#         'HOST': 'localhost',
+#         'HOST': 'db',
 #         'PORT': 5432,
 #     }
 # }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'docker',
+        'HOST': 'db',
+        'PORT': 5432,
+    }
+}
 
 
 # Password validation
@@ -165,3 +165,7 @@ DEFAULT_SEARCH_TAGS = [
     "year",
     "publisher"
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+REQUIRE_ADMIN_AUTH = True

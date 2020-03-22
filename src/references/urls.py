@@ -17,6 +17,7 @@ urlpatterns = [
     path('add/<int:pk>/', views.add, name="add"),
     path('add/<int:pk>/<int:template>/', views.add_template, name="add_template"),
     path('upload/<int:pk>/', views.uploadReference, name="upload"),
+    path('upload_bib/<int:group>/', views.upload_bib, name="upload_bib"),
     path('delete/<int:reference>/', views.delete_reference, name="delete_reference"),
     path('export/<int:pk>/export.bib', views.export, name="export"),
     path('search/', views.search, name="search"),

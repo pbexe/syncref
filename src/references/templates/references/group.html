@@ -2,23 +2,10 @@
 {% load static %}
 
 {% block body %}
-<body class="bg-background text-paragraph">
     <p>
         <h1 class="text-3xl">{{group.name}}</h1>
-        <blockquote>
             {{group.description}}
-        </blockquote>
-    </p>
-    <p>
-        Citations are as follows:
-        <ul>
-            {% for reference in references %}
-            
-            <a href="{% url 'view_reference' group.pk reference.pk %}">
-                <li>{{reference.bibtex_dump.0.title}}</li>
-            </a>   
-            {% endfor %}
-        </ul>
+        
     </p>
     <p>
         <div class="button-group">
@@ -28,29 +15,62 @@
         </div>
     </p>
     <p>
-        <div class="callout">
-            Add user to the group:
-            <form method="post" action="{% url 'add_user_to_group' group.pk %}">
-                {% csrf_token %}
-                <div class="grid-x grid-margin-x">
-                    <div class="medium-6 cell">
-                        <label>Username
-                            <input type="text" name="user">
-                        </label>
-                    </div>
-                    <div class="medium-12 cell">
-                        <input type="submit" value="Add user" class="button">
+         {% for reference in references %}
+                <div class="cell small-12">
+                    <div class="card">
+                        <div class="card-divider">
+                            <a href="{% url 'view_reference' reference.group.pk reference.pk %}">
+                                <h6>{{reference.name}}</h6> 
+                            </a>
+                        </div>            <div class="card-section">
+                            <p>{{reference.bibtex_dump.0.author}}</p>
+                        </div>
                     </div>
                 </div>
-            </form>
+            {% endfor %}
+    </p>
+    
+    <p>
+    <div class="grid-x grid-margin-x" data-equalizer data-equalize-on="medium" id="options">
+        <div class="small-12 medium-6 cell" >
+            <div class="callout" data-equalizer-watch>
+                Add user to the group:
+                <form method="post" action="{% url 'add_user_to_group' group.pk %}">
+                    {% csrf_token %}
+                    <div class="grid-x grid-margin-x">
+                        <div class="medium-6 cell">
+                            <label>Username
+                                <input type="text" name="user">
+                            </label>
+                        </div>
+                        <div class="medium-12 cell">
+                            <input type="submit" value="Add user" class="button">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
+        <div class="small-12 medium-6 cell">
+            <div class="callout" data-equalizer-watch>
+                Upload .bib file:
+                <form method="post" enctype="multipart/form-data" action="{% url 'upload_bib' group.pk %}">
+                    {% csrf_token %}
+                    <p><label for="bib">Bib File:</label> <input type="file" name="bib_file" required id="bib"></p>
+                </select></p>
+                <button type="submit" class="button">Upload</button>
+            </form>
+            </div>
+
+        </div>
+    </div>
         
         
         
     </p>
-    <div class="button-group">
+     
+    <!-- <div class="button-group">
 
         <a href="{% url 'home' %}" class="button">Back</a><a href="{% url 'logout' %}" class="button">Logout</a>
-    </div>
-</body>
+    </div> -->
 {% endblock %}
