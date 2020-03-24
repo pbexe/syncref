@@ -388,7 +388,8 @@ def delete_reference(request, reference):
     group = reference.group
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
         reference.delete()
-        return HttpResponse("OK")
+        messages.success(request, "Reference deleted")
+        return redirect("view_group", group.pk)
     else:
         raise PermissionDenied
 
@@ -438,7 +439,6 @@ def view_references(request, pk, reference):
             "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
 
         })
-        return HttpResponse(py2bib(reference.bibtex_dump))
     else:
         raise PermissionDenied
 
@@ -522,9 +522,14 @@ def search(request):
 
                 })
             else:
-                return HttpResponse("No results")
+                messages.warning(request, "No results found")
+                return render(request, "references/search_results.html", context={
+                    "results": [],
+                    "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+                    })
         else:
-            return HttpResponse("Please submit a query")
+            messages.warning(request, "Please submit a search query")
+            return redirect("home")
     else:
         raise PermissionDenied("Please use POST")
 
@@ -548,6 +553,7 @@ def upload_bib(request, group):
                     r.save()
                 return redirect(view_group, group)
             except Exception as e:
-                return HttpResponse(e)
+                messages.error(request, str(e))
+                return redirect("view_group", group)
     else:
         raise PermissionDenied
