@@ -1,1 +1,382 @@
-[BAD_INPUT_DATA] PDF to XML conversion failed with error code: 1
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /home/lopez/grobid/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Quantum circuit optimizations for NISQ architectures</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Beatrice</forename><surname>Nash</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Physics</orgName>
+								<orgName type="institution">Massachusetts Institute of Technology</orgName>
+								<address>
+									<settlement>Cambridge</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Institute for Quantum Computing</orgName>
+								<orgName type="institution">University of Waterloo</orgName>
+								<address>
+									<postCode>N2L 3G1</postCode>
+									<settlement>Waterloo</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Vlad</forename><surname>Gheorghiu</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Institute for Quantum Computing</orgName>
+								<orgName type="institution">University of Waterloo</orgName>
+								<address>
+									<postCode>N2L 3G1</postCode>
+									<settlement>Waterloo</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Combinatorics &amp; Optimization</orgName>
+								<orgName type="institution">University of Waterloo</orgName>
+								<address>
+									<postCode>N2L 3G1</postCode>
+									<settlement>Waterloo</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Michele</forename><surname>Mosca</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Institute for Quantum Computing</orgName>
+								<orgName type="institution">University of Waterloo</orgName>
+								<address>
+									<postCode>N2L 3G1</postCode>
+									<settlement>Waterloo</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Combinatorics &amp; Optimization</orgName>
+								<orgName type="institution">University of Waterloo</orgName>
+								<address>
+									<postCode>N2L 3G1</postCode>
+									<settlement>Waterloo</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="department">Perimeter Institute for Theoretical Physics</orgName>
+								<address>
+									<postCode>N2L 6B9</postCode>
+									<settlement>Waterloo</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff4">
+								<orgName type="institution">Canadian Institute for Advanced Research</orgName>
+								<address>
+									<postCode>M5G 1Z8</postCode>
+									<settlement>Toronto</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Quantum circuit optimizations for NISQ architectures</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<note type="submission">(Dated: Version of April 3, 2019)</note>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+
+		<encodingDesc>
+			<appInfo>
+				<application version="0.6.0-SNAPSHOT" ident="GROBID-SDO" when="2020-03-23T23:35+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid-sdo"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Currently available quantum computing hardware platforms have limited 2-qubit connectivity among their addressable qubits. In order to run a generic quantum algorithm on such a platform, one has to transform the initial logical quantum circuit describing the algorithm into an equivalent one that obeys the connectivity restrictions.</p><p>In this work we construct a circuit synthesis scheme that takes as input the qubit connectivity graph and a quantum circuit over the gate set generated by {CNOT, RZ } and outputs a circuit that respects the connectivity of the device. As a concrete application, we apply our techniques to Google's Bristlecone 72-qubit quantum chip connectivity. In addition, we also compare the performance of our scheme as a function of sparseness of randomly generated quantum circuits. * Electronic address: beanash@mit.edu † Electronic address: vlad.gheorghiu@uwaterloo.ca</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I. INTRODUCTION</head><p>Near-term quantum devices, such as Noisy Intermediate Scale Quantum Computers (NISQ) <ref type="bibr" target="#b0">[1]</ref>, are limited by sparse qubit connectivity, and many current compilers require that the input circuit take into account the allowed connectivity of the hardware. In this paper we introduce a circuit synthesis method that takes as input the connectivity of the hardware and the desired transformation that can be produced using gates from the set {CNOT, R Z }, where R Z denotes an arbitrary rotation about the Z axis of the Block sphere, and outputs a circuit that respects the connectivity of the device. Our results show a significant decrease in CNOT count compared to circuit synthesis methods currently in use and allows for efficient circuit synthesis given any arbitrary connectivity. The method we present is a heuristic: finding the exact optimal solution appears intractable <ref type="bibr" target="#b1">[2]</ref>.</p><p>The concept behind our approach is to take circuit synthesis methods that optimize the CNOT count of the output circuit that perform well under the assumption of full connectivity ( <ref type="bibr" target="#b2">[3]</ref> for CNOT circuits and <ref type="bibr" target="#b3">[4]</ref> for CNOT+R Z circuits) and modify them to take into account connectivity constraints. We compare the results to first synthesizing the circuit using the original methods and then accounting for the constraints and found that our approach of considering connectivity constraints and synthesizing the circuit simultaneously produced sizable reductions. These reductions depend on the sparseness of the connectivity and the complexity of the input transformation, as shown in our Results section.</p><p>Our method is effective and simple to implement, taking as input the desired transformation (the exact form of which is described in detail in the Methods section) and the graph representing the connectivity of the device and outputting a circuit that respects the allowed connectivity.</p><p>The reminder of this paper is organized as follows. In Sec. II we describe our methodology, followed by our results in Sec. III. In Sec. IV we conclude our manuscript and raise a series of open questions.</p><p>Note: Recently, the authors of <ref type="bibr" target="#b4">[5]</ref> independently presented a similar optimization scheme. Our work is independent of <ref type="bibr" target="#b4">[5]</ref>, being a longer version of the seminar presented by Beatrice Nash at the Dagstuhl Seminar 18381: Quantum Programming Languages, pg. 120, September 2018, Dagstuhl, Germany <ref type="bibr" target="#b5">[6]</ref>, slide deck available online at https://materials.dagstuhl.de/files/18/ 18381/18381.BeatriceNash.Slides.pdf.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>II. METHODS</head><p>In order to perform a CNOT operation between logical qubits mapped to non-adjacent qubits, a sequence of CNOT gates between adjacent qubits is required to indirectly perform the desired operation. If we have linear nearest-neighbor connectivity, then to perform a CNOT between q 1 and q 4 can be achieved using the example circuits shown in <ref type="figure">Fig. 1</ref>.</p><p>These general templates can be extended to work for any physical qubit connectivity graph. While performing a CNOT operation between any two qubits is possible, it is expensive. The circuit depicted in figure 1.b requires 4(l−1) CNOT gates to perform the operation, where l is the distance between the two qubits. The naïve swap circuit in <ref type="figure">Fig. 1</ref> (c) requires 1 + 6(l − 1) gates.</p><p>The best current circuit synthesis methods do not account for qubit connectivity when determining the output circuit. CNOT operations in the optimized output circuit must be replaced by templates such as those shown previously to account for the connectivity of the physical device. Given the sparsity of connectivity graphs of near-term quantum devices, this step increases the CNOT count drastically. </p><formula xml:id="formula_0">|q 1 i • • |q 1 i |q 2 i • • • • |q 2 i |q 3 i • • |q 3 i |q 4 i |q 4 q 1 i (b) |q 1 i ⇥ ⇥ |q 1 i |q 2 i ⇥ • ⇥ |q 2 i |q 3 i ⇥ ⇥ |q 3 i |q 4 i ⇥ ⇥ |q 4 q 1 i (c)</formula><p>FIG. 1: a) 4-qubit linear nearest neighbor physical qubit connectivity. b), c) Circuits for performing a CNOT operation with q 1 as the control and q 4 as the target using the connectivity shown in a).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. Linear reversible circuit synthesis</head><p>The first class of circuits we look at synthesizing are linear reversible circuits consisting of only CNOT gates. In the Clifford + T universal gate set, the only two-qubit gate needed to achieve universal quantum computation is the CNOT gate, and therefore the efficient synthesis of CNOT circuits is useful for optimizing broader classes of circuits given restricted connectivity. Additionally, CNOT gates are far noisier than single qubit gates, and thus minimizing the number of CNOT gates in a circuit is helpful for reducing errors.</p><p>Patel, Markov and Hayes give in <ref type="bibr" target="#b2">[3]</ref> an asymptotically optimal algorithm for synthesizing linear reversible circuits assuming full connectivity. The result is a O( n 2 log n ) size circuit in the worst case, where n is the number of qubits. In <ref type="bibr" target="#b6">[7]</ref> it is proven that, for n qubits, there exists a linear transformation for which the optimal circuit producing that transformation (again, assuming full connectivity) is size Ω( n 2 log 2 n ); hence, the method in <ref type="bibr" target="#b2">[3]</ref> is optimal in the worst case to within a multiplicative constant. However, each single CNOT gate in the output circuit using method <ref type="bibr" target="#b2">[3]</ref> becomes O(n) gates using the template in <ref type="figure">Fig 1.</ref> b to account for connectivity constraints. Thus, the resulting circuit increases to size O( n 3 log n ) in the worst-case under connectivity constraints. The algorithm we propose in this section improves on this performance, achieving an O(n 2 ) worst-case bound on the size of the resulting circuit, regardless of connectivity.</p><p>The algorithm in <ref type="bibr" target="#b2">[3]</ref>, which is the foundation for that pro-posed here, takes as input an arbitrary linear transformation represented by a n × n binary matrix, and outputs a circuit that produces the desired transformation. The initial state of the n qubits is represented by the n × n identity matrix and each CNOT applied produces a row operation. Specifically, a CNOT with target i and control j multiplies the matrix representation of the circuit by the elementary matrix A i,j , which is the matrix with all elements on the diagonal and (i, j) equal to 1 and all others equal to 0. This results in the bitwise addition of row i to row j. Hence, each row corresponds to the parity of the associated qubit. An example is given in <ref type="figure">Fig. 2</ref>.</p><p>The idea behind the process is to reverse engineer a circuit from the matrix representation of the transformation. The algorithm from <ref type="bibr" target="#b2">[3]</ref> is an optimized version of the Gaussian elimination approach to synthesizing the circuit. The steps are as follows:</p><p>1. Reduce the matrix to upper-triangular form. Each row operation corresponds to a CNOT in the output circuit.</p><p>2. Transpose the resulting matrix and repeat, resulting in the identity matrix.</p><p>3. Construct the output circuit from the operations performed in the following order: first, the operations done in 2) with their control/targets flipped and in the same order in which they were performed, and second, the operations done 1), with their control/targets preserved but the order in which they were performed flipped.</p><p>The O( n 2 log n ) upper bound on the number of operations required for this process, as opposed to the O(n 2 ) operations required for row reduction via Gaussian elimination, is achieved by partitioning. The matrix is divided into n log 2 n sections of size log 2 n × n. Starting with the first section-after placing a 1 on the diagonal, if necessary-eliminate duplicate sub-rows within that section before performing row reduction normally. Then move on to the next section and do the same for the rows below the first log 2 n. Continue in this way until the matrix is in upper triangular form, then transpose and repeat.</p><p>The algorithm we propose does not make use of the partitioning (although it can be easily altered to do so), because it takes advantage of grouping multiple row operations to perform together. We found that while partitioning works well when physical qubits are fully or very nearly fully connected ( 85%), for connectivity as sparse as that of near-term devices our algorithm works best without the use of partitioning. Therefore, we do not go into more details of the process; for more information, see <ref type="bibr" target="#b2">[3]</ref>. Now, we give the intuition for the motivation for our method, using an example of a linear transformation on 6 qubits and their connectivity given in <ref type="figure" target="#fig_0">Fig. 3</ref> (see Appendix A for the fully worked-out example). To eliminate the ones in the first column below the first row, the method in <ref type="bibr" target="#b2">[3]</ref> uses row 1 as the control for each of the operations. Thus, using this example, the sequence of operations for the first columnrepresented as (control, target)-is (1, 3), (1, 4), <ref type="bibr" target="#b0">(1,</ref><ref type="bibr" target="#b4">5)</ref>. Under the assumption of full connectivity, this makes no difference.</p><formula xml:id="formula_1">    1 0 0 1 0 1 0 0 0 0 1 0 0 0 0 1     ×     1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 1     ×     1 0 0 0 1 1 0 0 0 0 1 0 0 0 0 1     =     1 0 1 1 1 1 0 0 0 0 1 0 0 0 1 1     (a) (b) FIG. 2: a) Matrix operations corresponding to CNOTs in circuit in b).        1 1 0 1 1 0 0 0 1 1 0 1 1 0 1 0 1 0 1 1 0 1 0 0 1 1 1 1 0 0 0 1 0 1 0 1        (a) q1</formula><p>q2 q3 q6 q5 q4 However, with restricted connectivity, each operation requires 4(l − 1) CNOT gates when using the template in <ref type="figure">Fig 1.</ref>b, where l &gt; 1 is the length of the shortest path between the two physical qubits. Thus, this sequence of operations requires 4 + 8 + 4 = 16 CNOT gates. However, if we are to instead perform the row operations (4, 5), <ref type="bibr" target="#b2">(3,</ref><ref type="bibr" target="#b3">4)</ref>, <ref type="bibr" target="#b0">(1,</ref><ref type="bibr" target="#b2">3)</ref>, the ones below entry (1, 1) are still eliminated, and instead of 16 CNOT gates, only 1 + 1 + 4 = 6 are required. Give a connectivity graph and a set of rows, our goal is to find the shortest set of paths through the graph that effectively hits each of the nodes associated with those rows. Then, we want to convert that path into a sequence of operations that effectively eliminates each of the rows, while leaving the rest unchanged.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Steiner tree problem reduction</head><p>This problem reduces to the Steiner tree problem on the connectivity graph G with edge weights of 1 and the set S equal to the nodes associated with the control and the set of rows to be eliminated. The Steiner tree problem is that of finding the minimum weight tree, T , that is a subgraph of G and includes, but is not limited to including, all nodes in S. Nodes in S are called terminals, and nodes in T but not in S are known as Steiner nodes. An example is shown in <ref type="figure" target="#fig_1">Fig. 4</ref>. The reason for this reduction, perhaps not instantly clear, will become so once shown how to transform a tree into a sequence of row operations. We want to translate this tree, T {c,S} , where c is the control, into a sequence of operations that effectively eliminates each row in S \ {c} using only operations between adjacent nodes. S \ {c} is the set of rows in the linear transformation matrix with ones in their cth entry. We now describe in detail the process of converting a tree to a sequence of row operations. Note that the process differs between whether the row operations are performed before or after the transpose step.</p><p>In order to convert the tree into a sequence of row operations, we first separate it into a set of edge disjoint subtrees {T {ci,Si} } with root c i S and leaves S i \ {c i } ⊂ S. The remaining nodes in each sub-tree are Steiner nodes. The first sub-tree, T {c1,S1} , is rooted at c. Starting from c, grow the sub-tree by traversing T {c,S} in breadth first search order. When arriving at a non-leaf terminal u, add u to T {c1,S1} as a leaf and create a new sub-tree containing a copy of u as a root. Once the sub-tree rooted at c is complete, build the subtrees rooted at its leaves. Continue until all the edges in T {c,S} have been added to a sub-tree. The root of each sub-tree will be used as the control to eliminate each of its leaves.</p><p>Compute the sequence of row operations as follows. Starting with the last sub-tree constructed, traverse the tree in reverse depth first search order. When traversing an edge (u, v), where u is closer to the root than v, add a row operation to the sequence with u as the control and v the target. Once the top of the tree is reached, we have a sequence of operations R. Let</p><formula xml:id="formula_2">R = reverse(R − R[j]), where R[j]</formula><p>is the last operation in R. Now, create R * by removing from R + R those operations with terminals as the targets. R + R applies the row eliminations, while R * undoes those performed on the Steiner nodes, leaving them unchanged. R + R + R * gives the completed sequence of operations for that sub-tree. Add R + R + R * to the overall sequence of operations and move on to the prior sub-tree until all have been traversed. We give an example in <ref type="figure" target="#fig_2">Fig. 5</ref> for the resulting sequence of operations for the tree in <ref type="figure" target="#fig_1">Fig. 4</ref> (assuming before the transpose step), using node 1 as the overall control. Each CNOT in the circuit shown corresponds to a row operation with the same control and target; they are shown this way to help visualize the result. In the resulting circuit, just as in the original algorithm, if these eliminations are performed before the matrix is transposed, their order will be flipped in the resulting circuit. If they occur after, their control/targets will be flipped, but their order will be preserved.</p><p>Each edge will be traversed exactly once in this process. Thus, the total number of gates required will be approximately 4 * (l − d), where d is the number of terminals (excluding the control) and l is the number of edges in the tree. It is clear that for minimum l, this is the optimal solution; hence the reduction to the Steiner tree problem.</p><p>The minimal Steiner tree problem, however, is NP-hard. There are approximation algorithms that come close to optimal the best being within a factor of 1.39, given in <ref type="bibr" target="#b7">[8]</ref>, which improved on the previous bound of 1.55, given in <ref type="bibr" target="#b8">[9]</ref>. However, their run-time is insufficient for our algorithm, which requires many iterations, two for each row. The algorithm we use, given in <ref type="bibr" target="#b9">[10]</ref>, is somewhat of a combination between the better-performing and more efficient approximation algorithms.</p><p>Given a set of terminals and a connectivity graph, the algorithm performs breadth-first search outwards from each of the terminals. When the paths collide, the nodes along that path consolidate into a single node and all the edges adjacent to the consolidated nodes are placed adjacent to this new node. The process is restarted with this node as a new terminal. The total time will therefore be O(d * (|V | + |E|)), where d is the number of terminals. The resulting Steiner tree is within a factor of 2(1 − 1 l ) times the size of the optimal tree, where l is the number of leaves in the optimal tree. From many trials, it seems that this approximation is sufficient to see a large reduction in the CNOT count of the output circuit. The choice of Steiner tree approximation algorithm for this purpose depends on the user's efficiency and performance requirements; a survey is given in <ref type="bibr" target="#b10">[11]</ref>.</p><p>The algorithm thus far works as follows:</p><p>1. Start with column i = 1.</p><p>2. If entry (i, i) = 0, find all rows j such that (j, i) = 1 and j &gt; i. Choose j with the shortest path in the connectivity graph to i, and use this path to perform a series of allowed row operations that adds row j to row i.</p><p>3. Find rows below row i with entry in column i equal to 1. Create set of terminals S from nodes associated with those rows in addition to node i.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">Find Steiner graph approximation with connectivity</head><p>graph G and terminals S.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.</head><p>Compute row operations using this graph that eliminate those rows with constraints on allowed row operations. Perform those operations and compute resulting matrix.</p><p>6. Repeat steps 2-5 on the next columns, until the matrix is in upper-triangular form.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.">Transpose the matrix and repeat.</head><p>After the matrix is transposed, we must alter step 5 in the process slightly. Now, say that a row operation is effectively performed between (i, j), with i as the control, and j as the target. If i &gt; j, then the lower-triangular form of the matrix is ruined. Thus, we have to alter the algorithm so as to only allow effective row operations with a lower index row as the control and a higher index as the target.</p><p>To do this, perform the Steiner tree algorithm as before, except use the smallest node as the control for all of the operations. <ref type="figure">Fig. 6</ref> shows how to eliminate two rows on the same path, which is never necessary before the transpose step. From <ref type="figure">Fig. 6</ref> it is clear that the maximum number of additional gates required to ensure this requirement is 4 * d.</p><p>Let the output sequence of operations before the transpose step be a list A and after the transpose step be a list B. When adding each operation to the output sequence B, flip the control and target. The output circuit will be: B + reverse(A).</p><p>The Steiner tree approximations will always be size O(n). Since the number of operations is O(4 * (size of tree)), then the operations required will be O(n). Since there are O(n) trees computed in total throughout the execution of the algorithm (O(1) per column), then the overall number of operations is O(n 2 ), regardless of connectivity.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. CNOT + phase circuit synthesis</head><p>The other class of circuits we look at synthesizing given connectivity constraints are those consisting of CNOT gates and Z-basis rotations of arbitrary angles. Amy, Azimzadeh, and Mosca give in <ref type="bibr" target="#b3">[4]</ref> a heuristic algorithm for the efficient synthesis of CNOT count optimized circuits in this class assuming full connectivity. The results in <ref type="bibr" target="#b3">[4]</ref> show a 23% decrease in the CNOT count on average for a suite of Clifford+T benchmark circuits.</p><p>The {CN OT, R z } circuit to be synthesized is described by its phase polynomial f and matrix A representing the overall linear transformation on the basis <ref type="figure">states. (f, A)</ref>, known as the sum-over-paths form, fully defines the desired unitary transformation applied by the output circuit, U C . For a size n-qubit circuit:</p><formula xml:id="formula_3">U C = x F n 2 e 2πif (x) |Ax x| ,</formula><p>where F n 2 is the set of all length n bit strings, and f (x) is given by:</p><formula xml:id="formula_4">f (x) = y F n 2f (y)(x 1 y 1 ⊕ x 2 y 2 ⊕ ... ⊕ x n y n ).</formula><p>f (x) is the Fourier expansion of f with Fourier coefficientŝ f (y). Let the support off , supp(f ), be the parities with nonzero Fourier coeffiecient. Since the application of a CNOT gate with control x 1 and target x 2 maps |x 1 , x 2 to |x 1 , x 1 ⊕ x 2 , the state of each qubit can be mapped to a bit string representing a parity. Each R Z gate is determined by the parity of the state of the qubit on which it is applied at that point in the circuit. The coefficients for each parity y F n 2 , f (y), are given by the sum of the Z rotation angles on that parity. Hence R Z gates acting on the same parity can be combined. For example, the phase polynomial f and basis state transformation A associated with the circuit shown in <ref type="figure">Fig. 7</ref> is: The method in <ref type="bibr" target="#b3">[4]</ref> first synthesizes a circuit with the input phase polynomial f , then uses the method in <ref type="bibr" target="#b2">[3]</ref> to produce the basis state transformation given by input matrix A. To do the former, the goal is to compute a minimal parity network. A parity network is a circuit in which every parity in a set S appears. In our case, S = supp(f ). By applying R Z (θ), with θ =f (y), to each parity y S, the resulting circuit will have the desired phase polynomial. To apply the linear transformation to the basis states given by A, first compute the linear transformation C resulting from the parity network. Using the method described previously, compute the circuit the linear transformation AC −1 and append it to the end of the existing circuit.</p><formula xml:id="formula_5">f =a(x 1 ) + (b + c)(x 2 ) + d(x 1 ⊕ x 2 ⊕ x 3 ) + e(x 3 ⊕ x 4 ) + f (x 1 ⊕ x 2 ⊕ x 4 )</formula><p>To find the exact minimal parity network, however, is NPhard; a a heuristic for synthesizing an approximation is given in <ref type="bibr" target="#b3">[4]</ref>. The algorithm works as follows:</p><p>1. Represent the set of parities as a matrix P , where each column corresponds to a parity and each row to a qubit. For example, P associated with the circuit given in <ref type="figure">Fig. 7</ref> is</p><formula xml:id="formula_6">   1 0 1 1 0 0 1 1 1 0 0 0 1 0 1 0 0 0 1 1   </formula><p>where the first column corresponds to parity x 1 , the second to parity x 2 , the third to parity x 1 ⊕ x 2 ⊕ x 3 , the fourth to parity x 1 ⊕ x 2 ⊕ x 4 , and the last to parity</p><formula xml:id="formula_7">x 3 ⊕ x 4 .</formula><p>2. Find the row j (of those not yet recursed on) such that:</p><formula xml:id="formula_8">j = arg max i cols(P ) max x {0,1} {|P j,i = x|}.</formula><p>3. Separate P into P 0 , the columns i with P j,i = 0, and P 1 , those with P j,i = 1.</p><p>4. Recurse on P 0 .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.</head><p>For P 1 , find row i = j such that all elements in row i of P 1 equal 1. Add a CNOT with control i and target j to our parity network. Set P i = P i + P j . Repeat until no more such rows are found.</p><p>6. Recurse on P 1 .</p><p>A detailed example of this process can be found in <ref type="bibr" target="#b3">[4]</ref>. Our method performs the same series of steps, except step 5 is modified as follows:</p><p>5. Compute the approximate Steiner tree of the connectivity graph G with S equal to the set of rows {i} such that each element in row i of P 1 equals 1. Using row j as the control, eliminate them all together in the same manner described in the previous section.</p><p>In this case, whether the control bit has greater index than the target is not relevant. Each parity in supp(f ) will appear at least once in this circuit. For each y supp(f ), apply gate R Z (f (y)) to the qubit with incoming parity y. Lastly, append the circuit producing linear transformation AC −1 , taking into account connectivity constraints, using the algorithm described previously.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>III. RESULTS</head><p>In this section we compare the size of the output circuits generated using the algorithm described in the previous sections to those generated by first synthesizing the circuit using the method in <ref type="bibr" target="#b2">[3]</ref> (for linear reversible circuits) or <ref type="bibr" target="#b3">[4]</ref> (for CNOT + T circuits) without taking into account connectivity constraints, then, once the circuit has been synthesized, using the template given in <ref type="figure">Fig. 1 (b)</ref> to take into account the connectivity. In both cases, after the circuit has been synthesized, we further optimize the size of the resulting circuit by commuting operators and canceling where possible.</p><p>We investigate random circuits on 20 qubits with varying connectivity (results depicted in <ref type="figure">Fig. 8 and Fig. 10</ref>) and the Google Bristlecone 72 qubit architecture (results depicted in <ref type="figure" target="#fig_4">Fig. 9 and Fig. 11</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>IV. CONCLUSIONS AND OPEN QUESTIONS</head><p>We constructed a circuit synthesis scheme that takes as input the qubit connectivity graph and a quantum circuit over the gate set generated by {CNOT, R Z } and outputs a circuit that respects the connectivity of the device. We applied our techniques to Google's Bristlecone 72-qubit quantum chip connectivity. We compared the performance of our scheme as a function of sparseness of random quantum circuits of 20 qubits.</p><p>Since in practice different CNOT gates can be affected by different amount of noise, an idea for further work would be to weight the edges based on the error rate of the CNOT gate between the respective qubits. Techniques adapted from <ref type="bibr" target="#b3">[4]</ref> could potentially be integrated into the methods given in this paper to produce circuits with lower error rates.</p><p>One further direction is to improve on efficiency and quality of the results produced by our scheme.</p><p>Another research direction is to investigate whether our techniques can be extended to include broader classes of quantum circuits.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FIG. 8:</head><p>Results for the synthesis of CNOT circuits producing a randomly generated linear transformation on 20 qubits for connectivity of varying sparseness. We repeatedly generate random connected graphs of sparseness between 0.0 and 1.0, where sparseness is defined as the probability that an edge is placed between two qubits. Sparseness of 1.0 is a fully connected graph. The size of the output circuit is compared against the size of the circuit produced by first using the method in <ref type="bibr" target="#b2">[3]</ref> (with partitioning) to synthesize a circuit assuming full connectivity and then taking into account connectivity constraints. The reason that our method performs worse than the method in <ref type="bibr" target="#b2">[3]</ref> for nearly complete connectivity is due to partitioning, which our method does not use, but which achieves an improvement when the qubits are nearly fully connected. Since qubits in NISQ devices only have nearest-neighbor connectivity, their connectivity is very sparse.  <ref type="figure">FIG. 10</ref>: Results for the synthesis of CNOT+R Z circuits producing a randomly generated linear transformation and Z-axis rotation on 20 qubits for connectivity of varying sparseness. The size of the output circuit is compared against the size of the circuit produced by first using the method in <ref type="bibr" target="#b3">[4]</ref> to synthesize a circuit assuming full connectivity and then taking into account connectivity constraints.</p><p>FIG. 11: Results for the synthesis of CNOT+R Z circuits producing randomly generated transformations for Google's Bristlecone topology. The size of the output circuit is compared against the size of the circuit produced by first using the method in <ref type="bibr" target="#b3">[4]</ref> to synthesize a circuit assuming full connectivity and then taking into account connectivity constraints.  <ref type="figure" target="#fig_0">Fig. 3</ref> (a) on connectivity given in <ref type="figure" target="#fig_0">Fig. 3 (b)</ref>. Fully synthesized circuit can be produced by putting together the gates from steps 8-11 and switching the controls and targets, then putting together the gates from steps 1-7 and reversing them, leaving the controls and targets as shown.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>FIG. 3</head><label>3</label><figDesc>: a) Matrix representation of linear transformation; b) Connectivity of physical qubits.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>FIG. 4 :</head><label>4</label><figDesc>A solution to the Steiner tree problem on this graph, with each edge having weight 1. The non-shaded nodes are the terminals. The bold edges are those included in the solution. Nodes 4, 5, and 8 are Steiner nodes.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>FIG. 5 :</head><label>5</label><figDesc>Resulting sequence of operations from the tree inFig 4.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>FIG. 6 : 6 FIG. 7 :</head><label>667</label><figDesc>Circuit that produces CNOT operations between both q 1 , q 3 and q 1 , q CNOT + phase circuit example</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>FIG. 9 :</head><label>9</label><figDesc>Results for the synthesis of CNOT circuits producing randomly generated linear transformations of various size onGoogle's 72-qubit Bristlecone. The performance is calculated as described in the caption ofFig. 8.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>FIG. 12 :</head><label>12</label><figDesc>Worked through example of circuit synthesis producing the linear transformation given</figDesc></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We thank Matt Amy for very useful comments and discussions. We acknowledge support from NSERC and CIFAR. IQC is supported in part by the Government of Canada and the Province of Ontario.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Appendix A: Example</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+				<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">John</forename><surname>Preskill</surname></persName>
+		</author>
+		<title level="m">Quantum Computing in the NISQ era and beyond. Quantum</title>
+		<imprint>
+			<date type="published" when="2018-08" />
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page">79</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Optimization of lattice surgery is np-hard</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Herr</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">N</forename><surname>Franco</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Devitt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">npj Quantum Information</title>
+		<imprint>
+			<date type="published" when="2017" />
+			<biblScope unit="volume">3</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Optimal synthesis of linear reversible circuits. Quantum Information and Computation</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">I</forename><surname>Markov</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Hayes</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2008" />
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="282" to="294" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Polynomial-time t-depth optimization of Clifford+T circuits via matroid partitioning. Computer-Aided Design of Integrated Circuits and Systems</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Amy</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Maslov</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Mosca</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="1476" to="1489" />
+			<date type="published" when="2014-10" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">Cnot circuit extraction for topologically-constrained quantum memories</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Aleks</forename><surname>Kissinger</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Arianne</forename><surname>Meijer Van De Griend</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1904.00633</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">NISQ optimization for CNOT and CNOT + T circuits</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Beatrice</forename><surname>Nash</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Report from Dagstuhl Seminar 18381: Quantum Programming Languages</title>
+		<editor>Michele Mosca, Martin Roettler, and Peter Selinger</editor>
+		<imprint>
+			<date type="published" when="2018" />
+			<biblScope unit="volume">120</biblScope>
+		</imprint>
+	</monogr>
+	<note>Dagstuhl Reports</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Synthesis of reversible logic circuits</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">V</forename><surname>Shende</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Prasad</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">I</forename><surname>Markov</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Hayes</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Trans. on CAD</title>
+		<imprint>
+			<biblScope unit="page" from="710" to="722" />
+			<date type="published" when="2003-06" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">An improved lp-based approximation for steiner tree</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Byrka</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Grandoni</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Rothvoß</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Sanita</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of STOC</title>
+		<meeting>of STOC</meeting>
+		<imprint>
+			<date type="published" when="2010" />
+			<biblScope unit="page" from="583" to="592" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Improved steiner tree approximation in graphs</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><surname>Robins</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Zelikovsky</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">7th Annual ACM-SIAM Symposium on Discrete Algorithms</title>
+		<imprint>
+			<date type="published" when="2000" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">A multiple source algorithm for suboptimum steiner trees in graphs</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. International Workshop on Graphtheoretic Concepts in Computer Science</title>
+		<meeting>International Workshop on Graphtheoretic Concepts in Computer Science</meeting>
+		<imprint>
+			<date type="published" when="1985" />
+			<biblScope unit="page" from="387" to="396" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+				<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Hwang</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Richards</surname></persName>
+		</author>
+		<title level="m">Steiner tree problems. Networks</title>
+		<imprint>
+			<date type="published" when="1992" />
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="55" to="89" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>
+

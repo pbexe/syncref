@@ -77,22 +77,27 @@
             </div>
             <input type="submit" value="Update" class="button">
         </form>
-        <hr>
-        <h5>Upload associated PDF</h5>
-        <form method="post" enctype="multipart/form-data" action="{% url 'upload_to_reference' reference.group.pk reference.pk %}">
+        <div class="grid-x grid-margin-x" data-equalizer data-equalize-on="medium" id="options">
+        <div class="small-12 cell" >
+            <div class="callout" data-equalizer-watch>
+                Upload Reference:
+                <form method="post" enctype="multipart/form-data" action="{% url 'upload_to_reference' reference.group.pk reference.pk %}">
             {% csrf_token %}
             <p><label for="id_pdf">Pdf:</label> <input type="file" name="pdf" required id="id_pdf"></p>
         </select></p>
         <button type="submit" class="button">Upload</button>
-    </form>
-    <hr>
-    <a href="{% url 'delete_reference' reference.pk %}" class="button alert">DELETE REFERENCE</a>
+        </form>
+            </div>
+
+        </div>
+    </div>
+                     <a href="{% url 'delete_reference' reference.pk %}" class="button alert">DELETE REFERENCE</a>
+
+
     
 </div>
 </div>
 <!-- <br><a href="{% url 'view_group' reference.group.pk%}">Back</a> -->
-
-<br><a href="{% url 'logout' %}">Logout</a>
 {% endblock %}
 
 {% block scripts %}
