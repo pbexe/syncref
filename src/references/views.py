@@ -222,7 +222,7 @@ def edit_references(request, pk, reference):
                   entry of a reference
     """
     group = get_object_or_404(Group, pk=pk)
-    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+    if GroupMembership.objects.filter(group=group, user=request.user).exists() and get_object_or_404(Reference, pk=reference).group == group:
         if request.method == 'POST':
             pairs = {}
             for key in request.POST:
@@ -303,7 +303,7 @@ def uploadReference(request, pk):
 @login_required
 def uploadPDFToReference(request, pk, reference):
     group = get_object_or_404(Group, pk=pk)
-    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+    if GroupMembership.objects.filter(group=group, user=request.user).exists() and get_object_or_404(Reference, pk=reference).group == group:
         if request.method == 'POST':
             form = ReferenceUpload(request.POST, request.FILES)
             if form.is_valid():
@@ -417,7 +417,7 @@ def add_template(request, pk, template):
 @login_required
 def view_references(request, pk, reference):
     group = get_object_or_404(Group, pk=pk)
-    if GroupMembership.objects.filter(group=group, user=request.user).exists():
+    if GroupMembership.objects.filter(group=group, user=request.user).exists() and get_object_or_404(Reference, pk=reference).group == group:
         reference = Reference.objects.get(pk=reference)
         key_pairs = reference.bibtex_dump[0].copy()
         new_key_pairs = {}
