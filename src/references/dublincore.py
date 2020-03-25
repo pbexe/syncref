@@ -2,8 +2,11 @@ import re
 import sys
 
 import requests
+from bibtexparser.bibdatabase import BibDatabase
 from bs4 import BeautifulSoup
 from habanero import cn
+
+# from .parser import bib2py
 
 
 def url2doi(url):
@@ -40,6 +43,44 @@ def url2doi(url):
         return matches[0]
     else:
         return None
+
+
+def parse_meta(url):
+    bibtex = {}
+    extracted = False
+    print("Loading website")
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    r = requests.get(url, timeout=10, headers=headers)
+    soup = BeautifulSoup(r.text, "html.parser")
+    meta_tags = soup.find_all("meta")
+    for tag in meta_tags:
+        name = tag.get("name")
+        if name and ("title" in name):
+            bibtex["title"] = tag.get("content")
+            extracted = True
+        elif name and ("date" in name):
+            bibtex["year"] = tag.get("content")[:4]
+            extracted = True
+        elif name and ("url" in name):
+            bibtex["url"] = tag.get("content")
+            extracted = True
+        elif name and ("arxiv_id" in name):
+            bibtex["Eprint"] = "arXiv:" + tag.get("content")
+            extracted = True
+        elif name and ("author" in name):
+            if "author" in bibtex:
+                bibtex["author"] += " and " + tag.get("content")
+            else:
+                bibtex["author"] = tag.get("content")
+            extracted = True
+    if "title" in bibtex and "year" in bibtex:
+        bibtex["ID"] = bibtex["author"].split().pop() + bibtex["year"]
+    else:
+        bibtex["ID"] = "UNKNOWN"
+    bibtex["ENTRYTYPE"] = "misc"
+    if extracted:
+        return [bibtex]
+    return None
     
     
 if __name__ == "__main__":

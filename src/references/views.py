@@ -17,7 +17,7 @@ from django.views.decorators.cache import never_cache
 from habanero import cn
 
 from .bibparser import bib2py, py2bib
-from .dublincore import url2doi
+from .dublincore import parse_meta, url2doi
 from .forms import ReferenceUpload
 from .grobextract import ExtractionError, content_negotiation, extract
 from .models import (Group, GroupMembership, Reference, ReferenceField,
@@ -332,10 +332,13 @@ def submit_url(request, pk):
             try:
                 doi = url2doi(url)
                 if not doi:
-                    messages.error(request, "No DOI was found on the page")
-                    return redirect("add", pk=pk)
-                bibtex = cn.content_negotiation(ids=doi, format="bibentry")
-                entry = bib2py(bibtex)
+                    entry = parse_meta(url)
+                    if not entry:
+                        messages.error(request, "No DOI was found on the page")
+                        return redirect("add", pk=pk)
+                else:
+                    bibtex = cn.content_negotiation(ids=doi, format="bibentry")
+                    entry = bib2py(bibtex)
                 reference = Reference(name=entry[0]["title"], bibtex_dump=entry, group=group)
                 reference.save()
                 messages.success(request, "URL successfully parsed")
