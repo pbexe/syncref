@@ -1,6 +1,3 @@
-import json
-import re
-
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate
@@ -37,7 +34,8 @@ def index(request):
         render: Renders the specified template
     """
     if request.user.is_authenticated:
-        groups = [i.group for i in GroupMembership.objects.filter(user=request.user)]
+        groups = [i.group for i in GroupMembership.objects.filter(
+            user=request.user)]
         references = []
         for group in groups:
             references += Reference.objects.filter(group=group)
@@ -68,7 +66,8 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             if settings.REQUIRE_ADMIN_AUTH:
                 user.is_active = False
-                messages.info(request, "You account has been registered. An admin is required to authorise it")
+                messages.info(request, "You account has been registered. "
+                                       "An admin is required to authorise it")
             user.save()
             return redirect("home")
     else:
@@ -255,6 +254,19 @@ def edit_references(request, pk, reference):
 
 @login_required
 def uploadReference(request, pk):
+    """Upload a PDF to be parsed for the metadata
+    
+    Args:
+        request (request): A handle ot the request
+        pk (int): The pk of the group to upload to
+    
+    Raises:
+        PermissionDenied: The user is not a member of the group they are
+        uploading to
+    
+    Returns:
+        redirect: A redirect to the uploaded and parsed PDF
+    """
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
         if request.method == 'POST':
@@ -302,21 +314,40 @@ def uploadReference(request, pk):
 
 @login_required
 def uploadPDFToReference(request, pk, reference):
+    """Attach a PDF to an existing reference
+    
+    Args:
+        request (request): A handle to the request
+        pk (int): The pk of the group
+        reference (int): The pk of the reference
+    
+    Raises:
+        PermissionDenied: The user is not a member of the group they are
+        uploading to
+    
+    Returns:
+        redirect: Redirects the user to the reference
+    """
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists() and get_object_or_404(Reference, pk=reference).group == group:
         if request.method == 'POST':
             form = ReferenceUpload(request.POST, request.FILES)
             if form.is_valid():
-                reference_file = ReferenceFile(pdf=request.FILES['pdf'],
-                                               reference=get_object_or_404(Reference,
-                                                                           pk=reference))
+                reference_file = ReferenceFile(
+                    pdf=request.FILES['pdf'],
+                    reference=get_object_or_404(Reference, pk=reference)
+                    )
                 reference_file.save()
-                return redirect("view_reference", pk=group.pk, reference=reference)
+                return redirect("view_reference",
+                                pk=group.pk,
+                                reference=reference)
         else:
             form = ReferenceUpload()
         return render(request, 'references/upload.html', {
             'form': form,
-            "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+            "groups": [i.group for i in GroupMembership.objects.filter(
+                user=request.user
+                )]
 
         })
     else:
@@ -325,6 +356,19 @@ def uploadPDFToReference(request, pk, reference):
 
 @login_required
 def submit_url(request, pk):
+    """Add a reference by URL
+    
+    Args:
+        request (request): A handle to the request
+        pk (int): The pk of the group
+    
+    Raises:
+        PermissionDenied: The user is not a member of the group they are
+        submitting to
+    
+    Returns:
+        redirect: The extracted reference
+    """
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
         if request.method == 'POST':
@@ -334,22 +378,29 @@ def submit_url(request, pk):
                 if not doi:
                     entry = parse_meta(url)
                     if not entry:
-                        messages.error(request, "No DOI was found on the page")
+                        messages.error(request, "No references were located on"
+                                                " the page")
                         return redirect("add", pk=pk)
                 else:
                     bibtex = cn.content_negotiation(ids=doi, format="bibentry")
                     entry = bib2py(bibtex)
-                reference = Reference(name=entry[0]["title"], bibtex_dump=entry, group=group)
+                reference = Reference(name=entry[0]["title"],
+                                      bibtex_dump=entry,
+                                      group=group)
                 reference.save()
                 messages.success(request, "URL successfully parsed")
-                return redirect("view_reference", pk=group.pk, reference=reference.pk)
+                return redirect("view_reference",
+                                pk=group.pk,
+                                reference=reference.pk)
             except Exception as e:
-                messages.error(request, 'There was an error adding the link: ' + str(e))
+                messages.error(request,
+                               'There was an error adding the link: ' + str(e))
                 return redirect("add", pk=pk)
         else:
             return render(request, "references/url.html", {
                 "pk": pk,
-                "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+                "groups": [i.group for i in GroupMembership.objects.filter(
+                    user=request.user)]
 
             })
     else:
@@ -358,8 +409,19 @@ def submit_url(request, pk):
 
 @login_required
 def add_user_to_group(request, pk):
-    # TODO It is never checked if the reference is in the group. This happens
-    # for every authentication in this style.
+    """Adds a user to a group
+    
+    Args:
+        request (request): The handle to the request
+        pk (int): The pk of the group
+    
+    Raises:
+        PermissionDenied: The user is not a member of the group
+        PermissionDenied: The wrong method is used
+    
+    Returns:
+        redirect: The group the user has been added to
+    """
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
         if request.method == 'POST':
@@ -385,13 +447,23 @@ def add_user_to_group(request, pk):
 
 @login_required
 def delete_reference(request, reference):
-    # TODO This is a better way of checking the reference is allower=d to be
-    # modified
+    """Deletes a reference
+    
+    Args:
+        request (request): A handle to the request
+        reference (int): The pk of the reference to delete
+    
+    Raises:
+        PermissionDenied: The user is not in the group
+    
+    Returns:
+        redirect: The group the reference was in
+    """
     reference = get_object_or_404(Reference, pk=reference)
     group = reference.group
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
         reference.delete()
-        messages.success(request, "Reference deleted")
+        messages.warning(request, "Reference deleted")
         return redirect("view_group", group.pk)
     else:
         raise PermissionDenied
@@ -399,6 +471,9 @@ def delete_reference(request, reference):
 
 @login_required
 def add_template(request, pk, template):
+    """I don't think this is used and I don't remember writing this but it
+    stays
+    """
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
         template = get_object_or_404(ReferenceType, pk=template)
@@ -419,6 +494,19 @@ def add_template(request, pk, template):
 @never_cache
 @login_required
 def view_references(request, pk, reference):
+    """View a reference 
+    
+    Args:
+        request (request): A handle to the request
+        pk (int): The pk of the group
+        reference (int): The pk of the reference
+    
+    Raises:
+        PermissionDenied: The user is not a member of the group
+    
+    Returns:
+        render: The view reference page
+    """
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists() and get_object_or_404(Reference, pk=reference).group == group:
         reference = Reference.objects.get(pk=reference)
@@ -470,6 +558,18 @@ def combine(references):
 @never_cache
 @login_required
 def export(request, pk):
+    """Downloads the bib file for a group
+    
+    Args:
+        request (request): A handle to the request
+        pk (int): The pk of the group
+    
+    Raises:
+        PermissionDenied: The user is not a member of the group
+    
+    Returns:
+        HttpResponse: The bib file
+    """
     group = get_object_or_404(Group, pk=pk)
     if GroupMembership.objects.filter(group=group, user=request.user).exists():
         references = Reference.objects.filter(group=group)
@@ -486,6 +586,15 @@ def view_404(request):
 
 
 def search_vectors_from_keys(keys, attribute_name):
+    """Generate the search vector for the specified keys
+    
+    Args:
+        keys (List(str)): The json keys
+        attribute_name (str): JSON base string
+    
+    Returns:
+        SearchVector: The generated search vector
+    """
     vector = None
     for key in keys:
         if vector:
@@ -497,6 +606,17 @@ def search_vectors_from_keys(keys, attribute_name):
 
 @login_required
 def search(request):
+    """Search all the references the user has access to
+    
+    Args:
+        request (request): A handle to the request
+    
+    Raises:
+        PermissionDenied: The wrong method has been used
+    
+    Returns:
+        render: The search results page
+    """
     if request.method == "POST":
         if "query" in request.POST:
             query = request.POST["query"]
@@ -538,6 +658,18 @@ def search(request):
 
 
 def upload_bib(request, group):
+    """Allows the user to upload a bib file
+    
+    Args:
+        request (request): A handle to the request
+        group (int): The pk of the group
+    
+    Raises:
+        PermissionDenied: The user is not a member of the group
+    
+    Returns:
+        redirect: The group the references have just been uploaded to
+    """
     group_obj = get_object_or_404(Group, pk=group)
     if GroupMembership.objects.filter(group=group_obj, user=request.user).exists():
         if request.method == 'POST':
