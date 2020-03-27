@@ -6,69 +6,116 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /home/lopez/grobid/grobid-home/s
 	<teiHeader xml:lang="en">
 		<fileDesc>
 			<titleStmt>
-				<title level="a" type="main">Non-Markovian memory in IBMQX4</title>
+				<title level="a" type="main">Quantum circuit optimizations for NISQ architectures</title>
 			</titleStmt>
 			<publicationStmt>
 				<publisher/>
 				<availability status="unknown"><licence/></availability>
-				<date type="published" when="2019-02-22">(Dated: February 22, 2019)</date>
 			</publicationStmt>
 			<sourceDesc>
 				<biblStruct>
 					<analytic>
 						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Joshua</forename><surname>Morris</surname></persName>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Beatrice</forename><surname>Nash</surname></persName>
 							<affiliation key="aff0">
-								<orgName type="department">School of Physics &amp; Astronomy</orgName>
-								<orgName type="institution">Monash University</orgName>
+								<orgName type="department">Department of Physics</orgName>
+								<orgName type="institution">Massachusetts Institute of Technology</orgName>
 								<address>
-									<postCode>3800</postCode>
-									<settlement>Clayton</settlement>
-									<region>Victoria</region>
-									<country key="AU">Australia</country>
+									<settlement>Cambridge</settlement>
+									<region>MA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="department">Institute for Quantum Computing</orgName>
+								<orgName type="institution">University of Waterloo</orgName>
+								<address>
+									<postCode>N2L 3G1</postCode>
+									<settlement>Waterloo</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
 								</address>
 							</affiliation>
 						</author>
 						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Felix</forename><forename type="middle">A</forename><surname>Pollock</surname></persName>
-							<affiliation key="aff0">
-								<orgName type="department">School of Physics &amp; Astronomy</orgName>
-								<orgName type="institution">Monash University</orgName>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Vlad</forename><surname>Gheorghiu</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Institute for Quantum Computing</orgName>
+								<orgName type="institution">University of Waterloo</orgName>
 								<address>
-									<postCode>3800</postCode>
-									<settlement>Clayton</settlement>
-									<region>Victoria</region>
-									<country key="AU">Australia</country>
+									<postCode>N2L 3G1</postCode>
+									<settlement>Waterloo</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Combinatorics &amp; Optimization</orgName>
+								<orgName type="institution">University of Waterloo</orgName>
+								<address>
+									<postCode>N2L 3G1</postCode>
+									<settlement>Waterloo</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
 								</address>
 							</affiliation>
 						</author>
 						<author>
-							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Kavan</forename><surname>Modi</surname></persName>
-							<affiliation key="aff0">
-								<orgName type="department">School of Physics &amp; Astronomy</orgName>
-								<orgName type="institution">Monash University</orgName>
+							<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Michele</forename><surname>Mosca</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Institute for Quantum Computing</orgName>
+								<orgName type="institution">University of Waterloo</orgName>
 								<address>
-									<postCode>3800</postCode>
-									<settlement>Clayton</settlement>
-									<region>Victoria</region>
-									<country key="AU">Australia</country>
+									<postCode>N2L 3G1</postCode>
+									<settlement>Waterloo</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Combinatorics &amp; Optimization</orgName>
+								<orgName type="institution">University of Waterloo</orgName>
+								<address>
+									<postCode>N2L 3G1</postCode>
+									<settlement>Waterloo</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="department">Perimeter Institute for Theoretical Physics</orgName>
+								<address>
+									<postCode>N2L 6B9</postCode>
+									<settlement>Waterloo</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff4">
+								<orgName type="institution">Canadian Institute for Advanced Research</orgName>
+								<address>
+									<postCode>M5G 1Z8</postCode>
+									<settlement>Toronto</settlement>
+									<region>ON</region>
+									<country key="CA">Canada</country>
 								</address>
 							</affiliation>
 						</author>
-						<title level="a" type="main">Non-Markovian memory in IBMQX4</title>
+						<title level="a" type="main">Quantum circuit optimizations for NISQ architectures</title>
 					</analytic>
 					<monogr>
 						<imprint>
-							<date type="published" when="2019-02-22">(Dated: February 22, 2019)</date>
+							<date/>
 						</imprint>
 					</monogr>
+					<note type="submission">(Dated: Version of April 3, 2019)</note>
 				</biblStruct>
 			</sourceDesc>
 		</fileDesc>
 
 		<encodingDesc>
 			<appInfo>
-				<application version="0.6.0-SNAPSHOT" ident="GROBID-SDO" when="2020-03-25T15:35+0000">
+				<application version="0.6.0-SNAPSHOT" ident="GROBID-SDO" when="2020-03-25T16:07+0000">
 					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
 					<ref target="https://github.com/kermitt2/grobid-sdo"/>
 				</application>
@@ -76,1166 +123,253 @@ xsi:schemaLocation="http://www.tei-c.org/ns/1.0 /home/lopez/grobid/grobid-home/s
 		</encodingDesc>
 		<profileDesc>
 			<abstract>
-<div xmlns="http://www.tei-c.org/ns/1.0"><p>We measure and quantify non-Markovian effects in IBM's Quantum Experience. Specifically, we analyze the temporal correlations in a sequence of gates by characterizing the performance of a gate conditioned on the gate that preceded it. With this method, we estimate (i) the size of fluctuations in the performance of a gate, i.e., errors due to non-Markovianity; (ii) the length of the memory; and (iii) the total size of the memory. Our results strongly indicate the presence of non-trivial non-Markovian effects in almost all gates in the universal set. However, based on our findings, we discuss the potential for cleaner computation by adequately accounting the non-Markovian nature of the machine.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Currently available quantum computing hardware platforms have limited 2-qubit connectivity among their addressable qubits. In order to run a generic quantum algorithm on such a platform, one has to transform the initial logical quantum circuit describing the algorithm into an equivalent one that obeys the connectivity restrictions.</p><p>In this work we construct a circuit synthesis scheme that takes as input the qubit connectivity graph and a quantum circuit over the gate set generated by {CNOT, RZ } and outputs a circuit that respects the connectivity of the device. As a concrete application, we apply our techniques to Google's Bristlecone 72-qubit quantum chip connectivity. In addition, we also compare the performance of our scheme as a function of sparseness of randomly generated quantum circuits. * Electronic address: beanash@mit.edu † Electronic address: vlad.gheorghiu@uwaterloo.ca</p></div>
 			</abstract>
 		</profileDesc>
 	</teiHeader>
 	<text xml:lang="en">
 		<body>
-<div xmlns="http://www.tei-c.org/ns/1.0"><head>I. INTRODUCTION</head><p>Quantum computers promise significant speedups over their classical counterparts by manipulating and exploiting effects only seen in the quantum realm <ref type="bibr" target="#b0">[1]</ref><ref type="bibr" target="#b1">[2]</ref><ref type="bibr" target="#b2">[3]</ref>. The price of using phenomena that only become significant at the smallest scales is incredible sensitivity to noise and inherent fragility <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b4">5]</ref>. Quantifying this fragility, in general, necessitates sophisticated methods for understanding and predicting the behaviour of the fundamental constituents of computing, i.e., quantum gates <ref type="bibr" target="#b5">[6]</ref><ref type="bibr" target="#b6">[7]</ref><ref type="bibr" target="#b7">[8]</ref>.</p><p>Imperfections in quantum gates arise, in part, from interactions with an uncontrollable environment. Any realistic quantum computer is an open system, but the nature of the interactions with the environment are not always clear. In the broadest sense, the resulting dynamics can be partitioned into one of two categories, Markovian and non-Markovian <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b9">10]</ref>, depending on whether memory effects play a role. In the former case, information leaks out of the system over time, eventually reaching an equilibrium point, beyond which further computation becomes impossible or meaningless. In the non-Markovian regime, the information transfer between the system and its environment becomes bidirectional. At some later time information lost to the environment may return to the system, resulting in behaviour that depends on the system's previous state. While, in some cases, these temporal correlations could be beneficial <ref type="bibr" target="#b10">[11]</ref>, without knowledge of their specific structure, they manifest as unwanted noise. This noise furthermore violates many common assumptions made in characterizing and controlling it <ref type="bibr" target="#b11">[12]</ref>.</p><p>In a circuit-based quantum computer, where sequential gates are applied to realize the computational steps of a specific algorithm, if errors were to non-trivially depend on previous choices of gates, meaningful computation would become impossible. While quantum error correction could certainly be employed to minimize these effects, most error correction techniques almost always assume that the errors are Markovian and thus correct sub-optimally for correlated errors; see <ref type="bibr" target="#b12">[13]</ref><ref type="bibr" target="#b13">[14]</ref><ref type="bibr" target="#b14">[15]</ref> for exceptions. Moreover, techniques for gauging the performance of a quantum computer, such as ran- * josh.morris@monash.edu † felix.pollock@monash.edu ‡ kavan.modi@monash.edu domized benchmarking <ref type="bibr" target="#b4">[5]</ref> and gate set tomography <ref type="bibr" target="#b6">[7]</ref>, fail to be reliable in the presence of non-Markovian errors <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b15">16]</ref>.</p><p>Recently, several quantum computers have been made available to researchers to run experiments remotely, with IBM's Q Experience a prominent example. Researchers have used IBM's quantum computers to prepare highly entangled states <ref type="bibr" target="#b16">[17]</ref>, discriminate between unitary operations <ref type="bibr" target="#b17">[18]</ref>, implement quantum stochastic differential equations <ref type="bibr" target="#b18">[19]</ref>, test fault-tolerant protocols <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b20">21]</ref> and demonstrate dynamical decoupling <ref type="bibr" target="#b21">[22]</ref>. We add to this growing list here.</p><p>In this article, we show evidence for the existence of temporal correlations between sequential gates implemented on the IBMQX4, a five superconducting transmon qubit quantum computer (dubbed Tenerife) <ref type="bibr" target="#b22">[23]</ref>. To demonstrate non-Markovian effects in the IBMQX4, we develop techniques for quantifying the conditional dependence of noise in quantum gates on the history of past operations and identifying the approximate time scales of the corresponding correlations, all without specific information about the underlying system-environment interactions. Specifically, we look at the behaviour of a quantum gate conditioned on the gate that precedes it, finding noise that depends on past choices and hence a strong indication of non-Markovianity. Finally, we estimate the size of the memory by measuring the correlations in a sequence of controlled-not gates. Our findings indicate that the IBMQX4 is non-trivially coupled to its environment, and suffers from non-Markovian effects that cannot be ignored. On the other hand, our results could, in turn, be used to inform the design of better pulse sequences conditioned on previous pulses to either sidestep or mitigate the issue <ref type="bibr" target="#b23">[24]</ref>, yielding cleaner and more faithful computation.</p><p>We begin with an overview of our theoretical ideas, followed by presentation of data found by running remote experiments on the IBMQX4.</p></div>
-<div xmlns="http://www.tei-c.org/ns/1.0"><head>II. TESTING FOR NON-MARKOVIANITY</head><p>Consider the three scenarios outlined in <ref type="figure" target="#fig_0">Fig. 1</ref> for the sequential application of two quantum gates. The first panel represents the desired evolution; that of a closed quantum system undergoing unitary transformations. In reality, the implementation of a quantum gate U is unlikely to be perfect; instead, a noisy operation, described by a completelypositive, trace-preserving (CPTP) map or quantum channel Φ U <ref type="bibr" target="#b24">[25]</ref>, will be applied to the system. We may think of Φ U arXiv:1902.07980v1 [quant-ph] 21 Feb 2019 ) If the system evolves alongside an inaccessible bath or environment E, but does not affect it sufficiently to impact on future interactions, then it is Markovian (or can be approximated as such) and the dynamics on S alone will be described by a CPTP map. (c) Otherwise, the system is non-Markovian, and the environment can be thought of as an uncontrollable quantum memory attached to the system. While the collective dynamics on SE will be a sequence of unitaries, the local dynamics of S cannot be straightforwardly decomposed into two independent stages. Note that each of the boxes in these panels should be thought of as a quantum map (sometimes labelled by a unitary operator) acting on a density operator.</p><p>as stemming from a unitary transformationŨ applied on the system-environment. When applying an operator U followed by another operator V , it is often assumed that this leads to application of Φ U followed by Φ V . That is, the two noisy maps are independent, as depicted in <ref type="figure" target="#fig_0">Fig. 1b</ref>.</p><p>However, this assumption of independence between applications of quantum gates requires the information carried by the environment to dissipate from one application to the next. This Markovian behaviour is in contradistinction to the circuit in <ref type="figure" target="#fig_0">Fig. 1c</ref>, where the environment evolves without complete information loss, leading to a noisy process</p><formula xml:id="formula_0">Φ V U = Φ V • Φ U .<label>(1)</label></formula><p>The resulting non-Markovian dynamics leads to correlations between gate errors, which should be accounted for in a rigorous analysis of fault tolerance.</p><p>To quantify these correlations, we exploit the fact that in the Markovian case, with no temporal correlations between gates, Φ V U would be equivalent to the composition of individual maps Φ V • Φ U . Let us define the conditional map</p><formula xml:id="formula_1">Φ V |U := Φ V U • Φ −1 U , where Φ U • Φ −1 U = I,<label>(2)</label></formula><p>with I being the identity map (I[ρ] = ρ ∀ρ). If Φ V |U is completely positive, then the dynamics is what is called CP-divisible <ref type="bibr" target="#b25">[26]</ref>, and this is will be our first test for non-Markovian memory. Even when the conditional map is CP, this alone does not guarantee a Markov process, since the conditional map can still depend on its conditioning argument, and a broader analysis technique is required. For our second check we ask how different is Φ V |U from Φ V . If the two are not the same, this implies non-Markovianity. However, for a skeptic this failure could imply a very mild type of non-Markovianity. That is, suppose the performance of the second gate is always worse than the first gate, i.e.,</p><formula xml:id="formula_2">Φ V U = Φ V • Φ 2 • Φ U<label>(3)</label></formula><p>for some fixed decohering dynamics Φ 2 associated with application of any second gate. This is a simple non-Markovian process, where the memory is merely a clock keeping track of the number of gates that have been applied. To overcome this we further implement a more sophisticated check; a less trivial form of non-Markovianity would manifest as explicit dependence on the first gate, i.e.,</p><formula xml:id="formula_3">Φ V |U1 = Φ V |U2 for all U 1 , U 2 .<label>(4)</label></formula><p>We now construct all three of these tests for all gates in G, a universal set of gates.</p></div>
-<div xmlns="http://www.tei-c.org/ns/1.0"><head>III. CONDITIONAL PERFORMANCE</head><p>To clearly demonstrate the presence of temporal correlations, we implement single and sequential pairs of gates</p><formula xml:id="formula_4">U, V ∈ G = {H, S, T, X, Y, Z, C X }<label>(5)</label></formula><p>on the IBMQX4. Here H is the Hadamard gate, S is the phase gate, T is the π /8 gate, X, Y, Z are the Pauli gates, and C X is the CNOT gate. We reconstruct, via quantum process tomography (QPT), the maps {Φ U , Φ V U } corresponding to each one-and two-gate sequence, i.e., {Φ U , Φ V U }. The details of QPT are given in the Appendix A, along with an analysis of the associated statistical and systematic errors in Appendix B.</p><p>With the relevant maps reconstructed, we perform three tests described above for the presence of temporal correlations. The first is a simple check of complete positivity of each conditional map Φ V |U , computed from the corresponding Φ V U and Φ U . All of the gate combinations tested fail to satisfy this condition, as seen in <ref type="figure" target="#fig_1">Fig. 2</ref>; however, as mentioned above, even if they were completely positive, this would not rule out non-Markovianity. We therefore move on to the more sophisticated second and third tests, which involve direct comparison of each Φ V with various Φ V |U , and of pairs Φ V |U1 and Φ V |U2 , respectively.</p><p>There are many ways for comparing two quantum maps, with the natural metric being the diamond distance <ref type="bibr" target="#b26">[27,</ref><ref type="bibr" target="#b27">28]</ref> </p><formula xml:id="formula_5">Φ A − Φ B := max ξ D(Φ A ⊗ I d [ξ], Φ B ⊗ I d [ξ]), (6) where D(ρ, σ) = 1 2 tr|ρ − σ|<label>(7)</label></formula><p>is the trace distance, I d is the identity map on an ancillary d dimensional space, and ρ is a density operator on the joint system-ancilla space. This distance can be interpreted as the maximum ability to statistically distinguish between two maps in a single shot with an entangled input. However, the diamond distance in our context accounts for the worst case distinguishability; a given pair of maps are unlikely to differ this much when applied to a typical input. In addition, we would like a measure that characterises the average distinguishability between two maps. That is, we want to quantify the effects of non-Markovianity a typical user of IBMQX4 might encounter. To achieve this we employ the averaged trace distance</p><formula xml:id="formula_6">E(Φ A , Φ B ) := 1 M M l=1 D(Φ A [ρ l ], Φ B [ρ l ]),<label>(8)</label></formula><p>where {ρ l } M l=1 forms a set of M random input states drawn from the Haar distribution <ref type="bibr" target="#b28">[29]</ref>.</p><p>In <ref type="figure">Fig. 3a</ref>, we show the distribution of trace distances, prior to averaging, for the gate sequence U = X, V = Z. The figure shows this distribution for both experimentally determined maps, as well as maps constructed using the IBMQX4 simulator. The latter only accounts for statistical errors, while the former is equipped to account for memory effects. The figure shows that IBMQX4 suffers from systematic errors that go beyond statistical fluctuations. The average of this distribution indicates size of error, on the average, due to the non-Markovianity.</p><p>In Figs. 3b and c, we show the distances, according to Eq. (3) and Eq. (6) respectively, between conditional and unconditional maps corresponding to gates in the set G applied on IBMQX4. To maintain consistency, each single qubit gate always acts on qubit 1 (with numbering from 0-4) and each controlled-not (C X ) acts on qubit 0 with the control on qubit 1. This analysis clearly shows the conditional realization of the gates to be different from that of unconditional ones. This might be expected, as the coherence of the qubit will diminish more after two operations in comparison to just one. In this case, the magnitude of each column of the matrix entries in Figs. 3b and c would be the same. But they are not: for instance, performing a Z gate after an X gate is very different than after another Z. This significant variation as the initial operation U is varied, for a particular V , is precisely <ref type="figure">Figure 3</ref>. (a) The two maps Φ Z|X and ΦZ are found via process tomography on the IBMQX4. Both maps are applied to one hundred thousand randomly generated input states, and their output states are compared against one another (Green) using Eq. <ref type="formula" target="#formula_5">(7)</ref>. The same quantities computed using a simulator provided by IBM are also presented (Blue). (b) The average trace distance between outputs of Φ V |U and ΦV for each combination of U, V ∈ G, as given by Eq. <ref type="bibr" target="#b7">(8)</ref>. (c) The diamond distance, given in Eq. (6), between the same pairs of maps, but scaled by 1 d , with d = 4 when U or V is CX and d = 2 otherwise. This may be thought of (up to this scaling) as calculating the supremum of the distribution in (a), whereas (b) gives its mean. The uncertainty in these values is approximately 4.5 × 10 −3 . Note that for a constant operator V , both metrics fluctuate as U is varied, indicating a dependency on the previous gate. the dependence on the past discussed above. Beyond simply witnessing the existence of non-Markovian errors in the IB-MQX4, Figs. 3b and c tell us which specific gates lead to the strongest (detectable) interaction with the environment.</p><p>Though this result demonstrates some kind of correlation in sequential processes, it allows for the comparison of the effect of past gate choices only indirectly; two different choices of U might lead to Φ V |U s that are similarly distinguishable from Φ V , but which are also significantly distinct from each other. For a more direct comparison, we compute the distingushability between maps corresponding to a fixed gate conditioned on different preceding gates:</p><formula xml:id="formula_7">E(Φ V |U1 , Φ V |U2 )</formula><p>. This is shown in <ref type="figure">Fig. 4</ref> for V, U 1 , U 2 ∈ G. It can be seen that the difference between conditional maps is far from uniform. In other words, a gate's deviation from its ideal implementation is significantly perturbed by past actions, and not with others, when implemented on the IBMQX4. For instance, Y is strongly affected by S, but less so by other gates. Similarly, Z seems to be most affected only by X, while X is sensitive to any gate that precedes it. That is, the behaviour of X is drastically different conditionally on what came before it. These structures strengthen the confidence in our analysis.</p><p>As important as their presence is, the lifetime of these correlations may be relatively short. Even strong correlations <ref type="figure">Figure 4</ref>. The distinguishability between Φ V |U 1 and Φ V |U 2 for all V, U1, U2 ∈ G using the diamond distance (upper triangles) and average trace distance (lower triangles). The former is scaled by a factor of 1 d (d = 4 for CX , d = 2 otherwise), and both measures are scaled by a factor of two for V = CX . between sequential actions can be accounted for if their temporal range is small; one need only wait them out before application of the next gate. It is with this in mind that we proceed to an investigation of the lifetime of this newly detected quantum memory.</p></div>
-<div xmlns="http://www.tei-c.org/ns/1.0"><head>IV. MEMORY LENGTH</head><p>Having showed evidence for temporal correlations between pairs of sequential operations on the IBMQX4 platform, we now ask how long-lived they are. In addition to waiting between gate applications, if the length of the memory is not too long, then a hidden Markov model could be reconstructed and conditional pulse sequences applied to correct for errors <ref type="bibr" target="#b29">[30,</ref><ref type="bibr" target="#b30">31]</ref>. If, however, these correlations extend far into the system's future, then correcting or modelling them may be challenging. Additionally, having a better grasp of the structure of memory would also enable more informed decoupling techniques.</p><p>To estimate the length of the memory in IBMQX4, we apply a sequence of n C X gates and construct the corresponding CPTP maps {Φ (n) C X } using process tomography for each n ∈ <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b14">15]</ref>. In the Markovian case, where the errors in each implementation are independent, we would expect</p><formula xml:id="formula_8">E(Φ (n) C X , Φ (m) C X • Φ (n−m) C X )</formula><p>to vanish for integers m &lt; n. Conversely, as before, a non-vanishing distinguishability, by either measure we consider, is a measure for temporal correlations <ref type="bibr" target="#b25">[26]</ref>. Furthermore, the behaviour as a function of m, for fixed n, indicates whether and how the memory decays. Rather than the average distinguishability of two maps that we consider above, the diamond distance considers the absolute worst case scenario by maximising the trace distance between map outputs over all inputs, including those that include entangled ancillas. This maximisation problem can be posed as a semi-definite program <ref type="bibr" target="#b31">[32]</ref>, described and solved using an appropriate software package <ref type="bibr" target="#b32">[33,</ref><ref type="bibr" target="#b33">34]</ref>.</p><p>Unsurprisingly, given our previous results, we see significant fluctuations in the distinguishability as m, n are varied, shown in <ref type="figure" target="#fig_2">Fig. 5</ref>. Though we are now considering the absolute error of Φ n and the causally broken process Φ (m) • Φ (n−m) , as opposed to the relative error of two processes as in <ref type="figure">Fig. 3b</ref>, we are still comparing the two maps as they actually are in the IBMQX4, rather than the ideal case. This is to say that <ref type="figure" target="#fig_2">Fig. 5</ref> is not intended as a commentary on the fidelity of the C X gate in the IBMQX4, but rather its operational dependence on the environmental state after repeated applications of the controlled not gate.</p><p>From <ref type="figure" target="#fig_2">Fig. 5</ref>, it is clear that, beyond the lack of divisibility, there is some structure present in the distingushability as the temporal length of the two maps is increased. Considering the upper triangular matrix of the figure, where we compute the diamond distance between the two channels; we see a high channel distinguishability, corresponding to strong short term correlations, before a decrease with increasing duration. This decrease is presumably due to the decoherence of both maps as they converge on a noisy equilibrating channel. At m = 8, however, the divergence once again increases, indicating that some kind of long range temporal correlation has been lost due to the imposed causal break. Given that the C X , as a coupling operation, acts on a larger physical space than local operations, it is not surprising that we see evidence for temporal correlations. Curiously, after m = 10, the distinguishability once again drops quite sharply, where we might instead expect a gradual decrease. While this behaviour for m = 8, 9, 10 could indicate a different calibration of the device during their reconstruction, all tomography experiments for related maps in <ref type="figure" target="#fig_2">Fig. 5</ref> were performed at similar times on the IBMQX4.</p><p>Our results suggest that the non-Markovian memory lasts for several gates. Though it is not clear what physical mechanism corresponds to these long terms correlations, we find it encouraging that we can identify them with no knowledge of the corresponding gate implementations on the IBMQX4. Combining our results with a physical model will open up the potential for a hidden Markov model for IBMQX4. We now move to discuss broader implications of our results.</p></div>
-<div xmlns="http://www.tei-c.org/ns/1.0"><head>V. FULL QUANTIFICATION OF NON-MARKOVIANITY</head><p>Though we have presented measures for correlations between errors in gate applications at different points in time, this falls short of a full characterization of the corresponding non-Markovian process. Ideally, we would reconstruct the process tensor <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b34">35]</ref>, which is a generalization of the CPTP map to multi-step processes. The process tensor is a complete descriptor of a stochastic quantum process <ref type="bibr" target="#b35">[36,</ref><ref type="bibr" target="#b36">37]</ref>, including temporally correlated noise, which could be of purely quantum nature <ref type="bibr" target="#b37">[38,</ref><ref type="bibr" target="#b38">39]</ref>. However, reconstructing the process tensor requires sequential measurements, which are currently not possible in the IBMQX4 system. A potential way around this is to construct a restricted process tensor <ref type="bibr" target="#b39">[40]</ref>, but it too can be cumbersome. Another alternative is to map the process to the large entangled quantum state realized by the circuit depicted in <ref type="figure">Fig. 6</ref>, which physically implements a generalized Choi-Jamiołkowski isomorphism. This could then be determined through state tomography. Though more resource intensive in terms of qubits required, this procedure does not require sequential measurements.</p><p>Unfortunately, even this cannot be achieved, since implementing it requires the clean implementation of H, C X and swap (a sequence of three C X ) gates, which we have seen are themselves noisy and temporally correlated. These correlations and the imperfect nature of the gates means we construct not the Choi state of the process tensor but rather some proxy for it. Determining this proxy experimentally however can still yield meaningful results. We have run the circuit in <ref type="figure">Fig. 6</ref>, for the choices of U = S and V = T , on the older IBMQX2 and performed quantum state tomography on the relevant four qubits. We then compared this with a Markovian simulator of the same circuit. This is realized <ref type="figure">Figure 6</ref>. The quantum circuit that would create the Choi state of the process tensor corresponding to sequential application of gates U and V , assuming all other gates are applied cleanly. For Markovian noise in U and V , this would just be the product of Choi states of their corresponding maps ΦU and ΦV . by multiplying the reconstructed map for each element of the circuit numerically. The relative entropy distance between the two states represents an estimate of the amount of non-Markovianity <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b9">10]</ref>, which for IBMQX2 we find to be 0.68 (with 2 being the maximum achievable <ref type="bibr" target="#b40">[41]</ref>). Though this value cannot be taken as a measure of the correlation between the maps corresponding to gates U and V in <ref type="figure">Fig. 6</ref>, it can serve as an indicator and measure of non-Markovianity, albeit with little insight into the source. It is worth noting that IB-MQX2 appears to be much noisier than IBMQX4 <ref type="bibr" target="#b41">[42]</ref>. Nevertheless, our findings suggest that a great deal of quantum information may be trapped in the non-Markovian correlations in both devices. Being able to recover this information would make the quantum computation cleaner.</p><p>Our findings are supported by previous work, such as Ref. <ref type="bibr" target="#b21">[22]</ref>. There the authors focus on constructing quantum dynamics that are resistant to noise through dynamical decoupling. They experimentally implement a dynamical decoupling protocol on both the IBMQX4 and the Rigetti Acorn (a 19 superconducting qubit computer). They demonstrate enhancement in the fidelity of operations in the IBMQX4 due to their decoupling protocol, which is a purely a non-Markovian phenomenon <ref type="bibr" target="#b42">[43,</ref><ref type="bibr" target="#b43">44]</ref>.</p></div>
-<div xmlns="http://www.tei-c.org/ns/1.0"><head>VI. DISCUSSIONS</head><p>Although, we cannot fully quantify non-Markovianity in IBMQX4, we have presented two techniques for identifying and measuring the properties of a non-Markovian system. These techniques form a useful tool-set in identifying difficult to detect correlations in specific, sequential control operations for the IBMQX4 and for general quantum systems where process tomography (or some analogue of it) is possible. Our methods require no prior knowledge of the system Hamiltonian to infer the temporal correlations and as such we need not have an in-depth understanding of the experimental details of the IBMQX4 to comment on its physical behaviour. On the other hand, combining our methods with a physical model would allow for better estimates for the physical parameters, e.g., the coupling strengths, using machine learning tools <ref type="bibr" target="#b44">[45,</ref><ref type="bibr" target="#b45">46]</ref>. Moreover, through an iterative procedure our could be used to make a better physical model for IBMQX4, and consequently adjust the pulse sequence to yield cleaner gates.</p><p>The hurdle that we face in reconstructing the process tensor is also a main drawback in reconstructing the conditional dynamics. The root cause being the gate infidelity in what is essentially the preparation and measurement phases of tomography, i.e., state preparation and measurement (SPAM) errors. In performing process tomography we require the preparation of specific input states to the gate being reconstructed and specific measurements performed on the output state. A convenient assumption for most tomography <ref type="bibr" target="#b46">[47]</ref> is that these preparations and measurements are performed flawlessly, with the only error being statistical in nature (stemming from finite sampling of the outcome distribution). If this is not the case, however, then the determination of maps corresponding to different gates, and their comparison, can become unreliable. The error rates, based on randomized benchmarking, for IBMQX4 <ref type="bibr" target="#b47">[48]</ref> suggest that SPAM errors by themselves are small. Moreover, the SPAM errors alone are not sufficient to explain the high level of structure and the asymmetry in <ref type="figure">Figs. 3, 4</ref>, and 5. For the complete treatment of these errors see Appendix B.</p><p>Putting aside the IBMQX4, the ability to detect gate specific correlations, as we have demonstrated above, is a useful diagnostic tool when designing quantum devices. Though a single quantum gate may be well-implemented in isolation, the act of applying it may cause unwanted and traditionally difficult to detect perturbations in the next gate. Our techniques are designed to address this exact situation. In addition to this, though we have considered only temporal dependence mediated by some external environment here, this technique could easily be extended to a search for spatio-temporal correlations, e.g. find the correlations between the third gate applied to qubit one and the fifth gate applied to qubit six. Besides measuring the performance of the device, in a way that is not biased by its particular architecture, this confers a number of advantages. In particular, we note the possibility of the results shown here being used to identify where efforts to improve the implementation of gates might be best spent. At the very least, our results highlight where non-Markovian correlations play a role, allowing for improved constraints on meaningful quantum circuit compilation, something that is, and will continue to be, a problem for large scale quantum computation <ref type="bibr" target="#b23">[24,</ref><ref type="bibr" target="#b48">49]</ref>.</p></div>
-<div xmlns="http://www.tei-c.org/ns/1.0"><head>APPENDICES Appendix A: Process tomography in the IBMQX4</head><p>Due to our need to determine and compare the transformations that are actually being performed in the IBMQX4, it was required that we perform process tomography on a number of one and two step gate sequences. In the IBM system, only Pauli Z measurements are possible, thus a rotation operation needs to be performed for measurement in a complete tomographic basis (the minimal Pauli basis set in this instance). Since the computer is an open system, Markovian or otherwise, we are limited to determining the reduced dynamics of the full unitary evolution of the system-environment. This is described by the quantum map Φ[ρ S ] = tr E (Ũ ρ SEŨ † ) that acts on ρ S and may be expressed in tomographic form, as presented in <ref type="bibr" target="#b24">[25]</ref>:</p><formula xml:id="formula_9">Φ[ρ] = i ρ i tr D † i ρ ,<label>(A1)</label></formula><p>where ρ i = Φ[ρ i ] is the output state of the map and S = {ρ i } d 2 i=1 spans the space of bounded linear operators B(H d ) acting on the system Hilbert space (with dimension d). {D j } d 2 j=1 are the duals of S such that tr(D † i ρ j ) = δ ij . The map itself can be represented as a matrix that acts on vectorized density operators as Φ = i ρ i × D * i , where × indicates an outer product between vectorized quantities.</p><p>For any circuit implemented on the IBMQX4, we can perform state tomography on the output and reconstruct via maximum likelihood estimation <ref type="bibr" target="#b32">[33,</ref><ref type="bibr" target="#b33">34,</ref><ref type="bibr" target="#b49">50]</ref>. Knowing the input states in S, and hence the duals, gives us sufficient information to compute the map through Eq. (A1), performing process tomography. Specifically, the full reconstruction signal chain is as follows:</p><p>1. Define the 4 N × 3 N unique circuits required given preparation and measurement bases for full process tomography of a desired unitary operation U acting on N qubits.</p><p>2. Using the measurement outcome probability distributions, perform maximum likelihood estimation to determine the output state of each circuit.</p><p>3. Reconstruct the most likely process given the defined input and reconstructed output states for each circuit, retrieving the map Φ U .</p><p>As an explicit example of this process for a single qubit operator, one of the 4 × 3 = 12 unique measurement configurations we would run on the IBMQX4 would be to first create one of the spanning input states; |1 1| in this example. Each qubit in the IBMQX4 is always initialised in the |0 0| state so we first apply a Pauli X to the qubit then apply the operator U to this prepared state. We now wish to know what the output state of U is, given an input of |1 1|. Single qubit state tomography requires, at a minimum, measurement of three expectation values -X , Y , Z . The IBMQX4 can only perform projective measurements in the Z basis however and so to determine the others we must first rotate the output state of U before measuring Z . Continuing with our single configuration example, we choose to measure X , requiring a Hadamard H rotation prior to measurement of Z. Repeating this many times allows computation of X . Thus we are ultimately measuring tr ZHU X |0 0| XU † H as one of 12 measurements to compute the operator U , or rather the map Φ U when the desired operation U is performed on the IB-MQX4.</p><p>Since IBM regularly re-calibrates the device, some care does need to be taken when performing the tomography experiments, so as not to mistake fluctuations in system parameters with environmental noise. While different gate combinations were run at different times, the tomography experiments for a particular gate combination U, V are always performed in immediate succession. Additionally, the experiments for each column of <ref type="figure">Fig. 3b and 3c</ref> were run sequentially, so that the differences in conditional behaviour for fixed V could be attributed solely to the variation in the preceding choice of gate U .</p></div>
-<div xmlns="http://www.tei-c.org/ns/1.0"><head>Appendix B: Error contribution analysis</head><p>For the numerical data presented in Figs. 3 and 5 one can think of the uncertainty in these results stemming from two independent sources. The first being the usual statistical uncertainty for a finite sampling method, while the other is due to state preparation and measurement errors or SPAM errors. First we begin with consideration of the statistical errors.</p><p>The output of the IBMQX4 is a probability distribution of the measured states, built from a user defined number of N repeated experiments -the shot number. Assuming independent experiments, the standard deviation of the probabilities for each measured outcome goes as δ = 1 √ N . Since we assume no measurement error bias, this uncertainty defines a sphere (truncated by the space of valid quantum states) in B(H) with the true state being the center and the radius being the standard deviation δ. Our analysis methods from this point involve taking this outcome distribution and estimating the most probable quantum state, then using this state tomography in process tomography which is then used for comparing the temporal dependence of different quantum processes á la Figs. 3, 4, and 5 . By using a maximum likelihood estimator it is not immediately clear how to propagate the statistical uncertainty. We can however simulate this process numerically and gain, at the very least, a lower bound on the uncertainty. By sampling from the Gaussian distributed states, with mean centered on the true state, we can propagate a large number of measured states through our analysis process and compute a distribution of values for the entries in <ref type="figure">Figs. 3, 4</ref>, and 5. The standard deviation of the distribution of values found via this large scale sampling of quantum states then indicates the standard deviation in our output values due to a finite experiment, giving a bound on the standard deviation in the values of <ref type="figure">Fig. 3, 4</ref> </p></div>
-<div xmlns="http://www.tei-c.org/ns/1.0"><head>and 5.</head><p>Suppose for the moment the preparation and measurement errors are in fact zero and there is only a difference in the map we think we are applying (the ideal unitary) and the actual. The true process run in the noisy IBMQX4 then might be expressed as</p><formula xml:id="formula_10">Φ U = Φ id U + α U ,<label>(B1)</label></formula><p>with Φ id U being the ideal process we wish to apply and α U being an error channel that introduces unwanted perturbations in the output states of Φ U . It is the behaviour of α U and its dependence on the history of the system-environment that we have been concerned with in this paper. Our hope and assumption up until now is that the channel found through tomography</p><formula xml:id="formula_11">Φ U = Φ id U + β U ,<label>(B2)</label></formula><p>is exactly (B1). For perfect measurement/preparation channels the tomography error channel β U is equivalent to α U and the reconstructed channel and the actual are identical. Since in any real experiment this will not be true, we wish to know the error on the error itself</p><formula xml:id="formula_12">e(U ) = Φ U − Φ U = α U − β U .<label>(B3)</label></formula><p>We shall argue that even with the measurement errors accounted for, our results remain significant. Process tomography is a three step process; state preparation, evolution and measurement. The preparation stage involves constructing an input set of states ρ i that span the space of bounded linear operators L(H d ) that Φ U acts on. If one knows how a map acts on a complete spanning set the full process for an arbitrary input state may be derived. The IBMQX4 is always well initialized as ρ = |0 0| ⊗5 thus the preparation stage is a set of operations that map this initial state to an element in the spanning set. Since these maps will invariably have some error associated with them, the actual prepared states are {ρ i } = {Φ i [|0 0|] + γ i [|0 0|]}. If the actual input states to the process Φ U has some error, then so too do the duals {D i } = {D i + δ i } as they are constructed based off an assumed spanning set with {D i } being the actual duals to {ρ i }.</p><p>When the input state drawn from {ρ i } is passed through the process Φ U the channel can be thought of as acting on the desired input state and the error introduced by the preparation stage, with the output states of the channel becoming</p><formula xml:id="formula_13">ρ i = Φ U • Φ i [|0 0|] + Φ U • γ i [|0 0|].<label>(B4)</label></formula><p>The set {ρ i } is determined through state tomography, but, since we are restricted to purely Z projective measurements in the IBM system, measurements in the remaining elements of the Pauli basis (or any other measurement basis for that matter) first require the application of a rotation operator on the output states of {ρ i } before projective measurement. This rotation in the measurement stage introduces another source of errors beyond simple statistical uncertainty. This is to say that we measure not {ρ i } but another output state that is the output of Φ U plus the error η i introduced by imperfect rotation operators</p><formula xml:id="formula_14">ρ i = ρ i + η i [ρ i ].<label>(B5)</label></formula><p>If we then compute the channel defined by this new set of output states and the duals of the input states using Eq. (A1) we find an expression for the reconstructed channel in terms of the actual channel and the error terms;</p><formula xml:id="formula_15">Φ U = i ρ i × D * i , = i (ρ i + η i [ρ i ]) × (D * i + δ * i )<label>(B6)</label></formula><p>If we then substitute into Eq. (B3) terms of compositions of the channels and simplify, we arrive at an expression for the error e(U )</p><formula xml:id="formula_16">e(U ) = i (Φ U • γ i [|0 0|] + η i • Φ U • Φ i [|0 0|]) × D * i + Φ U • Φ i [|0 0|] × δ i + O(η i • γ i , η i • δ, γ i • δ i ).</formula><p>Considering only terms up to first order in the errors, we see that the SPAM errors at each stage of the tomography each contribute an independent error term. Ignoring the second order errors, the first order preparation/measurement errors are due solely to the imperfection of the preparation/measurement channels with the finite sampling contributing to the latter as well. Previously we argued that the finite sampling is a small contribution and by IBM's own gate analysis (using randomised bench-marking), and available as part of the IBMQX4 interface, we know that the gates used for preparation are projective measurement are small as well. This lets us conclude that each term in the above equation is small at first order and thus so to is e(U ), indicating that the results presented in the main text are due to non-Markovian behaviour rather than a simple infidelity.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>(a) Two unitary operators act on closed system S, evolving it in time. (b</figDesc></figure>
-<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 .</head><label>2</label><figDesc>As a measure of the non-positivity of the reconstructed inverse maps Φ V |U , we present the difference from unity of the summed absolute values of the maps' Choi states (operator representations of the maps<ref type="bibr" target="#b24">[25]</ref>): tr|Φ V |U | − 1 for each of the gate combinations U, V ∈ G. For completely positive quantum maps this should be vanishing. The deviation of this measure from zero then gives the degree to which the reconstructed map is not CP, indicating non-Markovian dynamics.</figDesc></figure>
-<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 5 .</head><label>5</label><figDesc>The distingushability of two maps; one constructed from the application of n sequential CX gates Φ (n) C X , and the other a concatenation of maps corresponding to m and n − m sequential CX gates Φ (m)C X • Φ (n−m) C X .In the upper figure the distinguishability is calculated using the diamond distance in Eq. 6, while in the lower one it is computed as in Eq.<ref type="bibr" target="#b7">(8)</ref>.</figDesc></figure>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I. INTRODUCTION</head><p>Near-term quantum devices, such as Noisy Intermediate Scale Quantum Computers (NISQ) <ref type="bibr" target="#b0">[1]</ref>, are limited by sparse qubit connectivity, and many current compilers require that the input circuit take into account the allowed connectivity of the hardware. In this paper we introduce a circuit synthesis method that takes as input the connectivity of the hardware and the desired transformation that can be produced using gates from the set {CNOT, R Z }, where R Z denotes an arbitrary rotation about the Z axis of the Block sphere, and outputs a circuit that respects the connectivity of the device. Our results show a significant decrease in CNOT count compared to circuit synthesis methods currently in use and allows for efficient circuit synthesis given any arbitrary connectivity. The method we present is a heuristic: finding the exact optimal solution appears intractable <ref type="bibr" target="#b1">[2]</ref>.</p><p>The concept behind our approach is to take circuit synthesis methods that optimize the CNOT count of the output circuit that perform well under the assumption of full connectivity ( <ref type="bibr" target="#b2">[3]</ref> for CNOT circuits and <ref type="bibr" target="#b3">[4]</ref> for CNOT+R Z circuits) and modify them to take into account connectivity constraints. We compare the results to first synthesizing the circuit using the original methods and then accounting for the constraints and found that our approach of considering connectivity constraints and synthesizing the circuit simultaneously produced sizable reductions. These reductions depend on the sparseness of the connectivity and the complexity of the input transformation, as shown in our Results section.</p><p>Our method is effective and simple to implement, taking as input the desired transformation (the exact form of which is described in detail in the Methods section) and the graph representing the connectivity of the device and outputting a circuit that respects the allowed connectivity.</p><p>The reminder of this paper is organized as follows. In Sec. II we describe our methodology, followed by our results in Sec. III. In Sec. IV we conclude our manuscript and raise a series of open questions.</p><p>Note: Recently, the authors of <ref type="bibr" target="#b4">[5]</ref> independently presented a similar optimization scheme. Our work is independent of <ref type="bibr" target="#b4">[5]</ref>, being a longer version of the seminar presented by Beatrice Nash at the Dagstuhl Seminar 18381: Quantum Programming Languages, pg. 120, September 2018, Dagstuhl, Germany <ref type="bibr" target="#b5">[6]</ref>, slide deck available online at https://materials.dagstuhl.de/files/18/ 18381/18381.BeatriceNash.Slides.pdf.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>II. METHODS</head><p>In order to perform a CNOT operation between logical qubits mapped to non-adjacent qubits, a sequence of CNOT gates between adjacent qubits is required to indirectly perform the desired operation. If we have linear nearest-neighbor connectivity, then to perform a CNOT between q 1 and q 4 can be achieved using the example circuits shown in <ref type="figure">Fig. 1</ref>.</p><p>These general templates can be extended to work for any physical qubit connectivity graph. While performing a CNOT operation between any two qubits is possible, it is expensive. The circuit depicted in figure 1.b requires 4(l−1) CNOT gates to perform the operation, where l is the distance between the two qubits. The naïve swap circuit in <ref type="figure">Fig. 1</ref> (c) requires 1 + 6(l − 1) gates.</p><p>The best current circuit synthesis methods do not account for qubit connectivity when determining the output circuit. CNOT operations in the optimized output circuit must be replaced by templates such as those shown previously to account for the connectivity of the physical device. Given the sparsity of connectivity graphs of near-term quantum devices, this step increases the CNOT count drastically. </p><formula xml:id="formula_0">|q 1 i • • |q 1 i |q 2 i • • • • |q 2 i |q 3 i • • |q 3 i |q 4 i |q 4 q 1 i (b) |q 1 i ⇥ ⇥ |q 1 i |q 2 i ⇥ • ⇥ |q 2 i |q 3 i ⇥ ⇥ |q 3 i |q 4 i ⇥ ⇥ |q 4 q 1 i (c)</formula><p>FIG. 1: a) 4-qubit linear nearest neighbor physical qubit connectivity. b), c) Circuits for performing a CNOT operation with q 1 as the control and q 4 as the target using the connectivity shown in a).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A. Linear reversible circuit synthesis</head><p>The first class of circuits we look at synthesizing are linear reversible circuits consisting of only CNOT gates. In the Clifford + T universal gate set, the only two-qubit gate needed to achieve universal quantum computation is the CNOT gate, and therefore the efficient synthesis of CNOT circuits is useful for optimizing broader classes of circuits given restricted connectivity. Additionally, CNOT gates are far noisier than single qubit gates, and thus minimizing the number of CNOT gates in a circuit is helpful for reducing errors.</p><p>Patel, Markov and Hayes give in <ref type="bibr" target="#b2">[3]</ref> an asymptotically optimal algorithm for synthesizing linear reversible circuits assuming full connectivity. The result is a O( n 2 log n ) size circuit in the worst case, where n is the number of qubits. In <ref type="bibr" target="#b6">[7]</ref> it is proven that, for n qubits, there exists a linear transformation for which the optimal circuit producing that transformation (again, assuming full connectivity) is size Ω( n 2 log 2 n ); hence, the method in <ref type="bibr" target="#b2">[3]</ref> is optimal in the worst case to within a multiplicative constant. However, each single CNOT gate in the output circuit using method <ref type="bibr" target="#b2">[3]</ref> becomes O(n) gates using the template in <ref type="figure">Fig 1.</ref> b to account for connectivity constraints. Thus, the resulting circuit increases to size O( n 3 log n ) in the worst-case under connectivity constraints. The algorithm we propose in this section improves on this performance, achieving an O(n 2 ) worst-case bound on the size of the resulting circuit, regardless of connectivity.</p><p>The algorithm in <ref type="bibr" target="#b2">[3]</ref>, which is the foundation for that pro-posed here, takes as input an arbitrary linear transformation represented by a n × n binary matrix, and outputs a circuit that produces the desired transformation. The initial state of the n qubits is represented by the n × n identity matrix and each CNOT applied produces a row operation. Specifically, a CNOT with target i and control j multiplies the matrix representation of the circuit by the elementary matrix A i,j , which is the matrix with all elements on the diagonal and (i, j) equal to 1 and all others equal to 0. This results in the bitwise addition of row i to row j. Hence, each row corresponds to the parity of the associated qubit. An example is given in <ref type="figure">Fig. 2</ref>.</p><p>The idea behind the process is to reverse engineer a circuit from the matrix representation of the transformation. The algorithm from <ref type="bibr" target="#b2">[3]</ref> is an optimized version of the Gaussian elimination approach to synthesizing the circuit. The steps are as follows:</p><p>1. Reduce the matrix to upper-triangular form. Each row operation corresponds to a CNOT in the output circuit.</p><p>2. Transpose the resulting matrix and repeat, resulting in the identity matrix.</p><p>3. Construct the output circuit from the operations performed in the following order: first, the operations done in 2) with their control/targets flipped and in the same order in which they were performed, and second, the operations done 1), with their control/targets preserved but the order in which they were performed flipped.</p><p>The O( n 2 log n ) upper bound on the number of operations required for this process, as opposed to the O(n 2 ) operations required for row reduction via Gaussian elimination, is achieved by partitioning. The matrix is divided into n log 2 n sections of size log 2 n × n. Starting with the first section-after placing a 1 on the diagonal, if necessary-eliminate duplicate sub-rows within that section before performing row reduction normally. Then move on to the next section and do the same for the rows below the first log 2 n. Continue in this way until the matrix is in upper triangular form, then transpose and repeat.</p><p>The algorithm we propose does not make use of the partitioning (although it can be easily altered to do so), because it takes advantage of grouping multiple row operations to perform together. We found that while partitioning works well when physical qubits are fully or very nearly fully connected ( 85%), for connectivity as sparse as that of near-term devices our algorithm works best without the use of partitioning. Therefore, we do not go into more details of the process; for more information, see <ref type="bibr" target="#b2">[3]</ref>. Now, we give the intuition for the motivation for our method, using an example of a linear transformation on 6 qubits and their connectivity given in <ref type="figure" target="#fig_0">Fig. 3</ref> (see Appendix A for the fully worked-out example). To eliminate the ones in the first column below the first row, the method in <ref type="bibr" target="#b2">[3]</ref> uses row 1 as the control for each of the operations. Thus, using this example, the sequence of operations for the first columnrepresented as (control, target)-is (1, 3), (1, 4), <ref type="bibr" target="#b0">(1,</ref><ref type="bibr" target="#b4">5)</ref>. Under the assumption of full connectivity, this makes no difference.</p><formula xml:id="formula_1">    1 0 0 1 0 1 0 0 0 0 1 0 0 0 0 1     ×     1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 1     ×     1 0 0 0 1 1 0 0 0 0 1 0 0 0 0 1     =     1 0 1 1 1 1 0 0 0 0 1 0 0 0 1 1     (a) (b) FIG. 2: a) Matrix operations corresponding to CNOTs in circuit in b).        1 1 0 1 1 0 0 0 1 1 0 1 1 0 1 0 1 0 1 1 0 1 0 0 1 1 1 1 0 0 0 1 0 1 0 1        (a) q1</formula><p>q2 q3 q6 q5 q4 However, with restricted connectivity, each operation requires 4(l − 1) CNOT gates when using the template in <ref type="figure">Fig 1.</ref>b, where l &gt; 1 is the length of the shortest path between the two physical qubits. Thus, this sequence of operations requires 4 + 8 + 4 = 16 CNOT gates. However, if we are to instead perform the row operations (4, 5), <ref type="bibr" target="#b2">(3,</ref><ref type="bibr" target="#b3">4)</ref>, <ref type="bibr" target="#b0">(1,</ref><ref type="bibr" target="#b2">3)</ref>, the ones below entry (1, 1) are still eliminated, and instead of 16 CNOT gates, only 1 + 1 + 4 = 6 are required. Give a connectivity graph and a set of rows, our goal is to find the shortest set of paths through the graph that effectively hits each of the nodes associated with those rows. Then, we want to convert that path into a sequence of operations that effectively eliminates each of the rows, while leaving the rest unchanged.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B. Steiner tree problem reduction</head><p>This problem reduces to the Steiner tree problem on the connectivity graph G with edge weights of 1 and the set S equal to the nodes associated with the control and the set of rows to be eliminated. The Steiner tree problem is that of finding the minimum weight tree, T , that is a subgraph of G and includes, but is not limited to including, all nodes in S. Nodes in S are called terminals, and nodes in T but not in S are known as Steiner nodes. An example is shown in <ref type="figure" target="#fig_1">Fig. 4</ref>. The reason for this reduction, perhaps not instantly clear, will become so once shown how to transform a tree into a sequence of row operations. We want to translate this tree, T {c,S} , where c is the control, into a sequence of operations that effectively eliminates each row in S \ {c} using only operations between adjacent nodes. S \ {c} is the set of rows in the linear transformation matrix with ones in their cth entry. We now describe in detail the process of converting a tree to a sequence of row operations. Note that the process differs between whether the row operations are performed before or after the transpose step.</p><p>In order to convert the tree into a sequence of row operations, we first separate it into a set of edge disjoint subtrees {T {ci,Si} } with root c i S and leaves S i \ {c i } ⊂ S. The remaining nodes in each sub-tree are Steiner nodes. The first sub-tree, T {c1,S1} , is rooted at c. Starting from c, grow the sub-tree by traversing T {c,S} in breadth first search order. When arriving at a non-leaf terminal u, add u to T {c1,S1} as a leaf and create a new sub-tree containing a copy of u as a root. Once the sub-tree rooted at c is complete, build the subtrees rooted at its leaves. Continue until all the edges in T {c,S} have been added to a sub-tree. The root of each sub-tree will be used as the control to eliminate each of its leaves.</p><p>Compute the sequence of row operations as follows. Starting with the last sub-tree constructed, traverse the tree in reverse depth first search order. When traversing an edge (u, v), where u is closer to the root than v, add a row operation to the sequence with u as the control and v the target. Once the top of the tree is reached, we have a sequence of operations R. Let</p><formula xml:id="formula_2">R = reverse(R − R[j]), where R[j]</formula><p>is the last operation in R. Now, create R * by removing from R + R those operations with terminals as the targets. R + R applies the row eliminations, while R * undoes those performed on the Steiner nodes, leaving them unchanged. R + R + R * gives the completed sequence of operations for that sub-tree. Add R + R + R * to the overall sequence of operations and move on to the prior sub-tree until all have been traversed. We give an example in <ref type="figure" target="#fig_2">Fig. 5</ref> for the resulting sequence of operations for the tree in <ref type="figure" target="#fig_1">Fig. 4</ref> (assuming before the transpose step), using node 1 as the overall control. Each CNOT in the circuit shown corresponds to a row operation with the same control and target; they are shown this way to help visualize the result. In the resulting circuit, just as in the original algorithm, if these eliminations are performed before the matrix is transposed, their order will be flipped in the resulting circuit. If they occur after, their control/targets will be flipped, but their order will be preserved.</p><p>Each edge will be traversed exactly once in this process. Thus, the total number of gates required will be approximately 4 * (l − d), where d is the number of terminals (excluding the control) and l is the number of edges in the tree. It is clear that for minimum l, this is the optimal solution; hence the reduction to the Steiner tree problem.</p><p>The minimal Steiner tree problem, however, is NP-hard. There are approximation algorithms that come close to optimal the best being within a factor of 1.39, given in <ref type="bibr" target="#b7">[8]</ref>, which improved on the previous bound of 1.55, given in <ref type="bibr" target="#b8">[9]</ref>. However, their run-time is insufficient for our algorithm, which requires many iterations, two for each row. The algorithm we use, given in <ref type="bibr" target="#b9">[10]</ref>, is somewhat of a combination between the better-performing and more efficient approximation algorithms.</p><p>Given a set of terminals and a connectivity graph, the algorithm performs breadth-first search outwards from each of the terminals. When the paths collide, the nodes along that path consolidate into a single node and all the edges adjacent to the consolidated nodes are placed adjacent to this new node. The process is restarted with this node as a new terminal. The total time will therefore be O(d * (|V | + |E|)), where d is the number of terminals. The resulting Steiner tree is within a factor of 2(1 − 1 l ) times the size of the optimal tree, where l is the number of leaves in the optimal tree. From many trials, it seems that this approximation is sufficient to see a large reduction in the CNOT count of the output circuit. The choice of Steiner tree approximation algorithm for this purpose depends on the user's efficiency and performance requirements; a survey is given in <ref type="bibr" target="#b10">[11]</ref>.</p><p>The algorithm thus far works as follows:</p><p>1. Start with column i = 1.</p><p>2. If entry (i, i) = 0, find all rows j such that (j, i) = 1 and j &gt; i. Choose j with the shortest path in the connectivity graph to i, and use this path to perform a series of allowed row operations that adds row j to row i.</p><p>3. Find rows below row i with entry in column i equal to 1. Create set of terminals S from nodes associated with those rows in addition to node i.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.">Find Steiner graph approximation with connectivity</head><p>graph G and terminals S.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.</head><p>Compute row operations using this graph that eliminate those rows with constraints on allowed row operations. Perform those operations and compute resulting matrix.</p><p>6. Repeat steps 2-5 on the next columns, until the matrix is in upper-triangular form.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.">Transpose the matrix and repeat.</head><p>After the matrix is transposed, we must alter step 5 in the process slightly. Now, say that a row operation is effectively performed between (i, j), with i as the control, and j as the target. If i &gt; j, then the lower-triangular form of the matrix is ruined. Thus, we have to alter the algorithm so as to only allow effective row operations with a lower index row as the control and a higher index as the target.</p><p>To do this, perform the Steiner tree algorithm as before, except use the smallest node as the control for all of the operations. <ref type="figure">Fig. 6</ref> shows how to eliminate two rows on the same path, which is never necessary before the transpose step. From <ref type="figure">Fig. 6</ref> it is clear that the maximum number of additional gates required to ensure this requirement is 4 * d.</p><p>Let the output sequence of operations before the transpose step be a list A and after the transpose step be a list B. When adding each operation to the output sequence B, flip the control and target. The output circuit will be: B + reverse(A).</p><p>The Steiner tree approximations will always be size O(n). Since the number of operations is O(4 * (size of tree)), then the operations required will be O(n). Since there are O(n) trees computed in total throughout the execution of the algorithm (O(1) per column), then the overall number of operations is O(n 2 ), regardless of connectivity.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C. CNOT + phase circuit synthesis</head><p>The other class of circuits we look at synthesizing given connectivity constraints are those consisting of CNOT gates and Z-basis rotations of arbitrary angles. Amy, Azimzadeh, and Mosca give in <ref type="bibr" target="#b3">[4]</ref> a heuristic algorithm for the efficient synthesis of CNOT count optimized circuits in this class assuming full connectivity. The results in <ref type="bibr" target="#b3">[4]</ref> show a 23% decrease in the CNOT count on average for a suite of Clifford+T benchmark circuits.</p><p>The {CN OT, R z } circuit to be synthesized is described by its phase polynomial f and matrix A representing the overall linear transformation on the basis <ref type="figure">states. (f, A)</ref>, known as the sum-over-paths form, fully defines the desired unitary transformation applied by the output circuit, U C . For a size n-qubit circuit:</p><formula xml:id="formula_3">U C = x F n 2 e 2πif (x) |Ax x| ,</formula><p>where F n 2 is the set of all length n bit strings, and f (x) is given by:</p><formula xml:id="formula_4">f (x) = y F n 2f (y)(x 1 y 1 ⊕ x 2 y 2 ⊕ ... ⊕ x n y n ).</formula><p>f (x) is the Fourier expansion of f with Fourier coefficientŝ f (y). Let the support off , supp(f ), be the parities with nonzero Fourier coeffiecient. Since the application of a CNOT gate with control x 1 and target x 2 maps |x 1 , x 2 to |x 1 , x 1 ⊕ x 2 , the state of each qubit can be mapped to a bit string representing a parity. Each R Z gate is determined by the parity of the state of the qubit on which it is applied at that point in the circuit. The coefficients for each parity y F n 2 , f (y), are given by the sum of the Z rotation angles on that parity. Hence R Z gates acting on the same parity can be combined. For example, the phase polynomial f and basis state transformation A associated with the circuit shown in <ref type="figure">Fig. 7</ref> is: The method in <ref type="bibr" target="#b3">[4]</ref> first synthesizes a circuit with the input phase polynomial f , then uses the method in <ref type="bibr" target="#b2">[3]</ref> to produce the basis state transformation given by input matrix A. To do the former, the goal is to compute a minimal parity network. A parity network is a circuit in which every parity in a set S appears. In our case, S = supp(f ). By applying R Z (θ), with θ =f (y), to each parity y S, the resulting circuit will have the desired phase polynomial. To apply the linear transformation to the basis states given by A, first compute the linear transformation C resulting from the parity network. Using the method described previously, compute the circuit the linear transformation AC −1 and append it to the end of the existing circuit.</p><formula xml:id="formula_5">f =a(x 1 ) + (b + c)(x 2 ) + d(x 1 ⊕ x 2 ⊕ x 3 ) + e(x 3 ⊕ x 4 ) + f (x 1 ⊕ x 2 ⊕ x 4 )</formula><p>To find the exact minimal parity network, however, is NPhard; a a heuristic for synthesizing an approximation is given in <ref type="bibr" target="#b3">[4]</ref>. The algorithm works as follows:</p><p>1. Represent the set of parities as a matrix P , where each column corresponds to a parity and each row to a qubit. For example, P associated with the circuit given in <ref type="figure">Fig. 7</ref> is</p><formula xml:id="formula_6">   1 0 1 1 0 0 1 1 1 0 0 0 1 0 1 0 0 0 1 1   </formula><p>where the first column corresponds to parity x 1 , the second to parity x 2 , the third to parity x 1 ⊕ x 2 ⊕ x 3 , the fourth to parity x 1 ⊕ x 2 ⊕ x 4 , and the last to parity</p><formula xml:id="formula_7">x 3 ⊕ x 4 .</formula><p>2. Find the row j (of those not yet recursed on) such that:</p><formula xml:id="formula_8">j = arg max i cols(P ) max x {0,1} {|P j,i = x|}.</formula><p>3. Separate P into P 0 , the columns i with P j,i = 0, and P 1 , those with P j,i = 1.</p><p>4. Recurse on P 0 .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.</head><p>For P 1 , find row i = j such that all elements in row i of P 1 equal 1. Add a CNOT with control i and target j to our parity network. Set P i = P i + P j . Repeat until no more such rows are found.</p><p>6. Recurse on P 1 .</p><p>A detailed example of this process can be found in <ref type="bibr" target="#b3">[4]</ref>. Our method performs the same series of steps, except step 5 is modified as follows:</p><p>5. Compute the approximate Steiner tree of the connectivity graph G with S equal to the set of rows {i} such that each element in row i of P 1 equals 1. Using row j as the control, eliminate them all together in the same manner described in the previous section.</p><p>In this case, whether the control bit has greater index than the target is not relevant. Each parity in supp(f ) will appear at least once in this circuit. For each y supp(f ), apply gate R Z (f (y)) to the qubit with incoming parity y. Lastly, append the circuit producing linear transformation AC −1 , taking into account connectivity constraints, using the algorithm described previously.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>III. RESULTS</head><p>In this section we compare the size of the output circuits generated using the algorithm described in the previous sections to those generated by first synthesizing the circuit using the method in <ref type="bibr" target="#b2">[3]</ref> (for linear reversible circuits) or <ref type="bibr" target="#b3">[4]</ref> (for CNOT + T circuits) without taking into account connectivity constraints, then, once the circuit has been synthesized, using the template given in <ref type="figure">Fig. 1 (b)</ref> to take into account the connectivity. In both cases, after the circuit has been synthesized, we further optimize the size of the resulting circuit by commuting operators and canceling where possible.</p><p>We investigate random circuits on 20 qubits with varying connectivity (results depicted in <ref type="figure">Fig. 8 and Fig. 10</ref>) and the Google Bristlecone 72 qubit architecture (results depicted in <ref type="figure" target="#fig_4">Fig. 9 and Fig. 11</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>IV. CONCLUSIONS AND OPEN QUESTIONS</head><p>We constructed a circuit synthesis scheme that takes as input the qubit connectivity graph and a quantum circuit over the gate set generated by {CNOT, R Z } and outputs a circuit that respects the connectivity of the device. We applied our techniques to Google's Bristlecone 72-qubit quantum chip connectivity. We compared the performance of our scheme as a function of sparseness of random quantum circuits of 20 qubits.</p><p>Since in practice different CNOT gates can be affected by different amount of noise, an idea for further work would be to weight the edges based on the error rate of the CNOT gate between the respective qubits. Techniques adapted from <ref type="bibr" target="#b3">[4]</ref> could potentially be integrated into the methods given in this paper to produce circuits with lower error rates.</p><p>One further direction is to improve on efficiency and quality of the results produced by our scheme.</p><p>Another research direction is to investigate whether our techniques can be extended to include broader classes of quantum circuits.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FIG. 8:</head><p>Results for the synthesis of CNOT circuits producing a randomly generated linear transformation on 20 qubits for connectivity of varying sparseness. We repeatedly generate random connected graphs of sparseness between 0.0 and 1.0, where sparseness is defined as the probability that an edge is placed between two qubits. Sparseness of 1.0 is a fully connected graph. The size of the output circuit is compared against the size of the circuit produced by first using the method in <ref type="bibr" target="#b2">[3]</ref> (with partitioning) to synthesize a circuit assuming full connectivity and then taking into account connectivity constraints. The reason that our method performs worse than the method in <ref type="bibr" target="#b2">[3]</ref> for nearly complete connectivity is due to partitioning, which our method does not use, but which achieves an improvement when the qubits are nearly fully connected. Since qubits in NISQ devices only have nearest-neighbor connectivity, their connectivity is very sparse.  <ref type="figure">FIG. 10</ref>: Results for the synthesis of CNOT+R Z circuits producing a randomly generated linear transformation and Z-axis rotation on 20 qubits for connectivity of varying sparseness. The size of the output circuit is compared against the size of the circuit produced by first using the method in <ref type="bibr" target="#b3">[4]</ref> to synthesize a circuit assuming full connectivity and then taking into account connectivity constraints.</p><p>FIG. 11: Results for the synthesis of CNOT+R Z circuits producing randomly generated transformations for Google's Bristlecone topology. The size of the output circuit is compared against the size of the circuit produced by first using the method in <ref type="bibr" target="#b3">[4]</ref> to synthesize a circuit assuming full connectivity and then taking into account connectivity constraints.  <ref type="figure" target="#fig_0">Fig. 3</ref> (a) on connectivity given in <ref type="figure" target="#fig_0">Fig. 3 (b)</ref>. Fully synthesized circuit can be produced by putting together the gates from steps 8-11 and switching the controls and targets, then putting together the gates from steps 1-7 and reversing them, leaving the controls and targets as shown.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>FIG. 3</head><label>3</label><figDesc>: a) Matrix representation of linear transformation; b) Connectivity of physical qubits.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>FIG. 4 :</head><label>4</label><figDesc>A solution to the Steiner tree problem on this graph, with each edge having weight 1. The non-shaded nodes are the terminals. The bold edges are those included in the solution. Nodes 4, 5, and 8 are Steiner nodes.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>FIG. 5 :</head><label>5</label><figDesc>Resulting sequence of operations from the tree inFig 4.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>FIG. 6 : 6 FIG. 7 :</head><label>667</label><figDesc>Circuit that produces CNOT operations between both q 1 , q 3 and q 1 , q CNOT + phase circuit example</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>FIG. 9 :</head><label>9</label><figDesc>Results for the synthesis of CNOT circuits producing randomly generated linear transformations of various size onGoogle's 72-qubit Bristlecone. The performance is calculated as described in the caption ofFig. 8.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>FIG. 12 :</head><label>12</label><figDesc>Worked through example of circuit synthesis producing the linear transformation given</figDesc></figure>
 		</body>
 		<back>
 
 			<div type="acknowledgement">
-<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We thank Nathan Langford and Chris Wood for insightful conversations. KM is supported through Australian Research Council Future Fellowship FT160100073.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We thank Matt Amy for very useful comments and discussions. We acknowledge support from NSERC and CIFAR. IQC is supported in part by the Government of Canada and the Province of Ontario.</p></div>
 			</div>
 
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Appendix A: Example</p></div>			</div>
 			<div type="references">
 
 				<listBibl>
 
 <biblStruct xml:id="b0">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">I</forename><forename type="middle">M</forename><surname>Georgescu</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Ashhab</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Nori</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/RevModPhys.86.153</idno>
-	</analytic>
 	<monogr>
-		<title level="j">Rev. Mod. Phys</title>
+				<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">John</forename><surname>Preskill</surname></persName>
+		</author>
+		<title level="m">Quantum Computing in the NISQ era and beyond. Quantum</title>
 		<imprint>
-			<biblScope unit="volume">86</biblScope>
-			<biblScope unit="page">153</biblScope>
-			<date type="published" when="2014" />
+			<date type="published" when="2018-08" />
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page">79</biblScope>
 		</imprint>
 	</monogr>
 </biblStruct>
 
 <biblStruct xml:id="b1">
 	<analytic>
-		<title/>
+		<title level="a" type="main">Optimization of lattice surgery is np-hard</title>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><forename type="middle">T</forename><surname>Barreiro</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Herr</surname></persName>
 		</author>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Müller</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">N</forename><surname>Franco</surname></persName>
 		</author>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">P</forename><surname>Schindler</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Devitt</surname></persName>
 		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Nigg</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Monz</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Chwalla</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Hennrich</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><forename type="middle">F</forename><surname>Roos</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">P</forename><surname>Zoller</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><surname>Blatt</surname></persName>
-		</author>
-		<idno type="DOI">10.1038/nature09801</idno>
 	</analytic>
 	<monogr>
-		<title level="j">Nature</title>
+		<title level="m">npj Quantum Information</title>
 		<imprint>
-			<biblScope unit="volume">470</biblScope>
-			<biblScope unit="page">486</biblScope>
-			<date type="published" when="2011" />
+			<date type="published" when="2017" />
+			<biblScope unit="volume">3</biblScope>
 		</imprint>
 	</monogr>
 </biblStruct>
 
 <biblStruct xml:id="b2">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><forename type="middle">P</forename><surname>Feynman</surname></persName>
-		</author>
-		<idno type="DOI">10.1007/BF02650179</idno>
-	</analytic>
 	<monogr>
-		<title level="j">Int. J. Theor. Phys</title>
+		<title level="m" type="main">Optimal synthesis of linear reversible circuits. Quantum Information and Computation</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">I</forename><surname>Markov</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Hayes</surname></persName>
+		</author>
 		<imprint>
-			<biblScope unit="volume">21</biblScope>
-			<biblScope unit="page">467</biblScope>
-			<date type="published" when="1982" />
+			<date type="published" when="2008" />
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="282" to="294" />
 		</imprint>
 	</monogr>
 </biblStruct>
 
 <biblStruct xml:id="b3">
 	<analytic>
-		<title/>
+		<title level="a" type="main">Polynomial-time t-depth optimization of Clifford+T circuits via matroid partitioning. Computer-Aided Design of Integrated Circuits and Systems</title>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><surname>Blümel</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Amy</surname></persName>
 		</author>
-		<idno type="DOI">10.1103/PhysRevLett.73.428</idno>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Maslov</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Mosca</surname></persName>
+		</author>
 	</analytic>
 	<monogr>
-		<title level="j">Phys. Rev. Lett</title>
+		<title level="j">IEEE Transactions on</title>
 		<imprint>
-			<biblScope unit="volume">73</biblScope>
-			<biblScope unit="page">428</biblScope>
-			<date type="published" when="1994" />
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="1476" to="1489" />
+			<date type="published" when="2014-10" />
 		</imprint>
 	</monogr>
 </biblStruct>
 
 <biblStruct xml:id="b4">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">E</forename><surname>Knill</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Leibfried</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><surname>Reichle</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Britton</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><forename type="middle">B</forename><surname>Blakestad</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><forename type="middle">D</forename><surname>Jost</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Langer</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><surname>Ozeri</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Seidelin</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><forename type="middle">J</forename><surname>Wineland</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevA.77.012307</idno>
-	</analytic>
 	<monogr>
-		<title level="j">Phys. Rev. A</title>
-		<imprint>
-			<biblScope unit="volume">77</biblScope>
-			<biblScope unit="page">12307</biblScope>
-			<date type="published" when="2007" />
-		</imprint>
+		<title level="m" type="main">Cnot circuit extraction for topologically-constrained quantum memories</title>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Aleks</forename><surname>Kissinger</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Arianne</forename><surname>Meijer Van De Griend</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1904.00633</idno>
+		<imprint/>
 	</monogr>
 </biblStruct>
 
 <biblStruct xml:id="b5">
 	<analytic>
-		<title/>
+		<title level="a" type="main">NISQ optimization for CNOT and CNOT + T circuits</title>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Proctor</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Beatrice</forename><surname>Nash</surname></persName>
 		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Rudinger</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Young</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Sarovar</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><surname>Blume-Kohout</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevLett.119.130502</idno>
 	</analytic>
 	<monogr>
-		<title level="j">Phys. Rev. Lett</title>
+		<title level="m">Report from Dagstuhl Seminar 18381: Quantum Programming Languages</title>
+		<editor>Michele Mosca, Martin Roettler, and Peter Selinger</editor>
 		<imprint>
-			<biblScope unit="volume">119</biblScope>
-			<biblScope unit="page">130502</biblScope>
-			<date type="published" when="2017" />
+			<date type="published" when="2018" />
+			<biblScope unit="volume">120</biblScope>
 		</imprint>
 	</monogr>
+	<note>Dagstuhl Reports</note>
 </biblStruct>
 
 <biblStruct xml:id="b6">
 	<analytic>
-		<title/>
+		<title level="a" type="main">Synthesis of reversible logic circuits</title>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><forename type="middle">T</forename><surname>Merkel</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">V</forename><surname>Shende</surname></persName>
 		</author>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><forename type="middle">M</forename><surname>Gambetta</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Prasad</surname></persName>
 		</author>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><forename type="middle">A</forename><surname>Smolin</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">I</forename><surname>Markov</surname></persName>
 		</author>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Poletto</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Hayes</surname></persName>
 		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><forename type="middle">D</forename><surname>Córcoles</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">B</forename><forename type="middle">R</forename><surname>Johnson</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><forename type="middle">A</forename><surname>Ryan</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Steffen</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevA.87.062119</idno>
 	</analytic>
 	<monogr>
-		<title level="j">Phys. Rev. A</title>
+		<title level="j">IEEE Trans. on CAD</title>
 		<imprint>
-			<biblScope unit="volume">87</biblScope>
-			<biblScope unit="page">62119</biblScope>
-			<date type="published" when="2013" />
+			<biblScope unit="page" from="710" to="722" />
+			<date type="published" when="2003-06" />
 		</imprint>
 	</monogr>
 </biblStruct>
 
 <biblStruct xml:id="b7">
-	<monogr>
-		<title/>
+	<analytic>
+		<title level="a" type="main">An improved lp-based approximation for steiner tree</title>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><forename type="middle">J</forename><surname>Wallman</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Byrka</surname></persName>
 		</author>
-		<idno type="DOI">10.22331/q-2018-01-29-47</idno>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Grandoni</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Rothvoß</surname></persName>
+		</author>
+		<author>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Sanita</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. of STOC</title>
+		<meeting>of STOC</meeting>
 		<imprint>
-			<date type="published" when="2018" />
-			<biblScope unit="volume">2</biblScope>
-			<biblScope unit="page">47</biblScope>
+			<date type="published" when="2010" />
+			<biblScope unit="page" from="583" to="592" />
 		</imprint>
 	</monogr>
 </biblStruct>
 
 <biblStruct xml:id="b8">
 	<analytic>
-		<title/>
+		<title level="a" type="main">Improved steiner tree approximation in graphs</title>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><forename type="middle">A</forename><surname>Pollock</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><surname>Robins</surname></persName>
 		</author>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Rodríguez-Rosario</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Zelikovsky</surname></persName>
 		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Frauenheim</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Paternostro</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Modi</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevLett.120.040405</idno>
 	</analytic>
 	<monogr>
-		<title level="j">Phys. Rev. Lett</title>
+		<title level="m">7th Annual ACM-SIAM Symposium on Discrete Algorithms</title>
 		<imprint>
-			<biblScope unit="volume">120</biblScope>
-			<biblScope unit="page">40405</biblScope>
-			<date type="published" when="2018" />
+			<date type="published" when="2000" />
 		</imprint>
 	</monogr>
 </biblStruct>
 
 <biblStruct xml:id="b9">
 	<analytic>
-		<title/>
+		<title level="a" type="main">A multiple source algorithm for suboptimum steiner trees in graphs</title>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Costa</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Shrapnel</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Wang</surname></persName>
 		</author>
 	</analytic>
 	<monogr>
-		<title level="j">New J. Phys</title>
+		<title level="m">Proc. International Workshop on Graphtheoretic Concepts in Computer Science</title>
+		<meeting>International Workshop on Graphtheoretic Concepts in Computer Science</meeting>
 		<imprint>
-			<biblScope unit="volume">18</biblScope>
-			<biblScope unit="page">63032</biblScope>
-			<date type="published" when="2016" />
+			<date type="published" when="1985" />
+			<biblScope unit="page" from="387" to="396" />
 		</imprint>
 	</monogr>
 </biblStruct>
 
 <biblStruct xml:id="b10">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Z.-X</forename><surname>Man</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Y.-J</forename><surname>Xia</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R. Lo</forename><surname>Franco</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevA.92.012315</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Phys. Rev. A</title>
-		<imprint>
-			<biblScope unit="volume">92</biblScope>
-			<biblScope unit="page">12315</biblScope>
-			<date type="published" when="2015" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b11">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">O</forename><surname>Oreshkov</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><forename type="middle">A</forename><surname>Brun</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevA.76.022318</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Phys. Rev. A</title>
-		<imprint>
-			<biblScope unit="volume">76</biblScope>
-			<biblScope unit="page">22318</biblScope>
-			<date type="published" when="2007" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b12">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Aharonov</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Kitaev</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Preskill</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevLett.96.050504</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Phys. Rev. Lett</title>
-		<imprint>
-			<biblScope unit="page">50504</biblScope>
-			<date type="published" when="2005" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b13">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename></persName>
-		</author>
-		<idno type="arXiv">arXiv:1207.6131</idno>
-		<imprint>
-			<date type="published" when="2012" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b14">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><surname>Kalai</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:0904.3265</idno>
-		<imprint>
-			<date type="published" when="2009" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b15">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">H</forename><surname>Ball</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><forename type="middle">M</forename><surname>Stace</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><forename type="middle">T</forename><surname>Flammia</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><forename type="middle">J</forename><surname>Biercuk</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevA.93.022303</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Phys. Rev. A</title>
-		<imprint>
-			<biblScope unit="volume">93</biblScope>
-			<biblScope unit="page">22303</biblScope>
-			<date type="published" when="2015" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b16">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Y</forename><surname>Wang</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Y</forename><surname>Li</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Z</forename><surname>Qi Yin</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">B</forename><surname>Zeng</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1801.03782</idno>
-		<imprint>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b17">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Liu</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Y</forename><surname>Li</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><surname>Duan</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1807.00429</idno>
-		<imprint>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b18">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><surname>Vissers</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Bouten</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1811.09657</idno>
-		<imprint>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b19">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><surname>Harper</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Flammia</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1806.02359</idno>
-		<imprint>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b20">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><forename type="middle">K</forename><surname>Singh</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">B</forename><surname>Panda</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">B</forename><forename type="middle">K</forename><surname>Behera</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">P</forename><forename type="middle">K</forename><surname>Panigrahi</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1807.02883</idno>
-		<imprint>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b21">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">B</forename><surname>Pokharel</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">N</forename><surname>Anand</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">B</forename><surname>Fortman</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><forename type="middle">A</forename><surname>Lidar</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevLett.121.220502</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Phys. Rev. Lett</title>
-		<imprint>
-			<biblScope unit="volume">121</biblScope>
-			<biblScope unit="page">220502</biblScope>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b22">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Koch</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><forename type="middle">M</forename><surname>Yu</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Gambetta</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><forename type="middle">A</forename><surname>Houck</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><forename type="middle">I</forename><surname>Schuster</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Majer</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Blais</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><forename type="middle">H</forename><surname>Devoret</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><forename type="middle">M</forename><surname>Girvin</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">R</forename><forename type="middle">J</forename><surname>Schoelkopf</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevA.76.042319</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Phys. Rev. A</title>
-		<imprint>
-			<biblScope unit="volume">76</biblScope>
-			<biblScope unit="page">42319</biblScope>
-			<date type="published" when="2007" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b23">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Häner</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><forename type="middle">S</forename><surname>Steiger</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Svore</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Troyer</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1604.01401</idno>
-		<imprint>
-			<date type="published" when="2016" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b24">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Milz</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><forename type="middle">A</forename><surname>Pollock</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Modi</surname></persName>
-		</author>
-		<idno type="DOI">10.1142/S1230161217400169</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Open Sys. &amp; Info. Dyn</title>
-		<imprint>
-			<biblScope unit="volume">24</biblScope>
-			<biblScope unit="page">1740016</biblScope>
-			<date type="published" when="2017" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b25">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Milz</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><forename type="middle">S</forename><surname>Kim</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><forename type="middle">A</forename><surname>Pollock</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Modi</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1901.05223</idno>
-		<imprint>
-			<date type="published" when="2019" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b26">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Gilchrist</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">N</forename><forename type="middle">K</forename><surname>Langford</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><forename type="middle">A</forename><surname>Nielsen</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevA.71.062310</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Phys. Rev. A</title>
-		<imprint>
-			<biblScope unit="volume">71</biblScope>
-			<biblScope unit="page">62310</biblScope>
-			<date type="published" when="2005" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b27">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><surname>Benenti</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><surname>Strini</surname></persName>
-		</author>
-		<idno type="DOI">10.1088/0953-4075/43/21/215508</idno>
-	</analytic>
-	<monogr>
-		<title level="j">J. Phys. B</title>
-		<imprint>
-			<biblScope unit="volume">43</biblScope>
-			<biblScope unit="page">215508</biblScope>
-			<date type="published" when="2010" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b28">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Maziero</surname></persName>
-		</author>
-		<idno type="DOI">10.1007/s13538-015-0367-2</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Braz. J. Phys</title>
-		<imprint>
-			<biblScope unit="volume">45</biblScope>
-			<biblScope unit="page">575</biblScope>
-			<date type="published" when="2015" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b29">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">P</forename><surname>Taranto</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><forename type="middle">A</forename><surname>Pollock</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Milz</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Tomamichel</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Modi</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1805.11341</idno>
-		<imprint>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b30">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">P</forename><surname>Taranto</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Milz</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><forename type="middle">A</forename><surname>Pollock</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Modi</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1810.10809</idno>
-		<imprint>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b31">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">J</forename><surname>Watrous</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:0901.4709</idno>
-		<imprint>
-			<date type="published" when="2009" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b32">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Diamond</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Boyd</surname></persName>
-		</author>
-	</analytic>
-	<monogr>
-		<title level="j">J. Mach. Learn. Res</title>
-		<imprint>
-			<biblScope unit="volume">17</biblScope>
-			<biblScope unit="page">1</biblScope>
-			<date type="published" when="2016" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b33">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><forename type="middle">D</forename><surname>Akshay Agrawal</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">Robin</forename><surname>Verschueren</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Boyd</surname></persName>
-		</author>
-	</analytic>
-	<monogr>
-		<title level="j">Journal of Control and Decision</title>
-		<imprint>
-			<biblScope unit="volume">5</biblScope>
-			<biblScope unit="page">42</biblScope>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b34">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><forename type="middle">A</forename><surname>Pollock</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Rodríguez-Rosario</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">T</forename><surname>Frauenheim</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Paternostro</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Modi</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevA.97.012127</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Phys. Rev. A</title>
-		<imprint>
-			<biblScope unit="volume">97</biblScope>
-			<biblScope unit="page">12127</biblScope>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b35">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Milz</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Sakuldee</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><forename type="middle">A</forename><surname>Pollock</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Modi</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1712.02589</idno>
-		<imprint>
-			<date type="published" when="2017" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b36">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Shrapnel</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Costa</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><surname>Milburn</surname></persName>
-		</author>
-		<idno type="DOI">10.1088/1367-2630/aabe12</idno>
-	</analytic>
-	<monogr>
-		<title level="j">New J. Phys</title>
-		<imprint>
-			<biblScope unit="volume">20</biblScope>
-			<biblScope unit="page">53010</biblScope>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b37">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Costa</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Ringbauer</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><forename type="middle">E</forename><surname>Goggin</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><forename type="middle">G</forename><surname>White</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Fedrizzi</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevA.98.012328</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Phys. Rev. A</title>
-		<imprint>
-			<biblScope unit="volume">98</biblScope>
-			<biblScope unit="page">12328</biblScope>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b38">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Giarmatzi</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Costa</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1811.03722</idno>
-		<imprint>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b39">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Milz</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><forename type="middle">A</forename><surname>Pollock</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Modi</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevA.98.012108</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Phys. Rev. A</title>
-		<imprint>
-			<biblScope unit="volume">98</biblScope>
-			<biblScope unit="page">12108</biblScope>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b40">
-	<monogr>
-		<title level="m" type="main">Relative entropy for four qubits can be as large as 4</title>
-		<imprint/>
-	</monogr>
-	<note>but due to causality conditions this is not achievable for the process tensor</note>
-</biblStruct>
-
-<biblStruct xml:id="b41">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Shukla</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><surname>Sisodia</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">A</forename><surname>Pathak</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1805.07185</idno>
-		<imprint>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b42">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Sakuldee</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Milz</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><forename type="middle">A</forename><surname>Pollock</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Modi</surname></persName>
-		</author>
-		<idno type="DOI">10.1088/1751-8121/aabb1e</idno>
-	</analytic>
-	<monogr>
-		<title level="j">J. Phys. A</title>
-		<imprint>
-			<biblScope unit="volume">51</biblScope>
-			<biblScope unit="page">414014</biblScope>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b43">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Li</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><forename type="middle">J W</forename><surname>Hall</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">H</forename><forename type="middle">M</forename><surname>Wiseman</surname></persName>
-		</author>
-		<idno type="DOI">10.1016/j.physrep.2018.07.001</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Phys. Rep</title>
-		<imprint>
-			<biblScope unit="volume">759</biblScope>
-			<biblScope unit="page">1</biblScope>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b44">
 	<monogr>
 				<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">C</forename><surname>Giarmatzi</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Hwang</surname></persName>
 		</author>
 		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Costa</surname></persName>
+			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Richards</surname></persName>
 		</author>
-		<idno type="DOI">10.1038/s41534-018-0062-6</idno>
-		<title level="m">npj Quantum Information</title>
+		<title level="m">Steiner tree problems. Networks</title>
 		<imprint>
-			<date type="published" when="2018" />
-			<biblScope unit="volume">4</biblScope>
-			<biblScope unit="page">17</biblScope>
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b45">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">S</forename><surname>Shrapnel</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">F</forename><surname>Costa</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><surname>Milburn</surname></persName>
-		</author>
-		<idno type="DOI">10.1142/S0219749918400105</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Int. J. Quant. Inf</title>
-		<imprint>
-			<biblScope unit="volume">16</biblScope>
-			<biblScope unit="page">1840010</biblScope>
-			<date type="published" when="2018" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b46">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">D</forename><surname>Greenbaum</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1509.02921</idno>
-		<imprint>
-			<date type="published" when="2015" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b47">
-	<monogr>
-		<title level="m" type="main">The ibm quantum experience</title>
-		<ptr target="http://www.research.ibm.com/quantum/" />
-		<imprint/>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b48">
-	<monogr>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">L</forename><surname>Heyfron</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">E</forename><forename type="middle">T</forename><surname>Campbell</surname></persName>
-		</author>
-		<idno type="arXiv">arXiv:1712.01557</idno>
-		<imprint>
-			<date type="published" when="2017" />
-		</imprint>
-	</monogr>
-</biblStruct>
-
-<biblStruct xml:id="b49">
-	<analytic>
-		<title/>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">K</forename><surname>Banaszek</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">G</forename><forename type="middle">M</forename><surname>D&amp;apos;ariano</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><forename type="middle">G A</forename><surname>Paris</surname></persName>
-		</author>
-		<author>
-			<persName xmlns="http://www.tei-c.org/ns/1.0"><forename type="first">M</forename><forename type="middle">F</forename><surname>Sacchi</surname></persName>
-		</author>
-		<idno type="DOI">10.1103/PhysRevA.61.010304</idno>
-	</analytic>
-	<monogr>
-		<title level="j">Phys. Rev. Lett</title>
-		<imprint>
-			<biblScope unit="volume">61</biblScope>
-			<biblScope unit="page">10304</biblScope>
-			<date type="published" when="1999" />
+			<date type="published" when="1992" />
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="55" to="89" />
 		</imprint>
 	</monogr>
 </biblStruct>

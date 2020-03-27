@@ -134,8 +134,8 @@
               </div>
               <div class="large-6 medium-6 cell">
                 <label>Check these out</label>
-                <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-                <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
+                <input id="checkbox1" type="checkbox" class="checkbox"><label for="checkbox1">Checkbox 1</label>
+                <input id="checkbox2" type="checkbox" class="checkbox"><label for="checkbox2">Checkbox 2</label>
               </div>
             </div>
             <div class="grid-x grid-padding-x">
@@ -161,6 +161,17 @@
         </div>
       </div>
     </div>
+
+    <nav aria-label="You are here:" role="navigation">
+  <ul class="breadcrumbs">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Features</a></li>
+    <li class="disabled">Gene Splicing</li>
+    <li>
+      <span class="show-for-sr">Current: </span> Cloning
+    </li>
+  </ul>
+</nav>
 
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/what-input/dist/what-input.js"></script>

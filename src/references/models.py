@@ -17,9 +17,9 @@ class GroupMembership(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
-        return user.username + " is a member of " + group.name
+        return self.user.username + " is a member of " + self.group.name
 
 
 class Reference(models.Model):
@@ -36,7 +36,7 @@ class Reference(models.Model):
 class ReferenceType(models.Model):
     name = models.CharField(max_length=200, unique=True)
     created = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return self.name
 
@@ -44,7 +44,7 @@ class ReferenceType(models.Model):
 class ReferenceField(models.Model):
     name = models.CharField(max_length=200)
     referenceType = models.ForeignKey(ReferenceType, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return self.referenceType.name + " " + self.name
 
@@ -52,6 +52,6 @@ class ReferenceField(models.Model):
 class ReferenceFile(models.Model):
     pdf = models.FileField(upload_to='papers')
     reference = models.ForeignKey(Reference, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return "PDF of " + self.reference.name

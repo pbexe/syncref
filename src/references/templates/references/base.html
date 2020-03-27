@@ -21,7 +21,9 @@
 <body>
     <div class="top-bar">
         <div class="top-bar-left">
+        
             <ul class="dropdown menu" data-dropdown-menu>
+            
                 <li class="menu-text">Syncref</li>
                 <ul class="menu">
                     <li><a href="{% url 'home' %}" ><i class="fi-home"></i></a></li>
@@ -77,6 +79,13 @@
         {% endif %}
             <main>
                 <div class="grid-container">
+                <nav aria-label="You are here:" role="navigation">
+                    {% block breadcrumbs %}
+                    <ul class="breadcrumbs">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                    </ul>
+                    {% endblock %}
+                    </nav>
                     {% if messages %}
                     {% for message in messages %}
                     <div class="callout {% if message.tags %} {{ message.tags }}{% endif %}" data-closable>
@@ -96,6 +105,16 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.1/dist/js/foundation.min.js"></script>
+    <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
 </script>
 <script>
     $(document).foundation();

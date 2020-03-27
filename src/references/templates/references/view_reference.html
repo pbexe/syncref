@@ -1,6 +1,14 @@
 {% extends "references/base.html" %}
 {% load static %}
 
+{% block breadcrumbs %}
+<ul class="breadcrumbs">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'view_group' reference.group.pk %}" >{{reference.group.name}}</a></li>
+    <li>{{reference.name}}</li>
+</ul>
+{% endblock %}
+
 {% block body %}
 <h1>{{reference.name}}</h1>
 <hr>

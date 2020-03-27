@@ -1,3 +1,6 @@
+import re
+import json
+
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate
@@ -74,7 +77,6 @@ def signup(request):
         form = UserCreationForm()
     return render(request, "references/signup.html", {
         "form": form,
-        # "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
         })
 
 
@@ -120,7 +122,8 @@ def create_group(request):
         membership.save()
         return redirect("view_group", pk=group.pk)
     return render(request, "references/create_group.html",{
-        "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+        "groups": [i.group for i in GroupMembership.objects.filter(
+            user=request.user)]
     })
 
 
@@ -147,7 +150,8 @@ def view_group(request, pk):
         return render(request, "references/group.html", {
             "group": group,
             "references": references,
-            "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
+            "groups": [i.group for i in GroupMembership.objects.filter(
+                user=request.user)]
 
         })
     else:
@@ -196,7 +200,8 @@ def add(request, pk):
         else:
             return render(request, "references/add.html", {
                 "pk": group.pk,
-                "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)],
+                "groups": [i.group for i in GroupMembership.objects.filter(
+                    user=request.user)],
                 "types": ReferenceType.objects.all()
             })
     else:
@@ -287,19 +292,31 @@ def uploadReference(request, pk):
                             bibtex["title"] = info[0]
                         if info[1]:
                             bibtex["author"] = " and ".join(info[1])
-                        bibtex["comment"] = "ERROR: No candidate was found. This is all the data I could extract"
+                        bibtex["comment"] = ("ERROR: No candidate was found. "
+                                             "This is all the data I could "
+                                             "extract")
                         bibtex_py = [bibtex]
-                        messages.warning(request, "Could not match the PDF with any known papers. The reference has been filled with the extracted data. Expect this to be wrong.")
+                        messages.warning(request, "Could not match the PDF "
+                                                  "with any known papers. "
+                                                  "The reference has been "
+                                                  "filled with the extracted "
+                                                  "data. Expect this to be "
+                                                  "wrong.")
                     reference = Reference(name=bibtex_py[0]["title"],
                                         bibtex_dump=bibtex_py,
                                         group=group,
                                         fulltext=info[2])
                     reference.save()
-                    reference_file = ReferenceFile(pdf=pdf, reference=reference)
+                    reference_file = ReferenceFile(pdf=pdf,
+                                                   reference=reference)
                     reference_file.save()
-                    return redirect("view_reference", pk=group.pk, reference=reference.pk)
+                    return redirect("view_reference",
+                                    pk=group.pk,
+                                    reference=reference.pk)
                 except ExtractionError as e:
-                    messages.error(request, "Error extracting from PDF: " + str(e))
+                    messages.error(
+                        request, "Error extracting from PDF: " + str(e)
+                        )
                     return redirect("add", pk)
         else:
             form = ReferenceUpload()
@@ -619,16 +636,32 @@ def search(request):
     """
     if request.method == "POST":
         if "query" in request.POST:
+            tags = []
             query = request.POST["query"]
-            vector = SearchVector('fulltext', weight="C") \
-                + search_vectors_from_keys(
-                    settings.DEFAULT_SEARCH_TAGS, "bibtex_dump__0"
-                    )
+            for key in request.POST:
+                if key.startswith("attribute-") and request.POST[key] == "on":
+                    tags.append(key[10:])
+            if not tags:
+                tags = settings.DEFAULT_SEARCH_TAGS
+            if "attribute-pdf" in request.POST:
+                vector = SearchVector('fulltext', weight="C") \
+                    + search_vectors_from_keys(
+                        tags, "bibtex_dump__0"
+                        )
+            else:
+                vector = search_vectors_from_keys(tags, "bibtex_dump__0")
             query = SearchQuery(query)
-            references = Reference.objects.annotate(
-                rank=SearchRank(vector, query))\
-                .order_by('-rank')\
-                .filter(rank__gt=0)
+            if "group" in request.POST and request.POST["group"]:
+                references = Reference.objects.annotate(
+                    rank=SearchRank(vector, query))\
+                    .order_by('-rank')\
+                    .filter(rank__gt=0)\
+                    .filter(group__name=request.POST["group"])
+            else:
+                references = Reference.objects.annotate(
+                    rank=SearchRank(vector, query))\
+                    .order_by('-rank')\
+                    .filter(rank__gt=0)
             groups = GroupMembership.objects.filter(user=request.user)
             r = []
             for reference in references:
@@ -638,18 +671,15 @@ def search(request):
                             reference.bibtex_dump[0]["author"].split(" and ")
                             )
                     r.append(reference)
-            if r:
-                return render(request, "references/search_results.html", {
-                    "results": r,
-                    "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
-
-                })
-            else:
+            if not r:
                 messages.warning(request, "No results found")
-                return render(request, "references/search_results.html", context={
-                    "results": [],
-                    "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)]
-                    })
+            return render(request, "references/search_results.html", {
+                "results": r,
+                "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)],
+                "query": request.POST["query"],
+                "keys": get_all_keys(request.user)
+
+            })
         else:
             messages.warning(request, "Please submit a search query")
             return redirect("home")
@@ -657,21 +687,36 @@ def search(request):
         raise PermissionDenied("Please use POST")
 
 
+def get_all_keys(user):
+    keys = []
+    groups = [i.group for i in GroupMembership.objects.filter(user=user)]
+    for group in groups:
+        references = Reference.objects.filter(group=group)
+        for reference in references:
+            for key in reference.bibtex_dump[0]:
+                if key not in keys:
+                    keys.append(key)
+    return keys
+
+
+@login_required
 def upload_bib(request, group):
     """Allows the user to upload a bib file
-    
+
     Args:
         request (request): A handle to the request
         group (int): The pk of the group
-    
+
     Raises:
         PermissionDenied: The user is not a member of the group
-    
+
     Returns:
         redirect: The group the references have just been uploaded to
     """
     group_obj = get_object_or_404(Group, pk=group)
-    if GroupMembership.objects.filter(group=group_obj, user=request.user).exists():
+    if GroupMembership.objects.filter(
+            group=group_obj,
+            user=request.user).exists():
         if request.method == 'POST':
             try:
                 bib_file = request.FILES['bib_file']
@@ -684,7 +729,10 @@ def upload_bib(request, group):
                         name = entry["title"]
                     else:
                         name = "Unknown"
-                    r = Reference(name=name,bibtex_dump=[entry], fulltext="", group=group_obj)
+                    r = Reference(name=name,
+                                  bibtex_dump=[entry],
+                                  fulltext="",
+                                  group=group_obj)
                     r.save()
                 return redirect(view_group, group)
             except Exception as e:
