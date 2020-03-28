@@ -44,7 +44,6 @@ def extract(fp):
     except AttributeError:
         # print("Title not found")
         ...
-    print(r.text, file=open("extracted.xml", "w"))
     a = []
     try:
         authors = soup.find_all("author")
