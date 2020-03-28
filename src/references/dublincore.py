@@ -2,7 +2,6 @@ import re
 import sys
 
 import requests
-from bibtexparser.bibdatabase import BibDatabase
 from bs4 import BeautifulSoup
 from habanero import cn
 
