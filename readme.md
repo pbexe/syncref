@@ -19,3 +19,5 @@ The development server can then be started with:
 cd src
 python manage.py runserver
 ```
+
+![Screenshot](/screenshots/screenshot.png)
