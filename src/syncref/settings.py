@@ -26,7 +26,7 @@ SECRET_KEY = 'iep7nr=m68q$!)9r@736hnum#8uvbw#=hwej$q5ox9k-f7kt3v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.1.187", "localhost"]
+ALLOWED_HOSTS = ["192.168.1.187", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -163,7 +163,7 @@ DEFAULT_SEARCH_TAGS = [
     "title",
     "author",
     "year",
-    "publisher"
+    "abstract"
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'

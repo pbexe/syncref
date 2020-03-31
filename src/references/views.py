@@ -370,8 +370,10 @@ def uploadPDFToReference(request, pk, reference):
     else:
         raise PermissionDenied
 
+from django.views.decorators.csrf import csrf_exempt
 
-@login_required
+# @login_required
+@csrf_exempt
 def submit_url(request, pk):
     """Add a reference by URL
     

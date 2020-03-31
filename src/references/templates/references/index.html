@@ -1,28 +1,30 @@
 {% extends "references/base.html" %}
 {% load static %}
 
-{% block body %}
-		<div class="flex h-screen">
-  		<!-- Container -->
-		  <div class="container pt-10 sm:pt-0 sm:m-auto">
-			<div class="flex">
-				<!-- Row -->
-                <div class="w-11/12 xl:w-1/3 lg:w-1/2 md: w-2/3 sm:w-3/4 flex m-auto flex-col">
-					<!-- Col -->
-                    <div class="m-auto text-headline text-6xl font-mono">
-                        <h3>SyncRef</h3>
-                    </div>
-					<div class="m-auto text-headline text-3xl md:w-2/3 pt-10">
-                        <img src="{% static "references/img/files.svg" %}" alt="">
-					</div>
-                    <div class="m-auto pt-10 w-full">
-                        <a href="{% url 'login' %}"><button class="w-full px-4 py-2 text-buttontext bg-button rounded-full hover:bg-paragraph focus:outline-none focus:shadow-outline" type="button" >Login</button></a>
-                    </div>
-                    <div class="m-auto pt-4 w-full">
-                        <a href="{% url 'signup' %}"><button class="w-full px-4 py-2 text-buttontext bg-button rounded-full hover:bg-paragraph focus:outline-none focus:shadow-outline" type="button" >Signup</button></a>
-                    </div>
-				</div>
-			</div>
-		</div>
-	</div>
+{% block breadcrumbs %}
 {% endblock %}
+
+{% block body %}
+
+<div class="grid-x">
+    <div class="cell small-12 medium-8 medium-offset-2 large-6 large-offset-3">
+        <div class="callout">
+            <div class="grid-x">
+                <div class="small-12 cell">
+                    <h1 class="text-center">
+                        Syncref
+                    </h1>
+                </div>
+                <div class="small-12">
+                    <p class="text-center">
+                        <a class="button" href="{% url 'signup' %}">Signup</a>
+                        <a class="button" href="{% url 'login' %}">Login</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
