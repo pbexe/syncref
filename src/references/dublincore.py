@@ -18,11 +18,8 @@ def url2doi(url):
         str -- The DOI of the paper in the URL
     """
     # Pretend to be a browser because some sites don't like being scraped
-    print("Loading website")
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     r = requests.get(url, timeout=10, headers=headers)
-    print("Website loaded. We're in...")    
-    print("Trying dublincore")
     # Try getting DOI using dublincore
     soup = BeautifulSoup(r.text, "html.parser")
     meta_tags = soup.find_all("meta")
@@ -33,7 +30,6 @@ def url2doi(url):
                 return tag.get("content")
     
     # Resort to regexing the results for a DOI
-    print("Trying regex")
     pattern = r"10.\d{4,9}/[-._()/:A-Z0-9]+"
     matches = re.findall(pattern, r.text)
     # Assume the first DOI is the correct one because it is usually close to
@@ -47,7 +43,6 @@ def url2doi(url):
 def parse_meta(url):
     bibtex = {}
     extracted = False
-    print("Loading website")
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     r = requests.get(url, timeout=10, headers=headers)
     soup = BeautifulSoup(r.text, "html.parser")
@@ -83,14 +78,52 @@ def parse_meta(url):
     
     
 if __name__ == "__main__":
-    url = sys.argv[1]
-
-    try:
-        doi = url2doi(url)
-        if doi:
-            print(doi)
-            print(cn.content_negotiation(ids = doi, format = "bibentry"))
-        else:
-            print("No results found")
-    except Exception as e:
-        print(e)        
+    from bibparser import bib2py
+    from pprint import pprint
+    from selenium.webdriver.chrome.options import Options
+    from selenium import webdriver
+    
+    file_name = sys.argv[1]
+    with open(file_name, "r") as fp:
+        chrome_options = Options()
+        # chrome_options.add_argument("--headless")
+        driver = webdriver.Chrome(options=chrome_options)
+        db = bib2py(fp.read())
+        s = 0
+        err = 0
+        for entry in db:
+            urls = None
+            if "url" in entry:
+                urls = entry["url"]
+            elif "doi" in entry:
+                urls = "https://doi.org/" + entry["doi"]
+            else:
+                continue
+            urls = urls.split(" ")
+            for url in urls:
+                print(f"S:{s} E:{err}")
+                try:
+                    driver.get(url)
+                except Exception as e:
+                    continue
+                url = driver.current_url
+                bibtex = None
+                if url:
+                    try:
+                        print(url, " ", end="")
+                        doi = url2doi(url)
+                        if doi:
+                            bibtex = cn.content_negotiation(ids = doi, format = "bibentry")
+                        else:
+                            bibtex = parse_meta(url)
+                            if bibtex:
+                                bibtex = bibtex[0]
+                    except Exception as e:
+                        print(e, end=" ")
+                if bibtex:
+                    print("SUCCESS")
+                    s+=1
+                    print(bibtex)
+                else:
+                    print("ERROR")
+                    err+=1

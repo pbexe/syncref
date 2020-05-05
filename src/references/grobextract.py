@@ -10,7 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 from habanero import Crossref, cn
 
-from .bibparser import py2bib
+from .bibparser import py2bib, bib2py
 
 # Required so arXiv doesn't hang forever
 socket.setdefaulttimeout(10)
@@ -219,16 +219,15 @@ def pdf2bib(fp):
 
 if __name__ == "__main__":
     with open(sys.argv[1], "rb") as fp:
-        import parser
         from pprint import pprint
         info = extract(fp)
         try:
             data = content_negotiation(*info[:2])
             print(data)
             print("\n\n")
-            pprint(parser.bib2py(data))
+            pprint(bib2py(data))
             print("\n\n")
-            print(parser.py2bib(parser.bib2py(data)))
+            print(py2bib(bib2py(data)))
         except ExtractionError as e:
             print(e)
             if info[0] or info[1]:

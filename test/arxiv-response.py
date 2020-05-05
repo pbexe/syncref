@@ -1,4 +1,4 @@
- result = {'affiliation': 'None',
+result = {'affiliation': 'None',
  'arxiv_comment': '16 pages, 8 figures',
  'arxiv_primary_category': {'scheme': 'http://arxiv.org/schemas/atom',
                             'term': 'quant-ph'},

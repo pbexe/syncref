@@ -23,7 +23,8 @@
         <b>{{key}}</b> - {{value.0}}<br>
         {% endfor %}
         <br>
-<code class="code-block">{{bibtex}}</code>
+<code class="code-block" id="code-block">{{bibtex}}<button class="button small float-right hollow  copy" data-clipboard-target="#code-block" id="copy"><i class="fi-clipboard-notes"></i> Copy</button></code>
+<!-- <button class="button" data-clipboard-target="#code-block" id="copy">Copy</button> -->
         Files:
         <ul class="accordion" data-accordion data-allow-all-closed="true">
             {% for file in files %}
@@ -109,7 +110,17 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
+    var clipboard = new ClipboardJS('#copy');
+    clipboard.on('success', function(e) {
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        $('#copy').html('<i class="fi-like"></i>  Copied')
+        e.clearSelection();
+    });
+    
     $(document).ready(function(){        
         // Add new element
         $(".add").click(function(){
