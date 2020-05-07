@@ -1,5 +1,5 @@
-import re
 import json
+import re
 
 from django.conf import settings
 from django.contrib import messages
@@ -10,18 +10,21 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.postgres.search import (SearchQuery, SearchRank,
                                             SearchVector)
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_exempt
 from habanero import cn
 
 from .bibparser import bib2py, py2bib
 from .dublincore import parse_meta, url2doi
 from .forms import ReferenceUpload
 from .grobextract import ExtractionError, content_negotiation, extract
-from .models import (Group, GroupMembership, Reference, ReferenceField,
+from .models import (APIKey, Group, GroupMembership, Reference, ReferenceField,
                      ReferenceFile, ReferenceType)
+
+import secrets
 
 
 @never_cache
@@ -370,10 +373,9 @@ def uploadPDFToReference(request, pk, reference):
     else:
         raise PermissionDenied
 
-from django.views.decorators.csrf import csrf_exempt
 
-# @login_required
-@csrf_exempt
+@login_required
+# @csrf_exempt
 def submit_url(request, pk):
     """Add a reference by URL
     
@@ -423,8 +425,60 @@ def submit_url(request, pk):
 
             })
     else:
+        
         raise PermissionDenied
 
+@csrf_exempt
+def submit_url_api(request):
+    """Add a reference by URL
+    
+    Args:
+        request (request): A handle to the request
+        pk (int): The pk of the group
+    
+    Raises:
+        PermissionDenied: The user is not a member of the group they are
+        submitting to
+    
+    Returns:
+        redirect: The extracted reference
+    """
+    if request.method == 'POST':
+        if "url" not in request.POST or "key" not in request.POST:
+            raise PermissionDenied
+        url = request.POST["url"]
+        key = request.POST["key"]
+        user = APIKey.objects.filter(key=key)
+        if user:
+            user_obj = user.first().user
+            # TODO specify which group
+            group = GroupMembership.objects.filter(user=user_obj).first().group
+            try:
+                doi = url2doi(url)
+                if not doi:
+                    entry = parse_meta(url)
+                    if not entry:
+                        messages.error(request, "No references were located on"
+                                                " the page")
+                        return HttpResponse("No references were located on"
+                                            " the page")
+                else:
+                    bibtex = cn.content_negotiation(ids=doi, format="bibentry")
+                    entry = bib2py(bibtex)
+                reference = Reference(name=entry[0]["title"],
+                                    bibtex_dump=entry,
+                                    group=group)
+                reference.save()
+                messages.success(request, "URL successfully parsed")
+                return HttpResponse("OK")
+            except Exception as e:
+                messages.error(request,
+                            'There was an error adding the link: ' + str(e))
+                return HttpResponse("Error adding link")
+        else:
+            raise PermissionDenied("Key not found")
+    else:
+        raise PermissionDenied("Invalid Method")
 
 @login_required
 def add_user_to_group(request, pk):
@@ -742,3 +796,15 @@ def upload_bib(request, group):
                 return redirect("view_group", group)
     else:
         raise PermissionDenied
+
+
+@login_required
+def view_API_key(request):
+    try:
+        key = APIKey.objects.get(user=request.user)
+        return HttpResponse(key.key)
+    except ObjectDoesNotExist:
+        key = secrets.token_urlsafe(16)
+        api_key = APIKey(key=key, user=request.user)
+        api_key.save()
+        return HttpResponse(key)

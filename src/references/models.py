@@ -55,3 +55,8 @@ class ReferenceFile(models.Model):
 
     def __str__(self):
         return "PDF of " + self.reference.name
+
+
+class APIKey(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    key = models.CharField(max_length=32, unique=True)
