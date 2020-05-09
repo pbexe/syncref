@@ -6,6 +6,16 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+django = "*"
+gunicorn = "*"
+psycopg2-binary = "*"
+uvicorn = "*"
+habanero = "*"
+beautifulsoup4 = "*"
+bibtexparser = "*"
+arxiv = "*"
+lxml = "*"
+pymed = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3"

@@ -3,5 +3,6 @@
     "python.linting.pylintEnabled": false,
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": false,
-    "python.linting.pylamaEnabled": true
+    "python.linting.pylamaEnabled": true,
+    "python.pythonPath": "/home/miles/.local/share/virtualenvs/syncref-zIrzETsB/bin/python"
 }

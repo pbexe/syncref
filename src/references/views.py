@@ -375,18 +375,17 @@ def uploadPDFToReference(request, pk, reference):
 
 
 @login_required
-# @csrf_exempt
 def submit_url(request, pk):
     """Add a reference by URL
-    
+
     Args:
         request (request): A handle to the request
         pk (int): The pk of the group
-    
+
     Raises:
         PermissionDenied: The user is not a member of the group they are
         submitting to
-    
+
     Returns:
         redirect: The extracted reference
     """

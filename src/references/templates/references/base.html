@@ -10,6 +10,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <style>
         main{
             margin-top: 2rem;
@@ -51,7 +52,7 @@
                 {% else %}
                 <li><a href="{% url 'login' %}">Login</a></li>
                 {% endif %}
-                    <li><input name="query" type="search" placeholder="Search"></li>
+                    <li><input name="query" type="search" placeholder="Search" id="search"></li>
                     <li><button type="submit" class="button">Search</button></li>
                 </ul>
             </div>
@@ -104,6 +105,7 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.1/dist/js/foundation.min.js"></script>
     <script>
 MathJax = {
@@ -115,9 +117,19 @@ MathJax = {
 <script id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 </script>
-</script>
 <script>
     $(document).foundation();
+    $(function() {
+        var availableTutorials  =  [
+           "ActionScript",
+           "Bootstrap",
+           "C",
+           "C++",
+        ];
+        $( "#search" ).autocomplete({
+           source: availableTutorials
+        });
+     });
 </script>
 {% block scripts %}
 {% endblock %}
