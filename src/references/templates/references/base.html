@@ -10,11 +10,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <style>
-        main{
-            margin-top: 2rem;
-        }
     </style>
 </head>
 
@@ -52,7 +48,9 @@
                 {% else %}
                 <li><a href="{% url 'login' %}">Login</a></li>
                 {% endif %}
-                    <li><input name="query" type="search" placeholder="Search" id="search"></li>
+                    <li><div class="dropdown"><input name="query" type="search" placeholder="Search" id="search" class="dropbtn" autocomplete="off">
+                        <div id="suggestions" class="dropdown-content">
+                          </div></div></li>
                     <li><button type="submit" class="button">Search</button></li>
                 </ul>
             </div>
@@ -105,7 +103,6 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.1/dist/js/foundation.min.js"></script>
     <script>
 MathJax = {
@@ -118,18 +115,76 @@ MathJax = {
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 </script>
 <script>
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    var csrftoken = getCookie('csrftoken');
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
     $(document).foundation();
-    $(function() {
-        var availableTutorials  =  [
-           "ActionScript",
-           "Bootstrap",
-           "C",
-           "C++",
-        ];
-        $( "#search" ).autocomplete({
-           source: availableTutorials
-        });
-     });
+     $("#search").on("keyup", function(){
+        $("#suggestions").removeClass("show");
+         if (this.value.length >= 3){
+            $.ajax({
+                type: "POST",
+                url: "{% url 'search' %}",
+                data: {
+                    "query": this.value,
+                    "json": true
+                },
+                success: function(data){
+                    console.log(data);
+                    if (data["results"].length > 0){
+                        $("#suggestions").empty();
+                        data.results.forEach(function(currentValue, index, arr){
+                            $("<a></a>", {
+                                "href": currentValue["url"],
+                                "text": currentValue["name"]
+                            }).appendTo("#suggestions");
+
+                        });
+                        $("#suggestions").addClass("show");
+                    }
+                }
+            });
+         }
+     })
+     window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+              while (openDropdown.hasChildNodes()) {  
+                openDropdown.removeChild(openDropdown.firstChild);
+              } 
+            }
+          }
+        }
+      } 
 </script>
 {% block scripts %}
 {% endblock %}

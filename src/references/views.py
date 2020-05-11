@@ -1,5 +1,6 @@
 import json
 import re
+import secrets
 
 from django.conf import settings
 from django.contrib import messages
@@ -10,9 +11,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.postgres.search import (SearchQuery, SearchRank,
                                             SearchVector)
-from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
-from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from habanero import cn
@@ -23,8 +25,6 @@ from .forms import ReferenceUpload
 from .grobextract import ExtractionError, content_negotiation, extract
 from .models import (APIKey, Group, GroupMembership, Reference, ReferenceField,
                      ReferenceFile, ReferenceType)
-
-import secrets
 
 
 @never_cache
@@ -726,14 +726,20 @@ def search(request):
                             reference.bibtex_dump[0]["author"].split(" and ")
                             )
                     r.append(reference)
-            if not r:
+            if not r and "json" not in request.POST:
                 messages.warning(request, "No results found")
+            if "json" in request.POST and request.POST["json"] == "true":
+                return JsonResponse({
+                    "results": [{"name": i.name,
+                                 "url": reverse('view_reference',
+                                                kwargs={'pk': i.group.pk,
+                                                        'reference': i.pk})} for i in r][:5],
+                })
             return render(request, "references/search_results.html", {
                 "results": r,
                 "groups": [i.group for i in GroupMembership.objects.filter(user=request.user)],
                 "query": request.POST["query"],
                 "keys": get_all_keys(request.user)
-
             })
         else:
             messages.warning(request, "Please submit a search query")
