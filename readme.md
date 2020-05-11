@@ -6,6 +6,14 @@
 
 ### Docker
 
+Set the admin username and password using environment variables:
+
+```sh
+export DJANGO_SUPERUSER_PASSWORD="your_password_here"
+export USERNAME_FIELD="probably_something_like_admin"
+export EMAIL_FIELD="email@example.com"
+```
+
 ```
 docker-compose up --build
 ```

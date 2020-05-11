@@ -12,6 +12,6 @@ done
 
 >&2 echo "Postgres is up - executing commands"
 
-python manage.py collectstatic --no-input --clear 
 python manage.py migrate
-uvicorn syncref.asgi:application --workers 2 --host 0.0.0.0 --port 8000 --reload
+python manage.py createsuperuser --no-input --username $USERNAME_FIELD --email $EMAIL_FIELD
+uvicorn syncref.asgi:application --workers 2 --host 0.0.0.0 --port 8000
