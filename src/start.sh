@@ -1,7 +1,4 @@
 #!/bin/sh
-
-set -e
-
 host="$1"
 shift
 
