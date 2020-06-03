@@ -10,7 +10,10 @@ import requests
 from bs4 import BeautifulSoup
 from habanero import Crossref, cn
 
-from .bibparser import py2bib, bib2py
+try:
+    from .bibparser import py2bib, bib2py
+except:
+    from bibparser import bib2py, py2bib
 
 # Required so arXiv doesn't hang forever
 socket.setdefaulttimeout(10)
@@ -33,8 +36,10 @@ def extract(fp):
     files = {"input": fp}
     
     # Upload the file to the server
-    r = requests.post("http://cloud.science-miner.com/grobid//api/processFulltextDocument",
+    r = requests.post("http://localhost:8080/api/processFulltextDocument",
                       files=files)
+    # r = requests.post("http://cloud.science-miner.com/grobid//api/processFulltextDocument",
+    #                   files=files)
     title = ""
     # Try fetching the name and authors from the results
     soup = BeautifulSoup(r.text, "xml")
@@ -218,19 +223,29 @@ def pdf2bib(fp):
 
 
 if __name__ == "__main__":
-    with open(sys.argv[1], "rb") as fp:
-        from pprint import pprint
-        info = extract(fp)
-        try:
-            data = content_negotiation(*info[:2])
-            print(data)
-            print("\n\n")
-            pprint(bib2py(data))
-            print("\n\n")
-            print(py2bib(bib2py(data)))
-        except ExtractionError as e:
-            print(e)
-            if info[0] or info[1]:
-                print("Extracted info:", info)
-            else:
-                print("No info extracted")
+    import glob
+    from tqdm import tqdm
+    pdfs = tqdm(glob.glob("/home/miles/repos/syncref/src/references/testing/frank-papers/*.pdf"))
+    s = 0
+    err = 0
+    for pdf in pdfs:
+        pdfs.set_description(f"S:{s} E:{err}")
+        with open(pdf, "rb") as fp:
+            from pprint import pprint
+            info = extract(fp)
+            try:
+                data = content_negotiation(*info[:2])
+                s += 1
+                # print(data)
+                # print("\n\n")
+                # pprint(bib2py(data))
+                # print("\n\n")
+                # print(py2bib(bib2py(data)))
+            except ExtractionError as e:
+                err += 1
+                pdfs.write(pdf)
+                # print(e)
+                # if info[0] or info[1]:
+                #     print("Extracted info:", info)
+                # else:
+                #     print("No info extracted")

@@ -82,6 +82,7 @@ if __name__ == "__main__":
     from pprint import pprint
     from selenium.webdriver.chrome.options import Options
     from selenium import webdriver
+    from tqdm import tqdm
     
     file_name = sys.argv[1]
     with open(file_name, "r") as fp:
@@ -91,7 +92,8 @@ if __name__ == "__main__":
         db = bib2py(fp.read())
         s = 0
         err = 0
-        for entry in db:
+        bar = tqdm(db)
+        for entry in bar:
             urls = None
             if "url" in entry:
                 urls = entry["url"]
@@ -101,7 +103,7 @@ if __name__ == "__main__":
                 continue
             urls = urls.split(" ")
             for url in urls:
-                print(f"S:{s} E:{err}")
+                bar.set_description(f"S:{s} E:{err}")
                 try:
                     driver.get(url)
                 except Exception as e:
@@ -110,7 +112,7 @@ if __name__ == "__main__":
                 bibtex = None
                 if url:
                     try:
-                        print(url, " ", end="")
+                        # tqdm.write(url, " ", end="")
                         doi = url2doi(url)
                         if doi:
                             bibtex = cn.content_negotiation(ids = doi, format = "bibentry")
@@ -119,11 +121,12 @@ if __name__ == "__main__":
                             if bibtex:
                                 bibtex = bibtex[0]
                     except Exception as e:
-                        print(e, end=" ")
+                        # tqdm.write(e, end=" ")
+                        pass
                 if bibtex:
-                    print("SUCCESS")
+                    # tqdm.write("SUCCESS")
                     s+=1
-                    print(bibtex)
+                    tqdm.write(str(bibtex))
                 else:
-                    print("ERROR")
+                    # tqdm.write("ERROR")
                     err+=1
