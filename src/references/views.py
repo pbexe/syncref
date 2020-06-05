@@ -749,6 +749,14 @@ def search(request):
 
 
 def get_all_keys(user):
+    """Gets all of the keys for all of the references available for a user
+
+    Args:
+        user (User): The user
+
+    Returns:
+        List: The keys
+    """
     keys = []
     groups = [i.group for i in GroupMembership.objects.filter(user=user)]
     for group in groups:
@@ -805,6 +813,14 @@ def upload_bib(request, group):
 
 @login_required
 def view_API_key(request):
+    """Generates and shows the API key
+
+    Args:
+        request (request): A handle to the request
+
+    Returns:
+        HttpReponse: The generated API key
+    """
     try:
         key = APIKey.objects.get(user=request.user)
         return HttpResponse(key.key)

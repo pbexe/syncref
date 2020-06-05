@@ -41,6 +41,14 @@ def url2doi(url):
 
 
 def parse_meta(url):
+    """Extracts metadata from a page's meta tags.
+
+    Args:
+        url (str): The URL to parse
+
+    Returns:
+        List: The BibTeX result
+    """
     bibtex = {}
     extracted = False
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}

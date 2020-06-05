@@ -153,6 +153,14 @@ def query_arXiv(title, author):
 
 
 def generate_bibtex_from_arXiv(result):
+    """Generates a BibTeX entry for an arXiv entry
+
+    Args:
+        result (dict): The data returned by arXiv
+
+    Returns:
+        str: The BibTeX entry
+    """
     bibtex = {}
     year = str(datetime.fromisoformat(result["published"][:len(result["published"])-1]).year)
     month = str(datetime.fromisoformat(result["published"][:len(result["published"])-1]).strftime("%b"))
