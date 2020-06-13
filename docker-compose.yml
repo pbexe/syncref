@@ -68,8 +68,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.static-http.entrypoints=websecure"
-      - "traefik.http.routers.static-http.rule=Host(`syncref.milesbudden.com`) && PathPrefix(`/static`)" 
-      - "traefik.http.routers.static-http.rule=Host(`syncref.milesbudden.com`) && PathPrefix(`/media`)" 
+      - "traefik.http.routers.static-http.rule=Host(`syncref.milesbudden.com`) && (PathPrefix(`/static`) || PathPrefix(`/media`))" 
       - "traefik.http.routers.static-http.tls.certresolver=mytlschallenge"
       - traefik.docker.network=proxy
     depends_on:
