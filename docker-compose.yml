@@ -11,7 +11,7 @@ services:
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.mytlschallenge.acme.tlschallenge=true"
-      - "--certificatesresolvers.mytlschallenge.acme.email=miles@budden.net"
+      - "--certificatesresolvers.mytlschallenge.acme.email=contact@milesbudden.com"
       - "--certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json"
     ports:
       - 80:80
@@ -33,15 +33,16 @@ services:
     volumes:
       - static_volume:/code/static
       - ./src/logs/main/:/code/logs/
+      - media_volume:/code/media
     ports:
       - 8000:8000
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
       - "traefik.http.routers.app-http.entrypoints=web"
-      - "traefik.http.routers.app-http.rule=Host(`localhost`)"
+      - "traefik.http.routers.app-http.rule=Host(`syncref.milesbudden.com`)"
       - "traefik.http.routers.app-http.middlewares=redirect-https@docker"
-      - "traefik.http.routers.app-https.rule=Host(`localhost`)"
+      - "traefik.http.routers.app-https.rule=Host(`syncref.milesbudden.com`)"
       - "traefik.http.routers.app-https.entrypoints=websecure"
       - "traefik.http.routers.app-https.tls.certresolver=mytlschallenge"
       - traefik.docker.network=proxy
@@ -63,10 +64,12 @@ services:
     volumes:
       - ./traefik-files/nginx.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/static
+      - media_volume:/media
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.static-http.entrypoints=websecure"
-      - "traefik.http.routers.static-http.rule=Host(`localhost`) && PathPrefix(`/static`)" 
+      - "traefik.http.routers.static-http.rule=Host(`syncref.milesbudden.com`) && PathPrefix(`/static`)" 
+      - "traefik.http.routers.static-http.rule=Host(`syncref.milesbudden.com`) && PathPrefix(`/media`)" 
       - "traefik.http.routers.static-http.tls.certresolver=mytlschallenge"
       - traefik.docker.network=proxy
     depends_on:
@@ -86,6 +89,9 @@ services:
       - traefik.enable=false
     networks:
       - internal
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      # POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
   grobid:
     image: lfoppiano/grobid:0.5.6
@@ -99,6 +105,7 @@ services:
 volumes:
   static_volume:
   postgres_data:
+  media_volume:
 
 networks:
   proxy:

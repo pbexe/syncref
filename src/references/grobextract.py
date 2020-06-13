@@ -36,7 +36,7 @@ def extract(fp):
     files = {"input": fp}
     
     # Upload the file to the server
-    r = requests.post("http://localhost:8080/api/processFulltextDocument",
+    r = requests.post("http://grobid:8070/api/processFulltextDocument",
                       files=files)
     # r = requests.post("http://cloud.science-miner.com/grobid//api/processFulltextDocument",
     #                   files=files)
