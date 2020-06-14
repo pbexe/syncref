@@ -501,7 +501,7 @@ def add_user_to_group(request, pk):
                 username = request.POST["user"]
                 user = User.objects.filter(username=username)
                 if user:
-                    member = GroupMembership(group=group, user=user)
+                    member = GroupMembership(group=group, user=user[0])
                     member.save()
                     messages.info(request, "Added " + username + " to group")
                     return redirect("view_group", pk)
