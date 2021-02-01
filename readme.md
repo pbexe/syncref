@@ -28,4 +28,4 @@ cd src
 python manage.py runserver
 ```
 
-![Screenshot](/screenshots/screenshot.png)
+![Screenshot](/screenshots/app.png)
